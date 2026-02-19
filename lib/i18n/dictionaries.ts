@@ -131,7 +131,7 @@ const es: Dictionary = {
   feed: {
     title: 'Feed de Noticias',
     rivalTitle: 'Noticias de Rivales',
-    subtitle: 'Todas las noticias de River Plate en un solo lugar',
+    subtitle: 'Todas las noticias de tu equipo en un solo lugar',
     rivalSubtitle: 'Lo que está pasando con tus rivales - ordenado por impacto',
     rivalMode: 'Modo Rival',
     noRivalNews: '🏟️ No hay noticias de rivales aún',
@@ -227,7 +227,7 @@ const en: Dictionary = {
   feed: {
     title: 'News Feed',
     rivalTitle: 'Rival News',
-    subtitle: 'All River Plate news in one place',
+    subtitle: 'All your team news in one place',
     rivalSubtitle: "What's happening with your rivals - sorted by impact",
     rivalMode: 'Rival Mode',
     noRivalNews: '🏟️ No rival news yet',

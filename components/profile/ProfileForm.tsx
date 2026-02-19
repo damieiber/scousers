@@ -316,16 +316,6 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
               {t.profile.noTeamSelected}
             </p>
           </div>
-
-          <div className="space-y-2 opacity-50">
-            <Label className="flex items-center gap-2">
-              {t.profile.secondaryTeams}
-              <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Premium</span>
-            </Label>
-            <p className="text-sm text-muted-foreground">
-              {t.profile.secondaryTeamsDesc}
-            </p>
-          </div>
         </CardContent>
       </Card>
 

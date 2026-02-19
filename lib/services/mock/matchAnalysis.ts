@@ -5,7 +5,7 @@ export class MockMatchAnalysisService implements IMatchAnalysisService {
     if (teamId === 'river-plate') {
       return {
         teamId: 'river-plate',
-        teamName: 'River Plate',
+        teamName: 'Liverpool',
         possession: 62,
         attackZones: [
           { zone: 'left', percentage: 30, label: 'Izquierda' },
@@ -45,7 +45,7 @@ export class MockMatchAnalysisService implements IMatchAnalysisService {
 
     return {
       id: matchId,
-      homeTeam: 'River Plate',
+      homeTeam: 'Liverpool',
       awayTeam: 'Racing Club',
       date: '2025-11-24T17:00:00',
       venue: 'Estadio Mâs Monumental',

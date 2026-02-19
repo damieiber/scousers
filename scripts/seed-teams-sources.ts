@@ -5,13 +5,6 @@ import Source from '../lib/models/Source';
 
 const TEAMS = [
   {
-    key: 'river-plate',
-    name: 'River Plate',
-    colors: { primary: '#FFFFFF', secondary: '#E30613' },
-    competitions: ['Liga Profesional', 'Copa Libertadores', 'Copa Argentina'],
-    keywords: ['River Plate', 'Millonario', 'Gallardo', 'Monumental']
-  },
-  {
     key: 'liverpool',
     name: 'Liverpool FC',
     colors: { primary: '#C8102E', secondary: '#F6EB61' },
@@ -28,26 +21,6 @@ const TEAMS = [
 ];
 
 const SOURCES = [
-  {
-    name: 'La Página Millonaria',
-    url: 'https://lapaginamillionaria.com',
-    team_key: 'river-plate'
-  },
-  {
-    name: 'TyC Sports River',
-    url: 'https://www.tycsports.com/river-plate.html',
-    team_key: 'river-plate'
-  },
-  {
-    name: 'Olé River',
-    url: 'https://www.ole.com.ar/river-plate/',
-    team_key: 'river-plate'
-  },
-  {
-    name: 'Infobae River',
-    url: 'https://www.infobae.com/tag/river-plate/',
-    team_key: 'river-plate'
-  },
   {
     name: 'Liverpool FC Official',
     url: 'https://www.liverpoolfc.com/news',

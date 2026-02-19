@@ -20,7 +20,7 @@ async function testGeminiAPI() {
           {
             parts: [
               {
-                text: 'Genera un resumen de 2 oraciones sobre River Plate en español.',
+                text: 'Generate a 2-sentence summary about Liverpool FC in English.',
               },
             ],
           },
@@ -57,7 +57,7 @@ async function testGeminiAPI() {
           content: {
             parts: [
               {
-                text: 'River Plate ganó la Copa Libertadores',
+                text: 'Liverpool FC won the Champions League',
               },
             ],
           },

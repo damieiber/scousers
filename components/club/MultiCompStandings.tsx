@@ -33,11 +33,13 @@ export function MultiCompStandings({ competitions }: MultiCompStandingsProps) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
-                  {comp.table.map((row) => (
-                    <tr key={row.team} className={`hover:bg-muted/30 transition-colors ${row.team === 'River Plate' ? 'bg-primary/5' : ''}`}>
+                  {comp.table.map((row) => {
+                    const isUserTeam = row.team === 'Liverpool' || row.team === 'Everton';
+                    return (
+                    <tr key={row.team} className={`hover:bg-muted/30 transition-colors ${isUserTeam ? 'bg-primary/5' : ''}`}>
                       <td className="px-4 py-3 text-center font-bold text-muted-foreground">{row.position}</td>
                       <td className="px-4 py-3 font-bold text-foreground flex items-center gap-2">
-                        {row.team === 'River Plate' && <div className="w-1 h-4 bg-primary rounded-full"></div>}
+                        {isUserTeam && <div className="w-1 h-4 bg-primary rounded-full"></div>}
                         {row.team}
                       </td>
                       <td className="px-4 py-3 text-center text-muted-foreground">{row.played}</td>
@@ -58,7 +60,8 @@ export function MultiCompStandings({ competitions }: MultiCompStandingsProps) {
                         </div>
                       </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

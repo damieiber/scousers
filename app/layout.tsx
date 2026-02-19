@@ -13,8 +13,8 @@ const inter = Inter({ subsets: ['latin'] });
 
 
 export const metadata: Metadata = {
-  title: 'AI-Powered Fan Hub - River Plate MVP',
-  description: 'Tu portal de noticias y contenido curado por IA para el hincha de River Plate.',
+  title: 'FanNews - AI-Powered Fan Hub',
+  description: 'Your AI-curated football news hub for Liverpool and Everton fans.',
 };
 
 export default function RootLayout({

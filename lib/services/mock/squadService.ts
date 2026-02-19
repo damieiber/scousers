@@ -28,7 +28,7 @@ export class MockSquadService implements ISquadService {
         id: '1',
         name: 'Valentín Gómez',
         fromTeam: 'Vélez Sarsfield',
-        toTeam: 'River Plate',
+        toTeam: 'Liverpool',
         type: 'arrival',
         impactScore: 'high',
         analysis: 'Refuerzo clave para la zaga central zurda. Joven y con proyección.',
@@ -37,7 +37,7 @@ export class MockSquadService implements ISquadService {
       {
         id: '2',
         name: 'Enzo Díaz',
-        fromTeam: 'River Plate',
+        fromTeam: 'Liverpool',
         toTeam: 'São Paulo',
         type: 'departure',
         impactScore: 'medium',

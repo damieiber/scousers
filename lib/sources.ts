@@ -8,7 +8,7 @@ export const commonSources = [
   { id: 'lanacion', name: 'La Nación' },
   { id: 'infobae', name: 'Infobae' },
   { id: 'canchallena', name: 'Cancha Llena' },
-  { id: 'riverplateoficial', name: 'River Plate Oficial' },
+  { id: 'liverpoolfc', name: 'Liverpool FC Official' },
 ];
 
 export function getSourceById(id: string) {

@@ -6,7 +6,7 @@ Este documento detalla dónde encontrar y cómo probar las 12 nuevas funcionalid
 
 ## 📍 Centro de Partido
 **Ruta:** `/match-center`
-**Descripción:** Dashboard unificado para el análisis del próximo encuentro (actualmente mockeado: River Plate vs Racing).
+**Descripción:** Dashboard unificado para el análisis del próximo encuentro (actualmente mockeado: Liverpool vs Everton).
 
 1.  **Previa de Partido Integrada (Feature #10)**
     *   **Qué ver:** Cabecera con escudos, estadio, árbitro y clima.

@@ -2,7 +2,7 @@
 
 Esta guía presenta **FanNews**, el hub de noticias deportivas potenciado por IA.  
 **Versión**: MVP 1.0 (Enero 2026)  
-**Enfoque**: River Plate
+**Enfoque**: Liverpool / Everton
 
 ---
 
