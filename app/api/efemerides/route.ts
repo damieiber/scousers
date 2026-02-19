@@ -13,7 +13,7 @@ export async function GET(request: Request) {
 
     await dbConnect();
 
-    let query: any = {};
+    const query: Record<string, string> = {};
     if (dateParam) {
       query.date = dateParam;
     }

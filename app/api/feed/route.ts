@@ -31,25 +31,19 @@ export async function GET(request: Request) {
         titleEn: article.titleEn,
         aiSummary: article.summary,
         aiSummaryEn: article.summaryEn,
-        // @ts-ignore - lean() result
         teamId: article.teamId.toString(),
-        // @ts-ignore
         createdAt: article.createdAt.toISOString(),
-        // @ts-ignore
         publishedAt: article.publishedAt.toISOString(),
-        // @ts-ignore
-        articles: (article.originalLinks || []).map((link: any) => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        articles: ((article as any).originalLinks || []).map((link: {url: string; title: string; sourceName: string}) => ({
           id: link.url,
           title: link.title,
           originalUrl: link.url,
           source: { name: link.sourceName },
         })),
-        // @ts-ignore
         imageUrl: article.imageUrl,
-        // @ts-ignore
         shortSummary: article.shortSummary,
         shortSummaryEn: article.shortSummaryEn,
-        // @ts-ignore
         rivalSentiment: article.rivalSentiment,
       };
 
@@ -83,7 +77,7 @@ export async function GET(request: Request) {
         }
       }
 
-      let query: any = {};
+      const query: Record<string, unknown> = {};
 
       if (mode === 'rivals') {
         if (!hasRivalAccess) {
@@ -124,10 +118,10 @@ export async function GET(request: Request) {
       let sortedThemedArticles = themedArticles;
 
       if (mode === 'rivals' && hasRivalAccess) {
-        const sentimentOrder: any = { 'NEGATIVE': 0, 'NEUTRAL': 1, 'POSITIVE': 2 };
-        sortedThemedArticles = [...themedArticles].sort((a: any, b: any) => {
-          const sentimentA = sentimentOrder[a.rivalSentiment] ?? 1;
-          const sentimentB = sentimentOrder[b.rivalSentiment] ?? 1;
+        const sentimentOrder: Record<string, number> = { 'NEGATIVE': 0, 'NEUTRAL': 1, 'POSITIVE': 2 };
+        sortedThemedArticles = [...themedArticles].sort((a, b) => {
+          const sentimentA = sentimentOrder[a.rivalSentiment || ''] ?? 1;
+          const sentimentB = sentimentOrder[b.rivalSentiment || ''] ?? 1;
           if (sentimentA !== sentimentB) {
             return sentimentA - sentimentB;
           }
@@ -136,24 +130,23 @@ export async function GET(request: Request) {
       } else {
         // Feature logic: Pick the best article of the most recent day
         if (themedArticles.length > 0) {
-            // @ts-ignore
             const mostRecentDate = new Date(themedArticles[0].publishedAt).toDateString();
             const articlesFromMostRecentDay = themedArticles.filter(
-            // @ts-ignore
-            (article: any) => new Date(article.publishedAt).toDateString() === mostRecentDate
+            (article) => new Date(article.publishedAt).toDateString() === mostRecentDate
             );
             
             if (articlesFromMostRecentDay.length > 0) {
-                const featuredArticle = articlesFromMostRecentDay.reduce((prev: any, current: any) => 
-                (prev.originalLinks?.length || 0) > (current.originalLinks?.length || 0) ? prev : current
+                const featuredArticle = articlesFromMostRecentDay.reduce((prev, current) => 
+                ((prev.originalLinks as unknown[])?.length || 0) > ((current.originalLinks as unknown[])?.length || 0) ? prev : current
                 );
                 
-                const otherArticles = themedArticles.filter((article: any) => article._id.toString() !== featuredArticle._id.toString());
+                const otherArticles = themedArticles.filter((article) => article._id.toString() !== featuredArticle._id.toString());
                 sortedThemedArticles = [featuredArticle, ...otherArticles];
             }
         }
       }
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const groupedNewsItems: GroupedNewsItem[] = sortedThemedArticles.map((article: any) => ({
         id: article._id.toString(),
         type: 'news_group',
@@ -168,6 +161,7 @@ export async function GET(request: Request) {
         createdAt: article.createdAt.toISOString(),
         imageUrl: article.imageUrl || undefined,
         rivalSentiment: article.rivalSentiment,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         articles: (article.originalLinks || []).map((link: any) => ({
           id: link.url, 
           title: link.title,

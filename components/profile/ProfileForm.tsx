@@ -52,7 +52,7 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
         }
 
         // Set selected team from session
-        // @ts-ignore
+        // @ts-expect-error - primaryTeamId added in auth callbacks
         const teamId = session?.user?.primaryTeamId;
         if (teamId) {
           setSelectedTeamId(teamId);

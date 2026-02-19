@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
-import { hexToOklch, hexToOklchLight } from '@/lib/utils/hexToOklch';
+import { hexToOklch } from '@/lib/utils/hexToOklch';
 
 interface TeamColors {
   primaryColor: string | null;
@@ -67,10 +67,10 @@ export function TeamThemeProvider({ children }: { children: React.ReactNode }) {
   const [teamColors, setTeamColors] = useState<TeamColors | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // @ts-ignore - primaryTeamId is added in auth callbacks
+  // @ts-expect-error - primaryTeamId is added in auth callbacks
   const primaryTeamId = session?.user?.primaryTeamId;
 
-  const applyTeamColors = useCallback((colors: TeamColors, isDark: boolean) => {
+  const applyTeamColors = useCallback((colors: TeamColors, _isDark: boolean) => {
     if (!colors.primaryColor) {
       clearColorVars();
       return;

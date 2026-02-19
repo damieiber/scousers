@@ -8,7 +8,8 @@ const MAX_LINKS_PER_SOURCE = 100;
 const VALID_ARTICLES_PER_SOURCE = 30;
 
 async function runIngestionProcess() {
-    let sources: any[]; // Using any to bypass strict type check for now if types mismatch, or Import ISource
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let sources: any[];
     try {
         sources = await getActiveSources();
     } catch (error) {
@@ -25,6 +26,7 @@ async function runIngestionProcess() {
     // Use camelCase accessors for Mongoose docs if they are not plain objects yet 
     const teamMap = new Map(teams.map(team => [team._id.toString(), team.key]));
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sourcesByTeam: Record<string, { teamKey: string; sources: any[] }> = {};
     sources.forEach(source => {
         const teamId = source.teamId.toString(); // Ensure string for map key
@@ -44,6 +46,7 @@ async function runIngestionProcess() {
     for (const teamId in sourcesByTeam) {
         try {
             const { teamKey, sources: teamSources } = sourcesByTeam[teamId]
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const allPotentialArticlesForTeam: any[] = [];
             
             console.log(`Processing team: ${teamKey} (${teamId}) with ${teamSources.length} sources.`);
@@ -146,6 +149,7 @@ async function runIngestionProcess() {
                      // Generate embedding using AI Service
                     const embedding = await generateEmbedding(`${group.theme} - ${shortSummary}`);
 
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const articlesToSave = group.articles.map((a: any) => ({ 
                         url: a.url, 
                         source_name: a.sourceName, 

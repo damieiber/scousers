@@ -50,6 +50,7 @@ export default function NewsDetail() {
             shortSummary: item.shortSummary,
             shortSummaryEn: item.shortSummaryEn || '',
             image_url: item.imageUrl,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             original_article_links: (item.articles || []).map((a: any) => ({
               id: a.id,
               title: a.title,

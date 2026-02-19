@@ -39,7 +39,7 @@ function HeaderContent() {
     async function checkRivalAccess() {
       setIsLoadingAccess(true);
       if (session?.user) {
-         // @ts-ignore
+         // @ts-expect-error
          const status = session.user.subscription_status;
          if (['premium', 'plus', 'trial'].includes(status)) {
              setHasRivalAccess(true);

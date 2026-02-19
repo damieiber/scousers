@@ -8,7 +8,7 @@ export interface IUser extends Document {
   language: 'es' | 'en';
   primaryTeamId?: mongoose.Types.ObjectId;
   secondaryTeamIds: mongoose.Types.ObjectId[];
-  preferences: Record<string, any>;
+  preferences: Record<string, unknown>;
   subscriptionStatus: 'free' | 'standard' | 'plus' | 'premium' | 'trial';
   subscriptionExpiresAt?: Date;
   roles: string[];

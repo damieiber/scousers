@@ -172,7 +172,7 @@ export async function handleSourceSuccess(sourceId: string): Promise<void> {
 export async function handleSourceFailure(source: ISource): Promise<void> {
     await ensureDb();
     const newFailureCount = (source.consecutiveFailures || 0) + 1;
-    const update: any = { consecutiveFailures: newFailureCount };
+    const update: Record<string, unknown> = { consecutiveFailures: newFailureCount };
     
     if (newFailureCount >= source.quarantineThreshold) {
         update.status = 'quarantined';
@@ -264,7 +264,7 @@ export async function hasFeature(userId: string, featureKey: string): Promise<bo
     return features.some(f => f.key === featureKey);
 }
 
-export async function getTeamRivalries(teamId: string): Promise<any[]> {
+export async function getTeamRivalries(teamId: string): Promise<Record<string, unknown>[]> {
     await ensureDb();
     // Populate rival team info
     const rivalries = await Rivalry.find({ teamId: teamId }).sort({ rank: 1 }).populate('rivalTeamId');
