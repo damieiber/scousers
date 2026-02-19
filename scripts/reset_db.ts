@@ -27,7 +27,12 @@ async function resetDatabase() {
   ];
 
   console.log('🗑️  Dropping collections...');
-  const collections = await mongoose.connection.db.listCollections().toArray();
+  if (!mongoose.connection.db) {
+    throw new Error('Database connection not established');
+  }
+  const db = mongoose.connection.db;
+
+  const collections = await db.listCollections().toArray();
   const collectionNames = collections.map(c => c.name);
   
   console.log(`Found collections: ${collectionNames.join(', ')}`);
@@ -63,7 +68,7 @@ async function resetDatabase() {
       const exists = collectionNames.includes(stray);
       if (exists) {
           try {
-              await mongoose.connection.db.dropCollection(stray);
+              await db.dropCollection(stray);
               console.log(`🧹 Dropped stray collection: ${stray}`);
           } catch (e) {
               // ignore
