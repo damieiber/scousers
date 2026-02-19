@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": false, // Crucial: emit output files
+    "allowJs": true, // Allow JS in scripts
+    "checkJs": false, // Don't check JS files
+    "resolveJsonModule": true,
+    "isolatedModules": false // Allow non-module files
+  },
+  "include": [
+    "scripts/**/*.ts",
+    "lib/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "**/*.test.ts"
+  ]
+}

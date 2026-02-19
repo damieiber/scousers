@@ -1,0 +1,142 @@
+﻿Nuevo contenido
+
+
+Recomendaciones transversales (automatización y calidad)
+* Orquestación: cron distribuido (Vercel cron/Cloud Scheduler) con prioridades (pre/post-partido, diario/semanal).
+* Cache y costos: Redis/edge cache con TTL por módulo; backoff y circuit breaker en proveedores.
+* IA confiable: aplicar pipeline factual en toda narrativa (extract facts → summarize from facts → second-agent validate → sanitize → save); fallback seguro si falla.
+* Observabilidad: logs estructurados por job, alertas si un proveedor falla o baja calidad de datos; métricas de frescura.
+* Estados UI: loading, empty, fallback (última captura válida + sello de hora); consistencia visual; accesibilidad AA; mobile-first.
+* Privacidad y cumplimiento: odds con aviso informativo; sin enlaces externos ni afiliados; geofencing opcional.
+
+
+
+
+1. Tablero táctico automático
+* Qué es: Vista rápida de patrones de ataque/defensa del equipo (zonas fuertes, tendencia de finalización, distribución por bandas).
+* Datos técnicos (automatización):
+   * Fuentes: API-Football (team stats, match stats), complementos si hay: event-level (distribución de tiros por zona), xG si disponible.
+   * Jobs: diario + post-partido (cron); recalcular ventanas móviles (últimos 5/10 partidos).
+   * Cálculo: agregaciones por zona (izq/centro/der), tipos de finalización, posesión en tercio ofensivo/defensivo; normalizar por minutos/juegos para comparar.
+   * Infra: cache (Redis/edge), backoff en fallos, thresholds para mostrar solo si hay suficientes datos.
+   * Endpoints: GET /api/team/tactics?teamId=… (devuelve métricas y series).
+* UX/UI:
+   * Visualizaciones compactas (radar + barras apiladas) con leyenda clara.
+   * Estado vacío con mensaje “insuficiente muestra” si <N partidos.
+   * Tooltips simples (no saturar); modo oscuro; accesibilidad AA.
+2. Eficacia a balón parado
+* Qué es: Índice de rendimiento en corners y faltas (a favor/en contra), con tendencia reciente.
+* Datos técnicos:
+   * Fuentes: API-Football (goals by situation si disponible; match events), sumar sanciones/disciplinario.
+   * Jobs: post-partido + semanal para tendencias.
+   * Cálculo: conversión = goles/ocasiones; contra = goles recibidos/ocasiones rivales; normalización por partido; sparkline 5 últimos.
+   * Endpoints: GET /api/team/setpieces?teamId=…
+* UX/UI:
+   * Tarjeta con dos columnas (a favor/en contra), mini-sparkline de tendencia.
+   * Badge “↑↓→” según tendencia; texto corto y factual.
+   * Mostrar solo si hay eventos suficientes; fallback a promedio liga si no.
+3. Índice de riesgo del próximo partido
+* Qué es: Señal única que combina forma, bajas confirmadas y movimiento informativo de cuotas (sin fomentar apuestas).
+* Datos técnicos:
+   * Fuentes: API-Football (form, injuries/suspensions, fixtures); Odds (TheOddsAPI/API-Football odds) para movimiento básico 1X2.
+   * Jobs: 48 h antes → cada 30 min; día de partido → cada 10–15 min.
+   * Cálculo: score = w1form + w2bajas + w3*Δodds; pesos configurables; límites para evitar spikes.
+   * Endpoints: GET /api/match/risk?matchId=…
+* UX/UI:
+   * Medidor tipo “termómetro” (Bajo/Medio/Alto) + 3 bullets de factores.
+   * Aviso fijo “Contenido informativo”.
+   * Colores neutros; evitar rojo agresivo excepto “alto”.
+4. Comparador rápido vs rival (H2H compacto)
+* Qué es: Cara a cara con lo esencial: forma, goles/xG, balón parado y bajas confirmadas.
+* Datos técnicos:
+   * Fuentes: API-Football (H2H, match stats, injuries).
+   * Jobs: 72–48 h antes, refresco diario hasta el partido.
+   * Cálculo: agregaciones últimas 5–10 fechas; diferenciales (equipo vs rival).
+   * Endpoints: GET /api/match/h2h?matchId=…
+* UX/UI:
+   * Tabla/ficha dividida en dos columnas (equipo vs rival) + resaltado de diferencias.
+   * Iconos simples (lesión, disciplina, balón parado).
+   * CTA a Previa integrada.
+5. Formómetro de jugadores (Top 5)
+* Qué es: Ranking de los 5 jugadores con mejor rendimiento reciente (ventana 4–6 semanas).
+* Datos técnicos:
+   * Fuentes: API-Football (player ratings, goals/assists/minutes).
+   * Jobs: semanal + post-partido.
+   * Cálculo: score compuesto (rating z-score + contribución/ofensiva + minutos ponderados); excluir lesionados.
+   * Endpoints: GET /api/team/top-form?teamId=…
+* UX/UI:
+   * Lista compacta con foto, posición, mini-progreso (↑↓→).
+   * Comentario factual de 1 línea (pipeline IA factual).
+   * Estado vacío si poca muestra.
+6. Mapa de minutos y carga
+* Qué es: Visual de rotación y acumulado de minutos por posición, con señal de fatiga.
+* Datos técnicos:
+   * Fuentes: API-Football (player minutes, lineups).
+   * Jobs: post-partido + semanal.
+   * Cálculo: acumulado por jugador, umbrales de riesgo por posición (>85% minutos posibles); marcar back-to-back.
+   * Endpoints: GET /api/team/load-map?teamId=…
+* UX/UI:
+   * Heatmap por línea (DF/MF/FW) + badges de riesgo (fatiga).
+   * Tooltip con última carga 7 días.
+   * Colores accesibles; evitar rojo/verde puros.
+7. Monitor de impacto en mercado de pases
+* Qué es: Movimientos oficiales con indicador de impacto (alto/medio/bajo) según datos recientes del jugador y necesidades del equipo.
+* Datos técnicos:
+   * Fuentes: API-Football (transfers), match stats del jugador, plantilla equipo.
+   * Jobs: diario + eventos de mercado.
+   * Cálculo: impacto = contribución reciente + ajuste posicional + minutos + edad; IA factual para minicomment; sin rumores inventados.
+   * Endpoints: GET /api/team/transfer-impact?teamId=…
+* UX/UI:
+   * Tarjetas con foto, rol, impacto (badge), 1 frase factual.
+   * Filtros por ventana (invierno/verano).
+   * Mostrar solo oficiales; evitar rumores duetos.
+8. Loan Watch (cedidos) refinado
+* Qué es: Resumen semanal de rendimiento de jugadores a préstamo, solo si hay relevancia.
+* Datos técnicos:
+   * Fuentes: API-Football (players en club destino, match stats).
+   * Jobs: semanal; disparo adicional si el jugador destaca.
+   * Cálculo: regla de publicación (minutos >N, goles/asistencias, rating top 3 por posición).
+   * Endpoints: GET /api/team/loans?teamId=…
+* UX/UI:
+   * Tarjetas con club destino, minutos, aportes; badge “destacado” cuando aplique.
+   * Evitar saturación; mostrar solo si hay novedad.
+9. Cantera y reserva con “prospecto de la semana”
+* Qué es: Tarjeta destacando rendimientos sobresalientes en juveniles/reserva.
+* Datos técnicos:
+   * Fuentes: RSS/portales oficiales de divisiones inferiores, API si liga juvenil disponible, Wikipedia/Wikidata para ficha básica.
+   * Jobs: semanal; IA factual para 1–2 líneas de contexto.
+   * Cálculo: umbral de relevancia (goles/minutos, torneos clave).
+   * Endpoints: GET /api/team/youth-highlight?teamId=…
+* UX/UI:
+   * Tarjeta con foto (si disponible), posición, métrica clave; etiqueta “Prospecto de la semana”.
+   * Link discreto a ficha completa.
+10. Previa de partido integrada
+* Qué es: Todo en una vista: XI probable (si disponible), H2H, árbitro, clima, estadio, bajas, 3 claves del partido.
+* Datos técnicos:
+   * Fuentes: API-Football (lineups si hay, H2H, referee, venue); Clima: OpenWeather (ubicación y franja horaria).
+   * Jobs: 72–48 h antes; clima cada 3–6 h; XI probable si endpoint disponible.
+   * Narrativa: 3 claves con pipeline IA factual (solo hechos); sin especulación.
+   * Endpoints: GET /api/match/preview?matchId=…
+* UX/UI:
+   * Layout de secciones (XI, H2H, bajas, árbitro, clima); acceso directo al fixture.
+   * Mobile-first; evitar textos largos; chips/badges para clima y bajas.
+11. Odds “Quién paga más” (informativo)
+* Qué es: Para cada partido, mostrar qué casa paga más en 1X2 (local/empate/visita), cuota y movimiento simple (↑/↓/→). Sin fomentar apuestas.
+* Datos técnicos:
+   * Fuentes: TheOddsAPI o API-Football odds (si ya integrado).
+   * Jobs: cada 30 min desde 48 h antes; día de partido cada 10–15 min; snapshots y cálculo de top por outcome; cache y fallback si proveedor falla.
+   * Endpoints: GET /api/match/odds-top?matchId=…
+* UX/UI:
+   * Tabla tipo Football Manager: Resultado | Casa | Cuota | Movimiento.
+   * Aviso fijo: “Contenido informativo. No constituye recomendación.”
+   * Colores neutros; sin brandings agresivos.
+12. Tabla de posiciones multi-competencia
+* Qué es: Acceso actualizado a las tablas de todas las competiciones donde participa el equipo (liga, copas, torneos internacionales).
+* Datos técnicos:
+   * Fuentes: API-Football (standings por league/season).
+   * Jobs: diario; post-jornada automática.
+   * Endpoints: GET /api/team/standings?teamId=… (lista competiciones + posición + forma).
+* UX/UI:
+   * Selector de competición (chips/dropdown) y tabla clara (pos, puntos, forma).
+   * Estado vacío si no hay standings (copas con formato distinto).
+   * Enlace al fixture y próximos partidos.

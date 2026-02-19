@@ -1,0 +1,328 @@
+Documento de Visión, Requisitos y Construcción - AI-Powered Fan Hub (Versión Maestra)
+
+Parte 1: Resumen Ejecutivo, Problema, Solución, Modelo de Negocio y Monetización
+1.1. Resumen Ejecutivo
+Este proyecto consiste en desarrollar "AI-Powered Fan Hub", una plataforma que resuelve la sobrecarga de información para los fanáticos del deporte. La solución ofrece un feed de noticias e insights hiper-personalizado, usando IA para agregar, resumir, curar y jerarquizar contenido. El MVP se centrará en un único nicho de alto valor (hinchas de River Plate) para validar la tecnología y el modelo de negocio, con un diseño que permite la escalabilidad a otros clubes, deportes y eventos.
+1.2. El Problema
+Los fanáticos deportivos apasionados pierden tiempo y energía navegando por un ecosistema de medios fragmentado, lleno de contenido repetitivo, muros de pago y clickbait. No existe una solución que centralice la información y, más importante aún, la cure de forma inteligente para ofrecer solo los insights de mayor calidad.
+1.3. La Solución Propuesta
+Crearemos una plataforma centralizada que actúa como el "hub definitivo" para el hincha. La plataforma ofrecerá:
+* Agregación Inteligente: Recopila noticias de una amplia gama de fuentes (nacionales, internacionales, blogs, etc.).
+* Curación y Jerarquización por IA: Utiliza IA para eliminar duplicados, agrupar noticias sobre el mismo tema, traducir artículos y generar resúmenes concisos. Además, la IA evaluará y destacará el artículo más completo sobre un mismo tema dentro de un grupo.
+* Hiper-Personalización: Permite a los usuarios no solo seguir a su equipo, sino también personalizar su feed con temas de interés específicos (ej. "Modo Rival", jugadores específicos, rumores de mercado, etc. - funcionalidad post-MVP).
+* Contenido de Engagement Diario: Ofrece contenido variado como efemérides con detalles generados por IA y fotos del día, para fomentar el hábito de uso y una conexión emocional.
+* Experiencia Emocional: La interfaz de usuario (UI) se adaptará visualmente a los colores y la identidad del club del usuario, creando una conexión personal.
+1.4. Modelo de Negocio y Monetización
+La plataforma operará bajo un modelo Freemium:
+* Versión Gratuita: Ofrecerá el feed básico con noticias resumidas y agrupadas, mostrando el artículo más completo, contenido de engagement diario (efemérides, foto del día) y la experiencia personalizada para un equipo. El objetivo es atraer un gran volumen de usuarios y demostrar el valor principal.
+* Versión Premium (Suscripción): Desbloqueará funciones avanzadas que añadirán un valor superior para el fanático más exigente. Esto incluirá:
+* "Modo Rival": Acceso a noticias curadas y análisis de los equipos competidores.
+* Análisis avanzados de datos y estadísticas por IA.
+* Personalización visual extendida y temática.
+* Acceso a módulos de eventos especiales (ej. Copa del Mundo, Champions League).
+* Motor de personalización explícita (selección de categorías de interés, feedback "pulgar arriba/abajo" estilo Netflix).
+* (Potencialmente) Resúmenes con validación de doble IA para máxima precisión.
+
+Parte 2: Requisitos del Producto Mínimo Viable (MVP) Post-Refinamiento
+Epic 1: Fundación y Experiencia del Hincha de River Plate
+Este Epic cubre todas las funcionalidades necesarias para lanzar una primera versión del producto, enfocada 100% en el nicho de River Plate para validar las hipótesis clave de valor y usabilidad.
+Historia 1.1: Configuración del Sistema para Soportar Múltiples Deportes y Equipos
+* Tipo: Técnica (Enabler para escalabilidad futura)
+* Historia: Como desarrollador, necesito que la arquitectura de datos esté diseñada desde el principio para soportar múltiples deportes y equipos, de modo que en el futuro podamos expandir la plataforma a nuevos nichos (otros clubes, otros deportes) de forma rápida y sin necesidad de rediseñar la base de datos.
+* Criterios de Aceptación (ACs):
+1. AC1: En la base de datos, la tabla articles debe contener una columna team_id para asociar cada noticia con un equipo.
+2. AC2: La tabla teams debe contener id, un campo key (ej. 'river-plate'), y una clave foránea sport_id que la vincule con su deporte correspondiente. El key debe ser un identificador único y programático en inglés.
+3. AC3: El código encargado de recopilar noticias (ingestion_service) debe asignar correctamente el team_id al guardar nuevos artículos.
+4. AC4: El código que muestra las noticias (feed_service) debe filtrar los artículos por team_id (en el MVP, siempre el de River Plate).
+5. AC5: No debe haber ninguna opción visible en la interfaz para que el usuario seleccione equipo o deporte. La experiencia debe ser 100% de River Plate por defecto.
+6. AC6: Debe existir una tabla sports que contenga, como mínimo, un id y un campo key (ej. 'soccer'). El valor key debe ser un identificador único y programático en inglés.
+7. AC7: El nombre visible para el usuario (ej. "Fútbol") NO se almacenará en la tabla sports. La traducción del key ('soccer' a "Fútbol") se gestionará en la capa de presentación.
+Historia 1.2: Ingesta de Contenido Básico y Gestión de Salud de Fuentes
+* Tipo: Técnica (Backend)
+* Historia: Como sistema, necesito poder conectarme de forma periódica a una lista predefinida de fuentes de noticias (blogs, portales, etc.) para recopilar, procesar y almacenar nuevos artículos relevantes para los equipos configurados, y gestionar de forma inteligente la fiabilidad de esas fuentes.
+* Criterios de Aceptación (ACs):
+1. AC1: El sistema debe ser capaz de procesar una lista configurable de fuentes (para el MVP, 15-20 fuentes para River Plate).
+2. AC2: Por cada artículo nuevo encontrado, el sistema debe extraer y guardar la siguiente información mínima: título, URL del artículo original, un breve resumen o descripción (si está disponible), fecha de publicación y la fuente de origen.
+3. AC3: Antes de guardar un nuevo artículo, el sistema debe verificar que la URL del mismo no exista ya en la base de datos para evitar duplicados exactos.
+4. AC4: El proceso de ingesta de noticias debe ejecutarse automáticamente de forma programada (ej. cada 30 minutos) sin necesidad de intervención manual.
+5. AC5: El sistema debe implementar una política de retención de datos configurable, con un valor por defecto de 30 días. Los artículos más antiguos que este período se eliminarán automáticamente para controlar el crecimiento y los costos de la base de datos.
+6. AC6 (Nuevo): El sistema implementará un mecanismo de salud de fuentes. Cada fuente tendrá un estado (active, quarantined) y un contador de fallos consecutivos (consecutive_failures).
+7. AC7 (Nuevo): Si una fuente falla consecutivamente un número configurable de veces (ej. 20), su estado cambiará automáticamente a quarantined y se enviará una alerta.
+8. AC8 (Nuevo): Se configurarán dos servicios de ingesta: uno de alta frecuencia (ej. cada 30 min) para fuentes active, y uno de baja frecuencia (ej. una vez al día) para re-verificar las fuentes en quarantined. Si una fuente en cuarentena vuelve a funcionar, su estado regresará automáticamente a active y se reseteará su contador de fallos.
+Historia 1.3: Visualización del Feed Básico
+* Tipo: Funcional (Frontend/UI)
+* Historia: Como un hincha de River, quiero ver un feed de noticias claro y ordenado cronológicamente, para poder ponerme al día rápidamente con todo lo que se publica sobre mi equipo en un solo lugar.
+* Criterios de Aceptación (ACs):
+1. AC1: La pantalla principal de la aplicación debe mostrar una lista de los artículos almacenados en la base de datos (recopilados por la Historia 1.2).
+2. AC2: Los artículos en el feed deben estar ordenados por fecha de publicación, mostrando siempre el más reciente primero.
+3. AC3: Cada "tarjeta" de noticia en el feed debe mostrar, como mínimo: el título del artículo, el nombre de la fuente (ej. "La Página Millonaria") y la fecha/hora de publicación.
+4. AC4: Al hacer clic en cualquier parte de la tarjeta de una noticia, el usuario debe ser redirigido al artículo original en la web de la fuente. El enlace debe abrirse en una nueva pestaña del navegador para no perder la aplicación.
+5. AC5: Mientras se cargan las noticias, la aplicación debe mostrar un indicador visual de carga (ej. un spinner o un texto "Cargando noticias...").
+6. AC6: Si por alguna razón no hay noticias para mostrar (ej. es la primera vez que se ejecuta el sistema), la pantalla no debe quedar en blanco, sino mostrar un mensaje claro como "Aún no hay noticias. Vuelve a intentarlo en unos minutos".
+Historia 1.4a: Implementar Resúmenes por IA (MVP de la Capa de IA)
+* Tipo: Funcional (Backend + Frontend)
+* Historia: Como hincha ocupado, quiero que cada noticia en mi feed venga con un resumen conciso generado por IA para entender rápidamente de qué trata, sin contenido malicioso.
+* Criterios de Aceptación (ACs):
+1. AC1: El sistema generará un resumen de IA de 2-3 frases para cada artículo recopilado, usando un prompt de "anclaje" (grounding) diseñado para asegurar la fidelidad al texto original y minimizar alucinaciones.
+2. AC2 (Nuevo): Todas las respuestas de la IA deben pasar obligatoriamente por un "Pipeline de Sanitización" (usando librerías como DOMPurify) que elimine cualquier código malicioso (XSS) o contenido malformado antes de ser guardadas en la base de datos.
+3. AC3: Este resumen generado por IA debe almacenarse en la base de datos junto con el artículo correspondiente.
+4. AC4: La "tarjeta" de noticia en el feed (definida en la Historia 1.3) ahora debe mostrar este resumen de IA debajo del titular.
+Historia 1.4b: Implementar Agrupación Semántica de Noticias
+* Tipo: Funcional (Backend + Frontend)
+* Historia: Como hincha ocupado, quiero que las noticias que hablan del mismo evento se agrupen en mi feed para no ver información repetida y obtener una visión consolidada.
+* Criterios de Aceptación (ACs):
+1. AC1: El sistema debe usar técnicas de IA (ej. embeddings vectoriales y pgvector en la base de datos) para identificar artículos que tratan sobre el mismo evento o noticia fundamental, aunque estén redactados de manera diferente por distintas fuentes.
+2. AC2: En el feed, en lugar de mostrar todas las noticias similares por separado, se debe mostrar una sola "tarjeta maestra" sobre el evento. Esta tarjeta debe tener una indicación visual de que agrupa varias fuentes (ej. un icono que diga "+5 fuentes").
+3. AC3: Al hacer clic en esta tarjeta maestra, el usuario debería poder expandirla para ver los enlaces a todos los artículos originales de las diferentes fuentes que cubrieron esa misma noticia.
+Historia 1.4c: Implementar Jerarquización del "Mejor Artículo"
+* Tipo: Funcional (Backend + Frontend)
+* Historia: Como hincha ocupado, quiero que, dentro de un grupo de noticias, la aplicación me destaque cuál es el artículo más completo y relevante para que pueda ir directamente a la información de mayor calidad.
+* Criterios de Aceptación (ACs):
+1. AC1: Una vez que un grupo de noticias similares es identificado, el sistema debe evaluar los artículos para determinar cuál es el "más completo" basándose en el número de puntos de información únicos que la IA pueda extraer y sintetizar de cada fuente.
+2. AC2: La "tarjeta maestra" que se muestra en el feed principal debe usar el titular y el resumen de este artículo destacado.
+3. AC3: Al hacer clic para expandir la tarjeta maestra, el artículo destacado debe mostrarse de forma prominente (ej. en la parte superior, con una estrella ?), seguido por los enlaces a las fuentes secundarias o menos detalladas.
+Historia 1.5: Módulo de Engagement Diario con Profundidad y Variedad
+* Tipo: Funcional (Backend + Frontend)
+* Historia: Como hincha, quiero descubrir cada día contenido interesante y variado sobre mi club más allá de las noticias del momento (como efemérides, la foto del día o análisis de opinión), para tener un motivo para abrir la aplicación y sentirme más conectado con la historia y la actualidad de mi equipo.
+* Criterios de Aceptación (ACs):
+1. AC1: Para el MVP, el sistema implementará al menos dos tipos de contenido de "engagement": (a) Efemérides y (b) Foto del Día. La arquitectura debe permitir agregar más tipos en el futuro.
+2. AC2: Este contenido de engagement debe mostrarse en una tarjeta especial y destacada en el feed, claramente diferenciada de las tarjetas de noticias normales (ej. con un diseño visual distinto o una etiqueta como "Recuerdo del Día"). Se mostrará un máximo de una o dos de estas tarjetas por día.
+3. AC3: Las efemérides se gestionarán desde una tabla ephemerides que debe incluir una columna team_id para ser escalable y una columna importance para clasificar la relevancia. Para el MVP, solo se cargarán los datos de River Plate y la lógica de selección priorizará eventos de mayor importancia.
+4. AC4 (Revisado): El sistema, a través de un proceso automático diario, generará el contenido detallado y contextualizado de la efeméride del día usando IA y lo almacenará en la base de datos. Al hacer clic en la tarjeta de la Efeméride, la aplicación mostrará este contenido pre-generado de forma instantánea en una vista interna.
+5. AC5: La recopilación de la "Foto del Día" debe ser un proceso automatizado que obtenga la última imagen de la cuenta oficial del club (ej. Instagram/Twitter) una vez al día.
+6. AC6: Al hacer clic en la tarjeta de la Foto del Día, el usuario será redirigido a la publicación original en la red social correspondiente.
+
+Parte 3: Funcionalidad Clave Post-MVP, Roadmap Post-MVP, Estrategia de Escalabilidad y Mejoras Futuras de la Capa de IA
+3.1. Funcionalidad Clave Post-MVP: Motor de Personalización Explícita
+Una vez validado el MVP, una de las primeras y más importantes mejoras será la introducción de un sistema de personalización explícita al estilo Netflix.
+* Funcionalidad: Los usuarios podrán dar "Pulgar arriba/abajo" a las noticias. Esto entrenará un perfil de preferencias personal. Los usuarios también podrán seleccionar categorías de interés en su configuración (ej. "Mercado de Pases", "Inferiores", "Análisis Táctico"). El feed se adaptará para priorizar el contenido de interés.
+* Tecnología Subyacente: Requerirá el desarrollo de un agente de IA para la clasificación automática de contenido por categorías y un algoritmo de recomendación para ordenar el feed.
+* Estrategia de Monetización: Esta funcionalidad será el núcleo de la oferta Premium, sirviendo como un incentivo clave para la conversión de usuarios gratuitos a suscriptores.
+3.2. Roadmap de Producto Post-MVP
+* Fase 2: Introducir cuentas de usuario y el modelo de suscripción. Lanzar las primeras funciones premium ("Modo Rival", personalización de la UI, Motor de Personalización Explícita). Expandir la plataforma para cubrir los 10 clubes más importantes de la región (Argentina y países cercanos).
+* Fase 3: Expandir la plataforma a un segundo deporte (ej. F1 o NBA), demostrando la escalabilidad de la arquitectura multi-deporte. Lanzar el primer "Módulo de Evento" especial (ej. Copa del Mundo 2026, Champions League) para captar picos de interés masivos.
+* Largo Plazo: Convertirse en la plataforma de referencia para cualquier fanático de cualquier deporte que busque una experiencia informativa premium, personal y sin ruido.
+3.3. Estrategia de Escalabilidad del Contenido (Efemérides)
+La gestión del contenido histórico (efemérides) evolucionará para soportar la expansión a cientos de equipos y deportes:
+* MVP: Carga manual de datos para el primer equipo (River Plate) para validar la funcionalidad con bajo costo y asegurar la calidad inicial.
+* Fase 2: Desarrollo de un "Scraper Inteligente" especializado en extraer datos históricos de fuentes estructuradas (ej. Wikipedia) para acelerar la expansión a los siguientes 10-20 equipos. Esto reducirá el trabajo manual.
+* Fase 3: Desarrollo de un "Agente de Investigación de IA" para poblar la historia de nuevos equipos de forma totalmente automática (mediante búsquedas web avanzadas y síntesis de información). Alternativamente, o en combinación, se podría implementar una herramienta de contribución comunitaria donde los propios hinchas expertos propongan efemérides.
+3.4. Mejoras Futuras de la Capa de IA
+* Agente de IA Validador: Para futuras versiones premium, se evaluará y potencialmente se implementará un segundo agente de IA (un "Agente Revisor/Validador"). Su función sería recibir el resumen bruto y el artículo original, y validar la veracidad del resumen, respondiendo "APROBADO" o "RECHAZADO". Esto aumentaría la fiabilidad de los resúmenes generados de un ~95% a un ~99%, ofreciendo una característica diferencial para usuarios de pago.
+
+Parte 4: Toda la Experiencia del Usuario (UX) y Diseño de Interfaz (UI)
+4.1. Principios de Diseño de UX
+1. Cero Fricción en el MVP: No se requerirá registro ni inicio de sesión para la primera versión. El objetivo es que el usuario obtenga valor de forma inmediata sin barreras.
+2. Diferenciación Visual Clara: La interfaz debe comunicar sutilmente el tipo de cada tarjeta (noticia simple, agrupada, efeméride, foto del día) antes de la interacción, usando iconos distintivos, variaciones de diseño o texto claro (ej. "+X fuentes").
+3. Consistencia de la Interacción: El comportamiento al hacer clic debe ser universal y predecible. Cualquier clic en una tarjeta de noticia (simple o agrupada) llevará primero a una vista de resumen detallado interno, no directamente a la fuente externa.
+4. Jerarquía de la Información: El contenido en las tarjetas y vistas detalladas debe presentarse en orden de importancia para el usuario que escanea: Título > Resumen > Metadatos (Fuente, Fecha).
+5. Control y Libertad del Usuario: El sistema hará recomendaciones claras (ej. artículo destacado), pero el usuario siempre tendrá acceso fácil a todas las opciones relevantes (ej. todas las fuentes de una noticia agrupada).
+4.2. Flujo de Usuario Principal del MVP
+Este diagrama describe el "camino feliz" del usuario en su primera visita y consumo diario, centrando en la simplicidad y el acceso inmediato al valor.
+graph TD
+    A[Inicio: Usuario abre la App] --> B[Muestra Feed Principal];
+    subgraph "Interacciones Posibles en el Feed"
+        B --> C1(Clic en Noticia Simple/Agrupada);
+        B --> C2(Clic en Efeméride);
+        B --> C3(Clic en Foto del Día);
+    end
+    C1 --> D1[Abre Vista de Resumen Detallado Interno];
+    C2 --> D2[Abre Vista de Efeméride con IA Interna];
+    C3 --> D3[Fin: Redirige a Red Social Externa];
+    D1 --> E1{Clic en "Leer Artículo Completo"};
+    E1 --> F1[Fin: Redirige a Fuente Original Externa];
+4.3. Wireframes de Baja Fidelidad (Planos de Pantalla)
+Estos bocetos representan la estructura de las pantallas clave, priorizando la disposición y la jerarquía de los elementos.
+A. Pantalla del Feed Principal
+* Objetivo: Presentar de forma clara y atractiva la variedad de contenido (noticias curadas, efemérides, foto del día) con diferenciación visual.
++-----------------------------------------------------+
+| [AI-POWERED FAN HUB]             [Icono Config.?]   |  <- Header con propuesta de valor
+| [Tu feed de noticias inteligente]                   |
++-----------------------------------------------------+
+|                                                     |
+|          [ TARJETA DE EFEMÉRIDE ]                     |  <- Diseño con tono sepia/look antiguo
+|          [ [Icono pelota antigua] "Un día como hoy..." ] |
+|          [ Breve descripción de la efeméride ]      |
+|                                                     |
++-----------------------------------------------------+
+|                                                     |
+|          [ TARJETA DE NOTICIA AGRUPADA ]              |  <- Título del artículo más completo
+|          [ Resumen generado por IA...          ]      |  <- Resumen primero
+|          [ [Icono Grupo] +4 fuentes más        ]      |  <- Metadatos al final
+|                                                     |
++-----------------------------------------------------+
+|                                                     |
+|          [ TARJETA DE NOTICIA SIMPLE ]                |  <- Título del artículo
+|          [ Resumen generado por IA...          ]      |  <- Resumen primero
+|          [ Fuente: La Página Millonaria        ]      |  <- Metadatos al final
+|                                                     |
++-----------------------------------------------------+
+|                                                     |
+|          [ TARJETA DE ENGAGEMENT: FOTO DEL DÍA ]      |  <- Imagen destacada
+|          [ [Imagen de Instagram/Twitter del día] ]      |
+|          [ Texto: "La foto del día de River Plate" ]      |
+|                                                     |
++-----------------------------------------------------+
+|                        ...                          |
+|                 (Más noticias y contenido)          |
+B. Vista de Resumen Detallado (Universal para todas las noticias)
+* Objetivo: Proporcionar un "briefing de inteligencia" completo antes de que el usuario decida ir a la fuente original. Consistente para noticias simples y agrupadas.
++-----------------------------------------------------+
+| [ ? Volver al Feed ]      [COMPARTIR ICONO]       |  <- Navegación y acciones
++-----------------------------------------------------+
+|                                                     |
+|  [ Título Principal del Evento/Noticia ]            |  <- Título grande y claro
+|                                                     |
+|  [ Resumen Largo Generado por IA ]                    |  <- Resumen detallado (2-3 párrafos)
+|  [ (Proporciona todo el contexto necesario) ]         |
+|                                                     |
++-----------------------------------------------------+
+|  [ FUENTE(S) ]                                      |  <- Sección claramente marcada
++-----------------------------------------------------+
+|                                                     |
+|          [ ? ARTÍCULO DESTACADO (si aplica) ]       |  <- Tu "killer feature"
+|          [ Título del artículo de TyCSports ]       |
+|          [ [Logo TyCSports] – Hace 2 horas ]        |
+|          [ **LEER ARTÍCULO COMPLETO ?** ]           |  <- CTA CLARO para leer original
+|                                                     |
++-----------------------------------------------------+
+|                                                     |
+|          [ OTRAS FUENTES (si aplica) ]                |  <- Fuentes secundarias
+|          [ Título del artículo de Olé         ]       |
+|          [ [Logo Olé] – Hace 3 horas          ]       |
+|          [ **LEER ARTÍCULO COMPLETO ?** ]           |  <- CTA CLARO
+|                                                     |
++-----------------------------------------------------+
+|                        ...                          |
+C. Vista de Efeméride Detallada
+* Objetivo: Recompensar el clic del usuario con un contenido histórico rico y curado por IA, ofreciendo una experiencia inmersiva.
++-----------------------------------------------------+
+| [ ? Volver al Feed ]      [COMPARTIR ICONO]       |  <- Navegación y acciones
++-----------------------------------------------------+
+|                                                     |
+|  [ FOTO HISTÓRICA DEL EVENTO (si es posible) ]      |  <- Impacto visual
+|                                                     |
+|  [ Título Grande: "A 25 AÑOS DE LA LIBERTADORES '96" ] |  <- Título evocador
+|                                                     |
++-----------------------------------------------------+
+|  [ RESUMEN GENERADO POR IA ]                          |  <- Párrafo explicando la importancia
+|  [ (Contexto histórico y relevancia del evento) ]     |
++-----------------------------------------------------+
+|                                                     |
+|  [ LAS FORMACIONES / DATOS CURIOSOS ]                 |  <- Datos estructurados y valor agregado
+|  [ River Plate: Burgos, Ayala, Berizzo... ]         |
+|  [ América de Cali: Córdoba, Bermúdez... ]          |
+|  [ "Sabías que ese día debutó...? El partido de ida..." ] |
+|                                                     |
++-----------------------------------------------------+
+
+Guía de Arquitectura y Stack Tecnológico para Desarrolladores
+Proyecto: AI-Powered Fan Hub
+1. Visión General de la Arquitectura (Full-Stack TypeScript)
+Hemos optado por una arquitectura Full-Stack TypeScript, lo que significa que utilizaremos un único lenguaje (TypeScript) y un framework (Next.js) para gestionar tanto el frontend (lo que el usuario ve) como el backend (la lógica de servidor, APIs, y el procesamiento de datos).
+* ¿Por qué esta elección?
+* Eficiencia: Un solo lenguaje y ecosistema para todo el proyecto reduce la complejidad y acelera el desarrollo.
+* Seguridad y Consistencia: La compartición de tipos (interfaces) entre frontend y backend elimina una clase entera de errores comunes y mejora la calidad del código.
+* Productividad: Unifica el conocimiento necesario, haciendo que el desarrollador pueda moverse más fácilmente entre diferentes partes del proyecto.
+
+2. Stack Tecnológico Detallado (Componentes Clave)
+Categoría
+Tecnología Seleccionada
+Justificación Clave (para el desarrollador)
+Framework Principal
+Next.js
+Elegido por su capacidad full-stack (frontend + backend APIs), renderizado híbrido (SSR/SSG), optimización automática y excelente ecosistema. Es la base de nuestro desarrollo.
+Lenguaje de Programación
+TypeScript
+Proporciona tipado estático a JavaScript, lo que mejora la detectabilidad de errores en tiempo de desarrollo, la legibilidad del código y el mantenimiento a largo plazo.
+Base de Datos
+PostgreSQL (gestionado por Supabase)
+Una base de datos relacional robusta y escalable. Supabase facilita su gestión, ofrece herramientas de desarrollo rápido y, crucialmente, soporta la extensión pgvector para manejar nuestros embeddings de IA de manera eficiente.
+Autenticación
+Supabase Auth
+Integrado directamente con nuestra base de datos. Nos ofrece soluciones listas para usar para la gestión de usuarios (necesarias para fases post-MVP) sin añadir complejidad adicional de desarrollo.
+Estilos y UI
+Tailwind CSS + Shadcn/UI
+Tailwind es un framework CSS utilitario que permite construir interfaces complejas de forma rápida y consistente. Shadcn/UI es una librería de componentes React construida sobre Tailwind, que acelera la creación de UI accesibles y estéticamente agradables.
+Hosting y Despliegue
+Vercel
+Optimizado para Next.js. Ofrece despliegues automatizados desde Git, entornos de previsualización (Preview Deployments) por cada Pull Request y la ejecución de "Cron Jobs" (para ingesta de datos) como Serverless Functions, todo con planes muy generosos para empezar.
+Integración de IA
+APIs de OpenAI / Google Gemini / Cohere (Modelo agnóstico)
+No construiremos la IA, la consumiremos. Nuestro backend actuará como orquestador de llamadas a servicios de IA externos. Esto nos permite flexibilidad para cambiar de proveedor o usar el mejor modelo para cada tarea (generación de texto, embeddings).
+
+3. Diagrama de Arquitectura de Alto Nivel
+Este diagrama visualiza cómo interactúan los componentes clave de nuestro sistema.
+graph TD
+    subgraph "Navegador del Usuario"
+        A[Frontend App (Next.js/React)]
+    end
+    subgraph "Plataforma Vercel"
+        B[Backend API (Next.js)]
+        C[Ingestion & AI Processing Services (Cron Jobs)]
+    end
+    subgraph "Plataforma Supabase"
+        D[Base de Datos (PostgreSQL + pgvector)]
+        E[Autenticación de Usuarios (Supabase Auth)]
+    end
+    subgraph "Servicios Externos de IA"
+        F[API de Gemini/OpenAI (Generación de Texto)]
+        G[API de Embeddings (Generación de Vectores)]
+    end
+    subgraph "Fuentes de Noticias"
+        H[RSS Feeds / APIs de Medios]
+    end
+
+    A -- Peticiones API --> B
+    C -- Lee/Escribe en --> D
+    C -- Obtiene datos de --> H
+    C -- Llama a --> F
+    C -- Llama a --> G
+    B -- Lee/Escribe en --> D
+    B -- Gestiona Usuarios --> E
+Flujo Clave para el Desarrollador:
+* El Frontend (Next.js/React) consume datos del Backend API (Next.js).
+* Los Servicios de Ingesta y Procesamiento de IA (Cron Jobs en Vercel) se ejecutan periódicamente:
+1. Obtienen noticias de las Fuentes Externas.
+2. Envían el contenido a las APIs de IA (Generación de Texto, Embeddings) para procesar (resumir, generar vectores).
+3. Almacenan los resultados en la Base de Datos (PostgreSQL en Supabase).
+
+4. Principios Clave de Desarrollo
+* Monorepo: Frontend y Backend (API Routes y Serverless Functions) residirán en el mismo repositorio de Git, facilitando la cohesión y el reuso de código (especialmente tipos de TypeScript).
+* Convenciones de Código: Se seguirán las convenciones estándar de Next.js/TypeScript. Se utilizará Prettier y ESLint para mantener un código limpio y consistente.
+* Modularidad: Se buscará crear módulos de código bien definidos (ej. lib/aiService.ts, services/ingestionService.ts) para facilitar el mantenimiento y la extensibilidad.
+* Testabilidad: Aunque para el MVP la prioridad es la funcionalidad, la estructura del código debe permitir la adición de tests unitarios e de integración en el futuro.
+* Seguridad: Se priorizará la seguridad en la gestión de claves de API (variables de entorno), la sanitización de inputs (especialmente de IA), y la protección de endpoints.
+
+5. Flujo de Trabajo para el Desarrollador
+1. Clonar Repositorio: git clone [URL_DEL_REPOSITORIO]
+2. Instalar Dependencias: npm install o yarn install
+3. Configurar Entorno: Crear archivo .env.local con las claves de Supabase y las APIs de Gemini (se proporcionarán).
+4. Ejecutar Desarrollo Local: npm run dev o yarn dev para iniciar el servidor de desarrollo.
+5. Trabajar por Historias: Implementar las tareas de cada historia de usuario siguiendo el desglose técnico detallado.
+6. Despliegue de Pre-visualización: Cada Pull Request (PR) a una rama de desarrollo generará automáticamente un "Preview Deployment" en Vercel, que permitirá la revisión por parte del Product Owner y otros stakeholders.
+7. Despliegue a Producción: Una vez que un PR es aprobado y fusionado a la rama principal (main), Vercel desplegará automáticamente los cambios a la URL de producción.
+
+6. Consideraciones Adicionales para el Desarrollo
+6.1. Gestión de Claves de API y Secretos
+* Nunca cometer secretos: Las claves de API de Gemini, Supabase y cualquier otra credencial sensible jamás deben ser commiteadas al repositorio de Git. Siempre se gestionarán a través de .env.local para desarrollo local y como "Environment Variables" seguras en Vercel para los entornos de preview y producción.
+* Rotación: Mantener en mente que las claves de API deben ser rotadas periódicamente como medida de seguridad.
+6.2. Manejo de Errores y Logging
+* Errores Resilientes: Toda interacción con servicios externos (APIs de IA, RSS feeds, Supabase) debe estar envuelta en bloques try-catch robustos para manejar fallos gracefully.
+* Logging Efectivo: Implementar un sistema de logging (ej. pino o simplemente console.log estructurado para el MVP) para registrar eventos importantes, errores y advertencias en los servicios de backend. Esto es crucial para depurar problemas en producción (especialmente en los Cron Jobs).
+6.3. Optimización de Costos de IA
+* Cacheo de Resultados: Para respuestas de IA que no cambian frecuentemente (ej. el contenido detallado de una efeméride), se deben almacenar en la base de datos y reutilizar. Evitar llamadas innecesarias a la IA.
+* Monitoreo de Uso: Estar atento a los costos de uso de las APIs de IA. Las plataformas (OpenAI, Google Cloud) suelen tener paneles de control para ello. Considerar límites de gasto para evitar sorpresas.
+* Modelos Adecuados: Siempre usar el modelo de IA más económico que cumpla con el requisito de calidad para cada tarea (ej. un modelo más pequeño para embeddings si es suficiente).
+6.4. Gestión de la Base de Datos (Supabase)
+* CLI de Supabase: Familiarizarse con la CLI de Supabase para gestionar migraciones de esquema y sincronización de bases de datos localmente con el entorno de desarrollo.
+* Seguridad (RLS): Aunque el MVP no tendrá autenticación, es bueno tener en mente las "Row Level Security" (RLS) de PostgreSQL/Supabase para proteger los datos cuando se implementen usuarios y roles.
+6.5. Rendimiento del Frontend
+* Optimización de Imágenes: Usar el componente next/image para optimizar la carga de imágenes.
+* Carga Perezosa (Lazy Loading): Implementar lazy loading para componentes o datos que no son críticos para la carga inicial de la página.
+6.6. Pruebas (MVP y Futuro)
+* Pruebas Manuales: Para el MVP, el enfoque principal será en pruebas manuales exhaustivas por parte del equipo de QA y el Product Owner, utilizando los entornos de preview de Vercel.
+* Estructura para Pruebas: Aunque no se implementarán tests automatizados en el MVP, el código debe ser modular y estructurado de manera que facilite la adición de tests unitarios e de integración en el futuro.
+6.7. Comunicación y Colaboración
+* Pull Requests (PRs): Cada nueva funcionalidad o corrección debe ser entregada a través de un Pull Request. Esto facilita la revisión del código y la activación de los despliegues de preview de Vercel.
+* Documentación: Si se toma alguna decisión técnica importante que no está reflejada en este documento o en el PRD, documentarla adecuadamente (en el código o en un README.md).

@@ -1,0 +1,136 @@
+[
+  {
+    "id": "group-news-1",
+    "type": "news_group",
+    "teamKey": "river-plate",
+    "createdAt": "2025-09-29T14:00:00.000Z",
+    "title": "River Plate sufre dura derrota ante Deportivo Riestra y profundiza su crisis",
+    "aiSummary": "El equipo de Marcelo Gallardo cayó 2-1, sumando su cuarta derrota consecutiva, la peor racha en 15 años. El entrenador se disculpó con los hinchas.",
+    "featuredArticleId": "news-1-source-lpm",
+    "totalSources": 3,
+    "articles": [
+      {
+        "id": "news-1-source-lpm",
+        "type": "news",
+        "teamKey": "river-plate",
+        "createdAt": "2025-09-29T14:00:00.000Z",
+        "title": "La Página Millonaria: River, en caída libre: Riestra lo superó y la preocupación crece",
+        "aiSummary": "Análisis de la derrota de River y el mal momento que atraviesa el equipo, con declaraciones del DT.",
+        "source": {
+          "id": "lpm",
+          "name": "La Página Millonaria"
+        },
+        "publishedAt": "2025-09-29T13:55:00.000Z",
+        "originalUrl": "https://lapaginamillonaria.com/river-derrota-riestra"
+      },
+      {
+        "id": "news-1-source-tyc",
+        "type": "news",
+        "teamKey": "river-plate",
+        "createdAt": "2025-09-29T13:58:00.000Z",
+        "title": "TyCSports: Cuarta derrota al hilo para River: ¿Qué le pasa al equipo de Gallardo?",
+        "aiSummary": "Reporte del partido y las posibles causas del bajo rendimiento de River en las últimas fechas.",
+        "source": {
+          "id": "tyc",
+          "name": "TyCSports"
+        },
+        "publishedAt": "2025-09-29T13:50:00.000Z",
+        "originalUrl": "https://tycsports.com/river-cuarta-derrota"
+      },
+      {
+        "id": "news-1-source-ole",
+        "type": "news",
+        "teamKey": "river-plate",
+        "createdAt": "2025-09-29T13:50:00.000Z",
+        "title": "Olé: La crisis de River no tiene fin: Riestra lo goleó y Gallardo pidió disculpas",
+        "aiSummary": "Crónica del partido, puntajes de los jugadores y la reacción del entrenador tras el encuentro.",
+        "source": {
+          "id": "ole",
+          "name": "Olé"
+        },
+        "publishedAt": "2025-09-29T13:45:00.000Z",
+        "originalUrl": "https://ole.com.ar/river-crisis-riestra"
+      }
+    ]
+  },
+  {
+    "id": "group-news-2",
+    "type": "news_group",
+    "teamKey": "river-plate",
+    "createdAt": "2025-09-29T13:30:00.000Z",
+    "title": "River acelera por un zaguero europeo de jerarquía para el próximo mercado",
+    "aiSummary": "La dirigencia de River Plate está negociando contra reloj para cerrar la incorporación de un defensor central de Europa en las próximas 48 horas.",
+    "featuredArticleId": "news-2-source-espn",
+    "totalSources": 2,
+    "articles": [
+      {
+        "id": "news-2-source-espn",
+        "type": "news",
+        "teamKey": "river-plate",
+        "createdAt": "2025-09-29T13:30:00.000Z",
+        "title": "ESPN: River, a un paso de cerrar un central de la Serie A",
+        "aiSummary": "Detalles de la negociación de River por el defensor, su trayectoria y el impacto que tendría en el equipo.",
+        "source": {
+          "id": "espn",
+          "name": "ESPN"
+        },
+        "publishedAt": "2025-09-29T13:25:00.000Z",
+        "originalUrl": "https://espn.com.ar/river-central-seriea"
+      },
+      {
+        "id": "news-2-source-bolavip",
+        "type": "news",
+        "teamKey": "river-plate",
+        "createdAt": "2025-09-29T13:28:00.000Z",
+        "title": "Bolavip: Bombazo en River: el defensor que está a punto de firmar",
+        "aiSummary": "Información de último momento sobre el posible fichaje de River y las expectativas de los hinchas.",
+        "source": {
+          "id": "bolavip",
+          "name": "Bolavip"
+        },
+        "publishedAt": "2025-09-29T13:20:00.000Z",
+        "originalUrl": "https://bolavip.com/river-fichaje-defensor"
+      }
+    ]
+  },
+  {
+    "id": "group-news-3",
+    "type": "news_group",
+    "teamKey": "river-plate",
+    "createdAt": "2025-09-29T13:00:00.000Z",
+    "title": "La joya de la Reserva de River que se suma a los entrenamientos del primer equipo",
+    "aiSummary": "Un joven mediocampista ofensivo que deslumbró en las inferiores de River Plate ha sido convocado para entrenar con el plantel profesional.",
+    "featuredArticleId": "news-3-source-riverplateoficial",
+    "totalSources": 2,
+    "articles": [
+      {
+        "id": "news-3-source-riverplateoficial",
+        "type": "news",
+        "teamKey": "river-plate",
+        "createdAt": "2025-09-29T13:00:00.000Z",
+        "title": "River Plate Oficial: Promesa de la Reserva se suma al primer equipo",
+        "aiSummary": "Comunicado oficial del club sobre la incorporación de un juvenil al plantel de primera división.",
+        "source": {
+          "id": "riverplateoficial",
+          "name": "River Plate Oficial"
+        },
+        "publishedAt": "2025-09-29T12:55:00.000Z",
+        "originalUrl": "https://www.cariverplate.com.ar/noticia-reserva-primer-equipo"
+      },
+      {
+        "id": "news-3-source-lpm",
+        "type": "news",
+        "teamKey": "river-plate",
+        "createdAt": "2025-09-29T12:58:00.000Z",
+        "title": "La Página Millonaria: Quién es la joya de la Reserva que Gallardo sube al primer equipo",
+        "aiSummary": "Perfil del joven jugador, sus características y las expectativas sobre su futuro en River.",
+        "source": {
+          "id": "lpm",
+          "name": "La Página Millonaria"
+        },
+        "publishedAt": "2025-09-29T12:50:00.000Z",
+        "originalUrl": "https://lapaginamillonaria.com/joya-reserva-river"
+      }
+    ]
+  }
+]

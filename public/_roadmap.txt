@@ -1,0 +1,210 @@
+Fase 2 – Funcionalidades Premium y Expansión multi-equipo (IA Progressiva)
+💰 Monetización: Todas las funcionalidades en Fase 2 están disponibles sólo con suscripción activa. El MVP seguirá siendo gratuito con contenido básico de Epic 1.
+
+Historia F2-1: Autenticación y Perfil de Usuario
+Objetivo:
+Permitir que el usuario se registre/inicie sesión, guarde y recupere sus preferencias: equipo principal, equipos secundarios, configuración premium y personalización explícita.
+Debe integrarse con Supabase Auth para almacenamiento seguro y escalable.
+Disponible sólo con suscripción activa para guardar y aplicar configuraciones Premium.
+
+Pasos Técnicos:
+Backend – Supabase Auth:
+Configurar autenticación por email/contraseña.
+Crear tabla user_profiles vinculada por auth.user_id:
+primary_team_id (FK a teams)
+secondary_team_ids (array de FK)
+subscription_status
+preferences (JSON)
+Frontend:
+Pantalla de login/registro.
+Validación en tiempo real de email y contraseñas.
+Form para configurar equipo principal y secundarios (máximo X secundarios).
+Persistencia:
+Guardar en Supabase al confirmar selección.
+Recuperar datos en login para aplicar configuración automática.
+
+UX/UI Guidelines:
+Formularios simples, mensajes de error inline.
+Selección de equipos con logos y nombres visibles.
+Indicar claramente qué equipo es principal y cuales son secundarios.
+
+Criterios de Aceptación:
+Usuario puede crear cuenta y loguearse correctamente.
+Perfil guarda correctamente equipo principal y secundarios.
+La configuración se aplica automáticamente después de login.
+No se permite tener “sin equipo principal”.
+
+QA Test Cases:
+Registro con email válido, login exitoso.
+Intentar login con credenciales incorrectas → error mostrado.
+Guardar perfil y hacer logout/login → configuración persiste.
+Intentar borrar equipo principal → se rechaza.
+
+
+Historia F2-2: Modo Rival Automático con IA
+Objetivo:
+Mostrar feed especial del equipo principal con noticias de sus rivales predeterminados, priorizando automáticamente noticias negativas.
+La lista de rivales es inicial manualmente y luego gestionada y ajustada por IA.
+Disponible sólo con suscripción activa.
+
+Pasos Técnicos:
+DB:
+Tabla rivalries: team_id, rival_team_id, rank.
+Insertar dataset inicial.
+IA Rival Manager:
+Agente IA que, cada X días, analiza resultados y cobertura mediática para confirmar relevancia de rivalidad.
+Ajusta lista en rivalries.
+Clasificación Noticias:
+Función IA classifyRivalNews(text, rivalName):
+
+
+IA extractKeyPoints() del texto.
+Clasifica la noticia como NEGATIVA, NEUTRA o POSITIVA para [rivalName].
+Validar con segundo agente que la clasificación usa hechos reales.
+Guardar en articles.rival_sentiment.
+Feed API:
+/api/feed?mode=rivals: filtrado solo rivales del equipo principal.
+Ordenado: NEGATIVA → NEUTRA → POSITIVA → fecha.
+
+UX/UI Guidelines:
+Toggle “Modo Rival” en barra superior.
+Tarjetas muestran escudo rival + distintivo visual según sentimiento:
+NEGATIVA: borde rojo oscuro.
+NEUTRA: gris.
+POSITIVA: verde.
+
+Criterios de Aceptación:
+Rivales detectados automáticamente según equipo principal.
+Feed muestra solo rivales.
+Noticias ordenadas por sentimiento (NEGATIVA > NEUTRA > POSITIVA).
+Validación aprobada antes de mostrar.
+UI refleja rivales y sentimiento con distintivos claros.
+
+QA Test Cases:
+Seleccionar River Plate → ver Boca, Racing, Independiente.
+Inyectar noticia negativa → aparece primero.
+Toggle off → feed normal.
+IA ajusta rivales tras cambio en contexto deportivo.
+
+
+Historia F2-3: Personalización Visual Automática con IA
+Objetivo:
+Configurar automáticamente la apariencia de la app (colores oficiales, escudo actual, banners, camisetas históricas) según el equipo principal, gracias a un agente IA que obtiene y mantiene esos assets.
+Disponible sólo con suscripción activa.
+
+Pasos Técnicos:
+DB:
+Tabla teams_assets: team_id, primary_color, secondary_color, logo_url, banner_url, jersey_image_url.
+IA Asset Manager:
+Scraper de fuentes oficiales y de prensa para obtener assets actualizados.
+Clasificación y validación de assets.
+Actualización automática de teams_assets.
+Frontend:
+Context React aplica tema y assets en cada render basado en primary_team_id.
+
+UX/UI Guidelines:
+Respetar identidad visual oficial.
+Evitar problemas de contraste.
+Assets adaptados para mobile y desktop.
+
+Criterios de Aceptación:
+Cambio de equipo principal actualiza de forma automática colores/banners/camisetas.
+Assets cargan sin distorsión.
+Nuevos assets detectados por IA y aplicados.
+
+QA Test Cases:
+Cambiar equipo principal → UI actualiza assets.
+Asset dañado o con error → IA repone versión funcional.
+Verificar contraste en colores oscuros/claro.
+
+
+Historia F2-4: Motor de Personalización Explícita Premium
+Objetivo:
+Ajustar el orden/prioridad del feed según preferencias explícitas del usuario sobre tipos de noticias.
+IA clasifica y etiqueta las noticias.
+Disponible sólo con suscripción activa.
+
+Pasos Técnicos:
+DB:
+Tabla user_preferences: user_id, category_id, weight.
+IA Categorization:
+Función categorizeNews(text) asigna categoría: mercado de pases, tácticas, juveniles, etc.
+Feed Ponderado:
+Query ordena noticias por peso categoría + fecha.
+
+UX/UI Guidelines:
+Selector simple con checklist y sliders de prioridad.
+Mostrar categoría de noticia en tarjeta.
+
+Criterios de Aceptación:
+Feed reacciona dinámicamente a cambios en preferencias.
+Categorías correctas en base a contenido.
+UI muestra categoría de cada noticia.
+
+QA Test Cases:
+Seleccionar "Mercado de pases" como prioridad alta → feed muestra más de esa categoría.
+Cambiar slider → feed reordena inmediatamente.
+Validar IA asigna categoría correcta a muestra de artículos.
+
+
+Historia F2-5: Multi-equipo Premium (Principal + Secundarios)
+Objetivo:
+Permitir seguir un equipo principal y varios secundarios en el feed. Rivales automáticos y assets también gestionados por IA.
+Disponible sólo con suscripción activa.
+
+Pasos Técnicos:
+DB:
+primary_team_id y secondary_team_ids en user_profiles.
+Feed Multi:
+Endpoint combina noticias de todos los equipos seleccionados.
+Etiquetas por equipo.
+IA Assets/Rivales:
+IA mantiene lista rivales y assets para secundarios.
+
+UX/UI Guidelines:
+Escudo y nombre del equipo visibles en cada tarjeta.
+Color/acento según equipo.
+Filtro rápido por equipo activo.
+
+Criterios de Aceptación:
+Siempre hay un equipo principal definido.
+Noticias etiquetadas correctamente por equipo.
+Filtro por equipo funciona correctamente.
+
+QA Test Cases:
+River principal + Madrid/Boca secundarios → feed mixto etiquetado.
+Filtrar por Boca → solo noticias Boca.
+IA actualiza rivales y assets secundarios semanalmente.
+
+
+Historia F2-6: Engagement Diario IA
+Objetivo:
+Automatizar completamente el contenido diario (efemérides, foto del día) con IA para todos los equipos configurados por el usuario.
+Disponible sólo con suscripción activa.
+
+Pasos Técnicos:
+IA Content Agent:
+Buscar eventos históricos relevantes según fecha y equipo.
+Ejecutar extractKeyPoints() para efeméride.
+Generar texto contextual desde puntos clave.
+Buscar y seleccionar foto actual en redes oficiales/prensa.
+Validar con segundo agente relevancia y formato contra fuente original antes de guardar.
+DB:
+Tabla daily_content: team_id, date, type (efemeride/photo), content, image_url.
+Cron Diario:
+Ejecuta IA agent y pobla daily_content.
+
+UX/UI Guidelines:
+Tarjeta efeméride con look vintage.
+Tarjeta foto con imagen cuadrada y link a fuente original.
+
+Criterios de Aceptación:
+IA genera efeméride y foto sin intervención humana.
+Contenido relevante y bien formateado.
+Tarjetas visibles y clicables en feed.
+
+QA Test Cases:
+Fecha con evento → IA lo detecta y muestra.
+No hay foto → tarjeta no mostrada.
+Foto clic → abre fuente original.
+

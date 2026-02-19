@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/ingest",
+      "schedule": "0 13 * * *"
+    },
+    {
+      "path": "/api/check-quarantined",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}

@@ -1,0 +1,2564 @@
+[
+  {
+    "date": "01-01",
+    "year": 2017,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "01-02",
+    "year": 1964,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "01-03",
+    "year": 2015,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "01-04",
+    "year": 1940,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "01-05",
+    "year": 1990,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "01-06",
+    "year": 1957,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "01-07",
+    "year": 1997,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "01-08",
+    "year": 2004,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "01-09",
+    "year": 1985,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "01-10",
+    "year": 2008,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "01-11",
+    "year": 1968,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "01-12",
+    "year": 1938,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "01-13",
+    "year": 1941,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "01-14",
+    "year": 1962,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "01-15",
+    "year": 2009,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "01-16",
+    "year": 1966,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "01-17",
+    "year": 1946,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "01-18",
+    "year": 1988,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "01-19",
+    "year": 1978,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "01-20",
+    "year": 1965,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "01-21",
+    "year": 1995,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "01-22",
+    "year": 1976,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "01-23",
+    "year": 1971,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "01-24",
+    "year": 1953,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "01-25",
+    "year": 2008,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "01-26",
+    "year": 1957,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "01-27",
+    "year": 1972,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "01-28",
+    "year": 1975,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "01-29",
+    "year": 1930,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "01-30",
+    "year": 1956,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "01-31",
+    "year": 2016,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "02-01",
+    "year": 1943,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "02-02",
+    "year": 1982,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "02-03",
+    "year": 1957,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "02-04",
+    "year": 1961,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "02-05",
+    "year": 2005,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "02-06",
+    "year": 2012,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "02-07",
+    "year": 1984,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "02-08",
+    "year": 2016,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "02-09",
+    "year": 1980,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "02-10",
+    "year": 1965,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "02-11",
+    "year": 1937,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "02-12",
+    "year": 1931,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "02-13",
+    "year": 2013,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "02-14",
+    "year": 2002,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "02-15",
+    "year": 1972,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "02-16",
+    "year": 1956,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "02-17",
+    "year": 1993,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "02-18",
+    "year": 1949,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "02-19",
+    "year": 1985,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "02-20",
+    "year": 1979,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "02-21",
+    "year": 1959,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "02-22",
+    "year": 1958,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "02-23",
+    "year": 1934,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "02-24",
+    "year": 1977,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "02-25",
+    "year": 2012,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "02-26",
+    "year": 2011,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "02-27",
+    "year": 1973,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "02-28",
+    "year": 1950,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "02-29",
+    "year": 2019,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "03-01",
+    "year": 1947,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "03-02",
+    "year": 1974,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "03-03",
+    "year": 2009,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "03-04",
+    "year": 1955,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "03-05",
+    "year": 1947,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-06",
+    "year": 1966,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-07",
+    "year": 2014,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-08",
+    "year": 1979,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "03-09",
+    "year": 1997,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "03-10",
+    "year": 1963,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-11",
+    "year": 1935,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "03-12",
+    "year": 1977,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "03-13",
+    "year": 1990,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "03-14",
+    "year": 1958,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "03-15",
+    "year": 1987,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "03-16",
+    "year": 1962,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-17",
+    "year": 2019,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "03-18",
+    "year": 1934,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "03-19",
+    "year": 1980,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "03-20",
+    "year": 1968,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "03-21",
+    "year": 2023,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-22",
+    "year": 2009,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "03-23",
+    "year": 1975,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-24",
+    "year": 1978,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "03-25",
+    "year": 1936,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "03-26",
+    "year": 1938,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "03-27",
+    "year": 2009,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "03-28",
+    "year": 2006,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "03-29",
+    "year": 1947,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "03-30",
+    "year": 1962,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "03-31",
+    "year": 1994,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "04-01",
+    "year": 1989,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "04-02",
+    "year": 1985,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "04-03",
+    "year": 2021,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "04-04",
+    "year": 2013,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "04-05",
+    "year": 1952,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "04-06",
+    "year": 2023,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "04-07",
+    "year": 1976,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "04-08",
+    "year": 1938,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "04-09",
+    "year": 1968,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "04-10",
+    "year": 2016,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "04-11",
+    "year": 1946,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "04-12",
+    "year": 1992,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "04-13",
+    "year": 2018,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "04-14",
+    "year": 2019,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "04-15",
+    "year": 1937,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "04-16",
+    "year": 1979,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "04-17",
+    "year": 2016,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "04-18",
+    "year": 1973,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "04-19",
+    "year": 1994,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "04-20",
+    "year": 2000,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "04-21",
+    "year": 1997,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "04-22",
+    "year": 1973,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "04-23",
+    "year": 1982,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "04-24",
+    "year": 1937,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "04-25",
+    "year": 1956,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "04-26",
+    "year": 2018,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "04-27",
+    "year": 1955,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "04-28",
+    "year": 1953,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "04-29",
+    "year": 1998,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "04-30",
+    "year": 1962,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "05-01",
+    "year": 1989,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-02",
+    "year": 1983,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "05-03",
+    "year": 1951,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "05-04",
+    "year": 1947,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-05",
+    "year": 1996,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-06",
+    "year": 1947,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "05-07",
+    "year": 1945,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-08",
+    "year": 1955,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "05-09",
+    "year": 1977,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "05-10",
+    "year": 1980,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-11",
+    "year": 1953,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "05-12",
+    "year": 1994,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "05-13",
+    "year": 1970,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "05-14",
+    "year": 1960,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "05-15",
+    "year": 1968,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "05-16",
+    "year": 2012,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "05-17",
+    "year": 2018,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "05-18",
+    "year": 1931,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-19",
+    "year": 1977,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "05-20",
+    "year": 1951,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-21",
+    "year": 1985,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "05-22",
+    "year": 2008,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "05-23",
+    "year": 1967,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "05-24",
+    "year": 1938,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "05-25",
+    "year": 1901,
+    "title": "Fundación del Club",
+    "description": "Nace el Club Atlético River Plate en la Dársena Sur.",
+    "type": "birth"
+  },
+  {
+    "date": "05-26",
+    "year": 1955,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "05-27",
+    "year": 1975,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "05-28",
+    "year": 1993,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "05-29",
+    "year": 1930,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "05-30",
+    "year": 2010,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "05-31",
+    "year": 2003,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-01",
+    "year": 1999,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "06-02",
+    "year": 1984,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "06-03",
+    "year": 1973,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "06-04",
+    "year": 2010,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "06-05",
+    "year": 1962,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "06-06",
+    "year": 1983,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "06-07",
+    "year": 1990,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "06-08",
+    "year": 2006,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "06-09",
+    "year": 1987,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-10",
+    "year": 2012,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-11",
+    "year": 1985,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "06-12",
+    "year": 1995,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "06-13",
+    "year": 2008,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "06-14",
+    "year": 1993,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "06-15",
+    "year": 2008,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-16",
+    "year": 2008,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-17",
+    "year": 2004,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "06-18",
+    "year": 2023,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "06-19",
+    "year": 2005,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-20",
+    "year": 1982,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "06-21",
+    "year": 1963,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-22",
+    "year": 1943,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "06-23",
+    "year": 2021,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "06-24",
+    "year": 1942,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "06-25",
+    "year": 1951,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "06-26",
+    "year": 1996,
+    "title": "Segunda Libertadores",
+    "description": "River vence a América de Cali con dos goles de Crespo y levanta su segunda Copa Libertadores.",
+    "type": "match"
+  },
+  {
+    "date": "06-27",
+    "year": 1934,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "06-28",
+    "year": 1937,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "06-29",
+    "year": 1942,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "06-30",
+    "year": 2006,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "07-01",
+    "year": 1987,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "07-02",
+    "year": 1960,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "07-03",
+    "year": 1980,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "07-04",
+    "year": 1973,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "07-05",
+    "year": 1953,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "07-06",
+    "year": 1936,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "07-07",
+    "year": 1930,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "07-08",
+    "year": 1941,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "07-09",
+    "year": 1972,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "07-10",
+    "year": 1995,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "07-11",
+    "year": 1952,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "07-12",
+    "year": 1931,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "07-13",
+    "year": 1986,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "07-14",
+    "year": 1937,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "07-15",
+    "year": 1999,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "07-16",
+    "year": 1974,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "07-17",
+    "year": 1994,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "07-18",
+    "year": 1969,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "07-19",
+    "year": 1999,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "07-20",
+    "year": 2003,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "07-21",
+    "year": 1968,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "07-22",
+    "year": 1941,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "07-23",
+    "year": 1967,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "07-24",
+    "year": 1930,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "07-25",
+    "year": 1968,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "07-26",
+    "year": 1932,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "07-27",
+    "year": 1989,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "07-28",
+    "year": 1964,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "07-29",
+    "year": 1937,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "07-30",
+    "year": 1967,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "07-31",
+    "year": 1954,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "08-01",
+    "year": 1939,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "08-02",
+    "year": 1940,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-03",
+    "year": 2014,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-04",
+    "year": 1950,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "08-05",
+    "year": 2019,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-06",
+    "year": 1959,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "08-07",
+    "year": 1979,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "08-08",
+    "year": 1946,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "08-09",
+    "year": 2011,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "08-10",
+    "year": 1982,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "08-11",
+    "year": 1967,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "08-12",
+    "year": 2021,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "08-13",
+    "year": 2005,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "08-14",
+    "year": 1969,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "08-15",
+    "year": 2003,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-16",
+    "year": 1968,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "08-17",
+    "year": 1987,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-18",
+    "year": 1983,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "08-19",
+    "year": 1982,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "08-20",
+    "year": 2017,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "08-21",
+    "year": 1997,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "08-22",
+    "year": 2018,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "08-23",
+    "year": 1963,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "08-24",
+    "year": 1969,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-25",
+    "year": 1939,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "08-26",
+    "year": 2015,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-27",
+    "year": 2003,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "08-28",
+    "year": 1983,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "08-29",
+    "year": 1936,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "08-30",
+    "year": 1947,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "08-31",
+    "year": 1997,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-01",
+    "year": 1986,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "09-02",
+    "year": 1989,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-03",
+    "year": 1982,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "09-04",
+    "year": 2005,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-05",
+    "year": 1951,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "09-06",
+    "year": 2008,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "09-07",
+    "year": 1952,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "09-08",
+    "year": 1963,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-09",
+    "year": 2021,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "09-10",
+    "year": 1998,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-11",
+    "year": 1997,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-12",
+    "year": 1940,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "09-13",
+    "year": 1972,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "09-14",
+    "year": 1949,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "09-15",
+    "year": 1935,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "09-16",
+    "year": 1985,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "09-17",
+    "year": 1969,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "09-18",
+    "year": 1989,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "09-19",
+    "year": 1959,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-20",
+    "year": 1996,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-21",
+    "year": 1950,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "09-22",
+    "year": 1936,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-23",
+    "year": 2008,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "09-24",
+    "year": 1937,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "09-25",
+    "year": 1978,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "09-26",
+    "year": 2006,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "09-27",
+    "year": 2000,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "09-28",
+    "year": 1918,
+    "title": "Día del Hincha",
+    "description": "Nace Ángel Labruna, máximo ídolo de la historia del club.",
+    "type": "birth"
+  },
+  {
+    "date": "09-29",
+    "year": 1998,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "09-30",
+    "year": 1987,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "10-01",
+    "year": 2002,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-02",
+    "year": 1938,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "10-03",
+    "year": 1992,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-04",
+    "year": 1957,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-05",
+    "year": 1980,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-06",
+    "year": 1973,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "10-07",
+    "year": 2020,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-08",
+    "year": 2001,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "10-09",
+    "year": 1975,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-10",
+    "year": 1949,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-11",
+    "year": 1948,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-12",
+    "year": 1995,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "10-13",
+    "year": 1958,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-14",
+    "year": 2022,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-15",
+    "year": 1980,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-16",
+    "year": 1974,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-17",
+    "year": 2016,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "10-18",
+    "year": 1939,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-19",
+    "year": 2003,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "10-20",
+    "year": 1989,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-21",
+    "year": 1956,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "10-22",
+    "year": 1952,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-23",
+    "year": 1969,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-24",
+    "year": 1944,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "10-25",
+    "year": 1983,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "10-26",
+    "year": 1972,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "10-27",
+    "year": 1979,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "10-28",
+    "year": 1979,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "10-29",
+    "year": 1986,
+    "title": "Primera Libertadores",
+    "description": "El Beto Alonso asiste a Funes y River gana su primera Copa Libertadores ante América de Cali.",
+    "type": "match"
+  },
+  {
+    "date": "10-30",
+    "year": 2016,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "10-31",
+    "year": 1979,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-01",
+    "year": 1963,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-02",
+    "year": 2021,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-03",
+    "year": 1987,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "11-04",
+    "year": 1944,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-05",
+    "year": 1998,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "11-06",
+    "year": 1981,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-07",
+    "year": 1976,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "11-08",
+    "year": 1943,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-09",
+    "year": 1987,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "11-10",
+    "year": 2022,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "11-11",
+    "year": 1955,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-12",
+    "year": 2002,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "11-13",
+    "year": 1986,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-14",
+    "year": 1953,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "11-15",
+    "year": 2006,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-16",
+    "year": 1940,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-17",
+    "year": 1954,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-18",
+    "year": 1998,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-19",
+    "year": 1954,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-20",
+    "year": 1989,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-21",
+    "year": 2013,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "11-22",
+    "year": 2023,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "11-23",
+    "year": 2001,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "11-24",
+    "year": 2008,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-25",
+    "year": 1959,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "11-26",
+    "year": 2016,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "11-27",
+    "year": 1957,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-28",
+    "year": 1996,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "11-29",
+    "year": 1993,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "11-30",
+    "year": 1977,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "12-01",
+    "year": 2002,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "12-02",
+    "year": 2009,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-03",
+    "year": 1937,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "12-04",
+    "year": 1936,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "12-05",
+    "year": 2020,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "12-06",
+    "year": 1953,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "12-07",
+    "year": 1986,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-08",
+    "year": 2003,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "12-09",
+    "year": 2018,
+    "title": "La Gloria Eterna",
+    "description": "River vence a Boca 3-1 en Madrid y gana la Copa Libertadores más importante de la historia.",
+    "type": "match"
+  },
+  {
+    "date": "12-10",
+    "year": 1983,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "12-11",
+    "year": 1981,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "12-12",
+    "year": 2012,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-13",
+    "year": 1974,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "12-14",
+    "year": 1998,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "12-15",
+    "year": 1971,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "12-16",
+    "year": 1969,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-17",
+    "year": 1944,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "12-18",
+    "year": 1936,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "12-19",
+    "year": 1988,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "12-20",
+    "year": 1940,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-21",
+    "year": 1933,
+    "title": "Victoria Monumental",
+    "description": "River golea en casa con una actuación brillante del equipo.",
+    "type": "match"
+  },
+  {
+    "date": "12-22",
+    "year": 2000,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-23",
+    "year": 1931,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "12-24",
+    "year": 1946,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-25",
+    "year": 1957,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "12-26",
+    "year": 1959,
+    "title": "Debut Prometedor",
+    "description": "Un juvenil de la cantera hace su estreno en primera división.",
+    "type": "generic"
+  },
+  {
+    "date": "12-27",
+    "year": 1992,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  },
+  {
+    "date": "12-28",
+    "year": 1982,
+    "title": "Triunfo Clásico",
+    "description": "Gran victoria ante un rival histórico en condición de visitante.",
+    "type": "match"
+  },
+  {
+    "date": "12-29",
+    "year": 1973,
+    "title": "Golazo Inolvidable",
+    "description": "Un remate desde fuera del área sella un triunfo clave para el campeonato.",
+    "type": "match"
+  },
+  {
+    "date": "12-30",
+    "year": 2023,
+    "title": "Vuelta Olímpica",
+    "description": "River se consagra campeón tras una campaña inolvidable.",
+    "type": "title"
+  },
+  {
+    "date": "12-31",
+    "year": 1981,
+    "title": "Noche de Copa",
+    "description": "River avanza de fase en un partido vibrante bajo la lluvia.",
+    "type": "match"
+  }
+]

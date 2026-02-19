@@ -1,0 +1,66 @@
+Vulnerable version of Next.js detected, please update immediately. Learn more: https://vercel.link/CVE-2025-66478
+
+11:34:22.116 Running build in Washington, D.C., USA (East) – iad1
+11:34:22.116 Build machine configuration: 2 cores, 8 GB
+11:34:22.247 Cloning github.com/damieiber/fannews (Branch: main, Commit: 8495835)
+11:34:22.603 Cloning completed: 354.000ms
+11:34:23.636 Restored build cache from previous deployment (EvAoDf3CsmfUN23KcrE8XxNK3rSU)
+11:34:24.271 Running "vercel build"
+11:34:24.689 Vercel CLI 49.0.0
+11:34:25.035 Installing dependencies...
+11:34:26.383 
+11:34:26.384 up to date in 1s
+11:34:26.385 
+11:34:26.385 177 packages are looking for funding
+11:34:26.385   run `npm fund` for details
+11:34:26.415 Detected Next.js version: 15.5.4
+11:34:26.420 Running "npm run build"
+11:34:26.530 
+11:34:26.531 > fannews@0.1.0 build
+11:34:26.531 > next build --turbopack
+11:34:26.531 
+11:34:27.682    ▲ Next.js 15.5.4 (Turbopack)
+11:34:27.683 
+11:34:27.781    Creating an optimized production build ...
+11:34:42.638  ✓ Finished writing to disk in 23ms
+11:34:42.663  ✓ Compiled successfully in 14.2s
+11:34:42.669    Linting and checking validity of types ...
+11:34:51.338    Collecting page data ...
+11:34:52.759    Generating static pages (0/15) ...
+11:34:53.489    Generating static pages (3/15) 
+11:34:54.259    Generating static pages (7/15) 
+11:34:54.821    Generating static pages (11/15) 
+11:34:54.822  ✓ Generating static pages (15/15)
+11:34:56.416    Finalizing page optimization ...
+11:34:56.422    Collecting build traces ...
+11:35:01.397 
+11:35:01.401 Route (app)                         Size  First Load JS
+11:35:01.401 ┌ ○ /                            8.05 kB         138 kB
+11:35:01.402 ├ ○ /_not-found                      0 B         130 kB
+11:35:01.402 ├ ƒ /api/check-quarantined           0 B            0 B
+11:35:01.402 ├ ƒ /api/cleanup                     0 B            0 B
+11:35:01.402 ├ ƒ /api/efemerides                  0 B            0 B
+11:35:01.402 ├ ƒ /api/feed                        0 B            0 B
+11:35:01.402 ├ ƒ /api/ingest                      0 B            0 B
+11:35:01.402 ├ ○ /efemerides                  28.2 kB         158 kB
+11:35:01.403 ├ ○ /feed                        7.07 kB         137 kB
+11:35:01.403 ├ ○ /match-center                    0 B         130 kB
+11:35:01.403 ├ ƒ /news/[id]                   5.23 kB         135 kB
+11:35:01.403 ├ ○ /squad                           0 B         130 kB
+11:35:01.403 └ ○ /standings                       0 B         130 kB
+11:35:01.403 + First Load JS shared by all     144 kB
+11:35:01.403   ├ chunks/150316a471952cee.js   59.2 kB
+11:35:01.403   ├ chunks/743ef0792dd30de1.js   20.6 kB
+11:35:01.403   ├ chunks/8082ab48faca5ea1.js   17.2 kB
+11:35:01.403   ├ chunks/8640edc5ac68c6b1.css  13.8 kB
+11:35:01.403   └ other shared chunks (total)    33 kB
+11:35:01.404 
+11:35:01.404 
+11:35:01.404 ○  (Static)   prerendered as static content
+11:35:01.404 ƒ  (Dynamic)  server-rendered on demand
+11:35:01.404 
+11:35:01.582 Traced Next.js server files in: 87.133ms
+11:35:02.158 Created all serverless functions in: 574.683ms
+11:35:02.167 Collected static files (public/, static/, .next/static): 4.089ms
+11:35:02.245 Build Completed in /vercel/output [37s]
+11:35:02.460 Deploying outputs...
