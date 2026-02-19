@@ -1,7 +1,7 @@
 import { saveThemedArticle, getActiveSources, getAllTeams } from '../lib/db';
 import { getLinksFromSource, getContentFromUrl } from '../lib/scrapingService';
 import { clusterArticlesByTheme, summarizeThemedArticles, filterRelevantArticles, ArticleData, generateEmbedding } from '../lib/aiService';
-import { Source } from '../lib/models/Source';
+
 import dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
@@ -117,8 +117,11 @@ async function main() {
                     
                     await saveThemedArticle(
                         group.theme,
+                        '',  // titleEn
                         fullSummary,
+                        '',  // summaryEn
                         shortSummary,
+                        '',  // shortSummaryEn
                         teamId,
                         articlesToSave,
                         embedding,
