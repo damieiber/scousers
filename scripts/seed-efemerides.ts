@@ -16,7 +16,13 @@ async function seedEfemerides() {
   }
 
   const fileContent = fs.readFileSync(jsonPath, 'utf-8');
-  const efemerides: Efemeride[] = JSON.parse(fileContent);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const rawEfemerides: any[] = JSON.parse(fileContent);
+  
+  const efemerides = rawEfemerides.map(e => ({
+      ...e,
+      teamId: e.teamId || e.team_id
+  }));
   
   try {
       // transform data if necessary to match schema

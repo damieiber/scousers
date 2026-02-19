@@ -118,12 +118,12 @@ async function seedTeamsAndSources() {
       await Source.create({
         name: sourceData.name,
         url: sourceData.url,
-        team_id: teamId,
+        teamId: teamId,
         status: 'active'
       });
     } else {
       console.log(`Source exists: ${sourceData.name}`);
-      exists.team_id = teamId; // Ensure relationship is correct
+      exists.teamId = teamId; // Ensure relationship is correct
       await exists.save();
     }
   }

@@ -34,7 +34,7 @@ async function main() {
     const sourcesByTeam: Record<string, { teamKey: string; sources: any[] }> = {};
     
     sources.forEach((source: any) => {
-        const teamId = source.team_id.toString();
+        const teamId = (source.teamId || source.team_id).toString();
         const teamKey = teamMap.get(teamId);
 
         if (!teamKey) {
