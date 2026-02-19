@@ -149,7 +149,7 @@ export async function saveThemedArticle(
             shortSummary: shortSummary,
             shortSummaryEn: shortSummaryEn,
             teamId: teamId,
-            imageUrl: imageUrl,
+            imageUrl: imageUrl ?? undefined,
             embedding,
             originalLinks: mappedLinks,
             publishedAt: new Date()
