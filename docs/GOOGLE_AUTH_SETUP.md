@@ -6,13 +6,13 @@ Para obtener el `AUTH_GOOGLE_ID` y `AUTH_GOOGLE_SECRET`, seguí estos pasos:
 1. Andá a [Google Cloud Console](https://console.cloud.google.com/).
 2. Iniciá sesión con tu cuenta de Google.
 3. Hacé clic en el desplegable de proyectos (arriba a la izquierda) y seleccioná **"New Project"** (Nuevo Proyecto).
-4. Ponele un nombre (ej: `River Plate MVP`) y dale a **"Create"**.
+4. Ponele un nombre (ej: `FanNews`) y dale a **"Create"**.
 
 ## 2. Configurar la Pantalla de Consentimiento (OAuth Consent Screen)
 1. En el menú lateral izquierdo, andá a **"APIs & Services"** > **"OAuth consent screen"**.
 2. Seleccioná **"External"** (para que cualquier usuario con cuenta de Google pueda entrar) y dale a **"Create"**.
 3. Llená los datos obligatorios:
-   - **App name**: `River Plate MVP` (o el nombre que quieras).
+   - **App name**: `FanNews` (o el nombre que quieras).
    - **User support email**: Tu email.
    - **Developer contact information**: Tu email.
 4. Dale a **"Save and Continue"** en las siguientes pantallas (no hace falta agregar "Scopes" especiales por ahora, con los default alcanza: `email`, `profile`, `openid`).

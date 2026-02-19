@@ -1,1 +1,0 @@
-ALTER TABLE public.sources ADD COLUMN keywords TEXT[];

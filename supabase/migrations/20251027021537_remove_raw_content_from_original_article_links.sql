@@ -1,2 +1,0 @@
-ALTER TABLE original_article_links
-DROP COLUMN raw_content;
