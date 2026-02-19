@@ -39,8 +39,8 @@ export default function TeamSelector({
 
   const selectedTeam = teams.find((team) => team.id === value);
 
-  const availableTeams = teams.filter(t => t.is_available);
-  const unavailableTeams = teams.filter(t => !t.is_available);
+  const availableTeams = teams.filter(t => t.isAvailable);
+  const unavailableTeams = teams.filter(t => !t.isAvailable);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
