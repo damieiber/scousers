@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { NewsCard } from '@/components/cards/NewsCard';
 import { Swords } from 'lucide-react';
 import type { FeedItem, GroupedNewsItem } from '@/lib/types';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 import { Suspense } from 'react';
 
@@ -21,6 +22,7 @@ function FeedContent() {
   const [error, setError] = useState<string | null>(null);
   const [feedMode, setFeedMode] = useState<string>('normal');
   const searchParams = useSearchParams();
+  const { locale, t } = useLanguage();
 
   const mode = searchParams.get('mode');
 
@@ -36,7 +38,7 @@ function FeedContent() {
           setFeedMode(data.mode || 'normal');
         }
       })
-      .catch(() => setError('No se pudo cargar el feed.'));
+      .catch(() => setError(t.home.couldNotLoadFeed));
     return () => {
       mounted = false;
     };
@@ -49,9 +51,12 @@ function FeedContent() {
         key={item.id}
         id={group.id}
         title={group.title}
+        titleEn={group.titleEn}
         aiSummary={group.aiSummary}
+        aiSummaryEn={group.aiSummaryEn}
         shortSummary={group.shortSummary}
-        sourceName={group.articles.length > 1 ? 'Varias fuentes' : group.articles[0]?.source.name ?? 'Fuente desconocida'}
+        shortSummaryEn={group.shortSummaryEn}
+        sourceName={group.articles.length > 1 ? t.home.multipleSources : group.articles[0]?.source.name ?? t.home.unknownSource}
         publishedAt={group.publishedAt}
         isGrouped={true}
         imageUrl={group.imageUrl}
@@ -69,17 +74,17 @@ function FeedContent() {
           {isRivalMode && (
             <span className="px-3 py-1 rounded-full bg-red-500 text-white text-sm font-bold flex items-center gap-2">
               <Swords className="h-4 w-4" />
-              Modo Rival
+              {t.feed.rivalMode}
             </span>
           )}
           <h1 className="text-4xl font-black text-foreground uppercase tracking-tighter">
-            {isRivalMode ? 'Noticias de Rivales' : 'Feed de Noticias'}
+            {isRivalMode ? t.feed.rivalTitle : t.feed.title}
           </h1>
         </div>
         <p className="text-lg text-muted-foreground font-medium">
           {isRivalMode 
-            ? 'Lo que está pasando con tus rivales - ordenado por impacto' 
-            : 'Todas las noticias de River Plate en un solo lugar'}
+            ? t.feed.rivalSubtitle 
+            : t.feed.subtitle}
         </p>
       </div>
 
@@ -103,12 +108,12 @@ function FeedContent() {
       {items && items.length === 0 && (
         <div className="text-center py-16">
           <p className="text-xl text-muted-foreground font-medium">
-            {isRivalMode ? '🏟️ No hay noticias de rivales aún' : 'Aún no hay noticias.'}
+            {isRivalMode ? t.feed.noRivalNews : t.feed.noNews}
           </p>
           <p className="text-muted-foreground/80 mt-2">
             {isRivalMode 
-              ? 'Los rivales se configuran automáticamente. La IA está trabajando.' 
-              : 'Vuelve a intentarlo en unos minutos, la IA está trabajando.'}
+              ? t.feed.noRivalNewsDesc 
+              : t.feed.noNewsDesc}
           </p>
         </div>
       )}

@@ -6,6 +6,7 @@ import { EfemeridesCard } from '@/components/cards/EfemeridesCard';
 import type { FeedItem, GroupedNewsItem } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface Efemeride {
   date: string;
@@ -19,6 +20,7 @@ export default function Home() {
   const [items, setItems] = useState<FeedItem[] | null>(null);
   const [todayEfemeride, setTodayEfemeride] = useState<Efemeride | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { locale, t } = useLanguage();
 
   useEffect(() => {
     let mounted = true;
@@ -28,7 +30,7 @@ export default function Home() {
       .then((data) => {
         if (mounted) setItems(data.items ?? []);
       })
-      .catch(() => setError('No se pudo cargar el feed.'));
+      .catch(() => setError(t.home.couldNotLoadFeed));
 
     const today = new Date();
     const month = String(today.getMonth() + 1).padStart(2, '0');
@@ -52,6 +54,14 @@ export default function Home() {
   const featuredArticle = items && items.length > 0 ? (items[0] as GroupedNewsItem) : null;
   const previewArticles = items && items.length > 1 ? items.slice(1, 3) : [];
 
+  const getTitle = (item: GroupedNewsItem) => locale === 'en' && item.titleEn ? item.titleEn : item.title;
+  const getSummary = (item: GroupedNewsItem) => {
+    if (locale === 'en') {
+      return item.shortSummaryEn || item.shortSummary || item.aiSummaryEn || item.aiSummary;
+    }
+    return item.shortSummary || item.aiSummary;
+  };
+
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-2">
       {error && <p className="text-center text-red-600 bg-red-100 dark:bg-red-900/30 p-4 rounded-lg mb-8">{error}</p>}
@@ -61,7 +71,7 @@ export default function Home() {
           {featuredArticle && (
             <section>
               <h2 className="text-2xl font-black text-foreground mb-6 uppercase tracking-tighter border-l-4 border-primary pl-3">
-                Noticia Destacada
+                {t.home.featuredArticle}
               </h2>
               <a
                 href={`/news/${featuredArticle.id}`}
@@ -71,20 +81,20 @@ export default function Home() {
                   <div className="relative h-64 md:h-96 overflow-hidden">
                     <Image 
                       src={featuredArticle.imageUrl} 
-                      alt={featuredArticle.title} 
+                      alt={getTitle(featuredArticle)} 
                       fill 
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-300" />
                     <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                       <span className="inline-block px-3 py-1 mb-3 text-xs font-bold text-white bg-primary rounded-full uppercase tracking-wider">
-                        {featuredArticle.articles.length > 1 ? 'Cobertura Especial' : featuredArticle.articles[0]?.source.name}
+                        {featuredArticle.articles.length > 1 ? t.home.specialCoverage : featuredArticle.articles[0]?.source.name}
                       </span>
                       <h3 className="text-2xl md:text-4xl font-black text-white leading-tight mb-3 group-hover:text-gray-100 transition-colors drop-shadow-lg">
-                        {featuredArticle.title}
+                        {getTitle(featuredArticle)}
                       </h3>
                       <p className="text-gray-200 line-clamp-2 md:line-clamp-3 text-sm md:text-base max-w-2xl drop-shadow-md">
-                        {featuredArticle.shortSummary || featuredArticle.aiSummary}
+                        {getSummary(featuredArticle)}
                       </p>
                     </div>
                   </div>
@@ -92,10 +102,10 @@ export default function Home() {
                 {!featuredArticle.imageUrl && (
                    <div className="p-8">
                       <h3 className="text-3xl font-black text-foreground leading-tight mb-4 group-hover:text-primary transition-colors">
-                        {featuredArticle.title}
+                        {getTitle(featuredArticle)}
                       </h3>
                       <p className="text-muted-foreground line-clamp-3 text-lg">
-                        {featuredArticle.shortSummary || featuredArticle.aiSummary}
+                        {getSummary(featuredArticle)}
                       </p>
                    </div>
                 )}
@@ -107,7 +117,7 @@ export default function Home() {
             <section>
               <Link href="/feed">
                 <h2 className="text-2xl font-black text-foreground mb-6 uppercase tracking-tighter border-l-4 border-primary pl-3 hover:text-primary transition-colors cursor-pointer">
-                  Últimas Noticias
+                  {t.home.latestNews}
                 </h2>
               </Link>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -118,9 +128,12 @@ export default function Home() {
                       key={item.id}
                       id={group.id}
                       title={group.title}
+                      titleEn={group.titleEn}
                       aiSummary={group.aiSummary}
+                      aiSummaryEn={group.aiSummaryEn}
                       shortSummary={group.shortSummary}
-                      sourceName={group.articles.length > 1 ? 'Varias fuentes' : group.articles[0]?.source.name ?? 'Fuente desconocida'}
+                      shortSummaryEn={group.shortSummaryEn}
+                      sourceName={group.articles.length > 1 ? t.home.multipleSources : group.articles[0]?.source.name ?? t.home.unknownSource}
                       publishedAt={group.publishedAt}
                       isGrouped={true}
                       imageUrl={group.imageUrl}
@@ -133,7 +146,7 @@ export default function Home() {
                   href="/feed"
                   className="inline-flex items-center justify-center px-8 py-3 text-sm font-bold text-white bg-black hover:bg-primary rounded-full transition-all duration-300 shadow-lg hover:shadow-primary/30 transform hover:-translate-y-1 uppercase tracking-widest border border-gray-800 hover:border-primary"
                 >
-                  Ver más noticias
+                  {t.home.viewMoreNews}
                 </a>
               </div>
             </section>
@@ -151,7 +164,7 @@ export default function Home() {
         <div className="lg:col-span-1">
           <Link href="/efemerides">
             <h2 className="text-2xl font-black text-foreground mb-6 uppercase tracking-tighter border-l-4 border-primary pl-3 hover:text-primary transition-colors cursor-pointer">
-              Efemérides
+              {t.home.ephemerides}
             </h2>
           </Link>
           {todayEfemeride ? (

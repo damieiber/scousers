@@ -13,8 +13,8 @@ import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { UserNav } from '@/components/layout/UserNav';
 import { ChevronDown, Swords, BarChart3, Users, Trophy } from 'lucide-react';
 import { useEffect, useState, Suspense } from 'react';
-// import { supabase } from '@/lib/supabaseService'; // Removed
 import { useSession } from "next-auth/react"
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 export function Header() {
   return (
@@ -31,6 +31,7 @@ function HeaderContent() {
   const router = useRouter();
   const [hasRivalAccess, setHasRivalAccess] = useState(false);
   const [isLoadingAccess, setIsLoadingAccess] = useState(true);
+  const { locale, setLocale, t } = useLanguage();
 
   const isRivalMode = searchParams.get('mode') === 'rivals';
 
@@ -38,8 +39,6 @@ function HeaderContent() {
     async function checkRivalAccess() {
       setIsLoadingAccess(true);
       if (session?.user) {
-         // We should add this to the session in auth.ts or fetch via API
-         // For now, let's assume if they have a premium role/sub they have access
          // @ts-ignore
          const status = session.user.subscription_status;
          if (['premium', 'plus', 'trial'].includes(status)) {
@@ -69,6 +68,10 @@ function HeaderContent() {
     }
   };
 
+  const toggleLanguage = () => {
+    setLocale(locale === 'es' ? 'en' : 'es');
+  };
+
   return (
     <header
       className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-md py-3 transition-all duration-300 ease-in-out"
@@ -85,12 +88,12 @@ function HeaderContent() {
         <div className="flex items-center gap-6">
           <nav className="hidden md:flex items-center gap-1">
             {[
-              { name: 'Home', href: '/' },
-              { name: 'Feed', href: '/feed' },
-              { name: 'Match Center', href: '/match-center' },
-              { name: 'Plantel', href: '/squad' },
-              { name: 'Tablas', href: '/standings' },
-              { name: 'Efemérides', href: '/efemerides' },
+              { name: t.nav.home, href: '/' },
+              { name: t.nav.feed, href: '/feed' },
+              { name: t.nav.matchCenter, href: '/match-center' },
+              { name: t.nav.squad, href: '/squad' },
+              { name: t.nav.standings, href: '/standings' },
+              { name: t.nav.efemerides, href: '/efemerides' },
             ].map((link) => {
               const isActive = pathname === link.href && !isRivalMode;
               return (
@@ -110,22 +113,22 @@ function HeaderContent() {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide transition-all duration-200 text-white/90 hover:text-white hover:bg-white/20 flex items-center gap-1 outline-none">
-                Club <ChevronDown className="h-4 w-4" />
+                {t.nav.club} <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
                   <Link href="/match-center" className="flex items-center cursor-pointer">
-                    <BarChart3 className="mr-2 h-4 w-4" /> Match Center
+                    <BarChart3 className="mr-2 h-4 w-4" /> {t.nav.matchCenter}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/squad" className="flex items-center cursor-pointer">
-                    <Users className="mr-2 h-4 w-4" /> Plantel
+                    <Users className="mr-2 h-4 w-4" /> {t.nav.squad}
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/standings" className="flex items-center cursor-pointer">
-                    <Trophy className="mr-2 h-4 w-4" /> Tablas
+                    <Trophy className="mr-2 h-4 w-4" /> {t.nav.standings}
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -139,15 +142,27 @@ function HeaderContent() {
                     ? 'bg-red-500 text-white shadow-sm'
                     : 'text-white/90 hover:text-white hover:bg-white/20'
                 }`}
-                title="Modo Rival: Ver noticias de tus rivales"
+                title={locale === 'es' ? 'Modo Rival: Ver noticias de tus rivales' : 'Rival Mode: View your rivals\' news'}
               >
                 <Swords className="h-4 w-4" />
-                Rival
+                {t.nav.rival}
               </button>
             )}
           </nav>
           
-          <div className="pl-2 border-l border-white/20 flex gap-2">
+          <div className="pl-2 border-l border-white/20 flex gap-2 items-center">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/20 transition-all duration-200"
+              title={locale === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+            >
+              <img 
+                src={locale === 'es' ? '/spain.png' : '/uk.png'} 
+                alt={locale === 'es' ? 'Español' : 'English'} 
+                className="h-4 w-4 rounded-sm object-cover" 
+              />
+              {locale === 'es' ? 'ES' : 'EN'}
+            </button>
             <ThemeSwitcher />
             <UserNav />
           </div>

@@ -5,6 +5,7 @@ export interface IUser extends Document {
   email: string;
   emailVerified?: Date;
   image?: string;
+  language: 'es' | 'en';
   primaryTeamId?: mongoose.Types.ObjectId;
   secondaryTeamIds: mongoose.Types.ObjectId[];
   preferences: Record<string, any>;
@@ -20,6 +21,7 @@ const UserSchema: Schema = new Schema({
   email: { type: String, unique: true, required: true },
   emailVerified: { type: Date },
   image: { type: String },
+  language: { type: String, enum: ['es', 'en'], default: 'es' },
   primaryTeamId: { type: Schema.Types.ObjectId, ref: 'Team' },
   secondaryTeamIds: [{ type: Schema.Types.ObjectId, ref: 'Team' }],
   preferences: { type: Schema.Types.Mixed, default: {} },

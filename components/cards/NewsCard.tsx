@@ -1,12 +1,18 @@
+'use client';
+
 import LinkNext from 'next/link';
 import Image from 'next/image';
 import { Clock, Link, Users, ThumbsDown, Minus, ThumbsUp } from 'lucide-react';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface NewsCardProps {
   id: string;
   title: string;
+  titleEn?: string;
   aiSummary: string;
+  aiSummaryEn?: string;
   shortSummary?: string;
+  shortSummaryEn?: string;
   sourceName: string;
   publishedAt: string;
   isGrouped: boolean;
@@ -14,42 +20,53 @@ interface NewsCardProps {
   rivalSentiment?: 'NEGATIVE' | 'NEUTRAL' | 'POSITIVE';
 }
 
-const sentimentConfig = {
-  NEGATIVE: {
-    label: 'Mala para ellos',
-    icon: ThumbsDown,
-    bgColor: 'bg-red-500/10',
-    textColor: 'text-red-500',
-    borderColor: 'border-red-500/30',
-  },
-  NEUTRAL: {
-    label: 'Neutral',
-    icon: Minus,
-    bgColor: 'bg-gray-500/10',
-    textColor: 'text-gray-500',
-    borderColor: 'border-gray-500/30',
-  },
-  POSITIVE: {
-    label: 'Buena para ellos',
-    icon: ThumbsUp,
-    bgColor: 'bg-green-500/10',
-    textColor: 'text-green-500',
-    borderColor: 'border-green-500/30',
-  },
-};
-
 export function NewsCard({ 
   id, 
   title, 
+  titleEn,
   aiSummary, 
+  aiSummaryEn,
   shortSummary, 
+  shortSummaryEn,
   sourceName, 
   publishedAt, 
   isGrouped, 
   imageUrl,
   rivalSentiment 
 }: NewsCardProps) {
+  const { locale, t } = useLanguage();
   const href = `/news/${id ?? 'unknown'}`;
+
+  const displayTitle = locale === 'en' && titleEn ? titleEn : title;
+  const displaySummary = locale === 'en' && aiSummaryEn ? aiSummaryEn : aiSummary;
+  const displayShort = locale === 'en' 
+    ? (shortSummaryEn || shortSummary || displaySummary) 
+    : (shortSummary || displaySummary);
+
+  const sentimentConfig = {
+    NEGATIVE: {
+      label: t.newsCard.badForThem,
+      icon: ThumbsDown,
+      bgColor: 'bg-red-500/10',
+      textColor: 'text-red-500',
+      borderColor: 'border-red-500/30',
+    },
+    NEUTRAL: {
+      label: t.newsCard.neutral,
+      icon: Minus,
+      bgColor: 'bg-gray-500/10',
+      textColor: 'text-gray-500',
+      borderColor: 'border-gray-500/30',
+    },
+    POSITIVE: {
+      label: t.newsCard.goodForThem,
+      icon: ThumbsUp,
+      bgColor: 'bg-green-500/10',
+      textColor: 'text-green-500',
+      borderColor: 'border-green-500/30',
+    },
+  };
+
   const sentiment = rivalSentiment ? sentimentConfig[rivalSentiment] : null;
 
   return (
@@ -61,7 +78,7 @@ export function NewsCard({
           <div className="relative w-full h-48 overflow-hidden">
             <Image
               src={imageUrl}
-              alt={`Imagen para la noticia: ${title}`}
+              alt={`Imagen para la noticia: ${displayTitle}`}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -91,18 +108,18 @@ export function NewsCard({
             )}
           </div>
           <h3 className="text-lg font-bold text-foreground mb-3 leading-tight group-hover:text-primary transition-colors">
-            {title}
+            {displayTitle}
           </h3>
           <p className="text-muted-foreground line-clamp-3 text-sm flex-grow">
-            {shortSummary || aiSummary}
+            {displayShort}
           </p>
           <div className="mt-4 pt-4 border-t border-border flex justify-between items-center text-xs text-muted-foreground">
             <span className="flex items-center gap-1 font-medium group-hover:text-primary transition-colors">
-              Leer más <Link className="h-3 w-3 ml-1" />
+              {t.newsCard.readMore} <Link className="h-3 w-3 ml-1" />
             </span>
             {isGrouped && (
-              <span className="flex items-center gap-1" title="Agrupada de varias fuentes">
-                <Users className="h-3 w-3" /> +Fuentes
+              <span className="flex items-center gap-1" title={locale === 'es' ? 'Agrupada de varias fuentes' : 'Grouped from multiple sources'}>
+                <Users className="h-3 w-3" /> {t.newsCard.sources}
               </span>
             )}
           </div>

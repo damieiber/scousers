@@ -4,22 +4,22 @@ import Feature from '../lib/models/Feature';
 import SubscriptionFeature from '../lib/models/SubscriptionFeature';
 
 const FEATURES = [
-  { key: 'ad_free', name: 'Sin Publicidad', description: 'Navegación sin anuncios intrusivos' },
-  { key: 'dark_mode', name: 'Modo Oscuro', description: 'Interfaz con colores oscuros para descansar la vista' },
-  { key: 'match_center', name: 'Match Center', description: 'Estadísticas en vivo y detalles de partidos' },
-  { key: 'squad_details', name: 'Detalle de Plantel', description: 'Información completa de todos los jugadores' },
-  { key: 'multi_team', name: 'Multi-Equipo', description: 'Seguir a más de un equipo a la vez' },
-  { key: 'rival_mode', name: 'Modo Rival', description: 'Ver noticias desde la perspectiva del rival' },
-  { key: 'advanced_stats', name: 'Estadísticas Avanzadas', description: 'Métricas detalladas de rendimiento' },
-  { key: 'early_access', name: 'Acceso Anticipado', description: 'Ver noticias antes que nadie' }
+  { key: 'AdFree', name: 'Sin Publicidad', description: 'Navegación sin anuncios intrusivos' },
+  { key: 'DarkMode', name: 'Modo Oscuro', description: 'Interfaz con colores oscuros para descansar la vista' },
+  { key: 'MatchCenter', name: 'Match Center', description: 'Estadísticas en vivo y detalles de partidos' },
+  { key: 'SquadDetails', name: 'Detalle de Plantel', description: 'Información completa de todos los jugadores' },
+  { key: 'MultiTeam', name: 'Multi-Equipo', description: 'Seguir a más de un equipo a la vez' },
+  { key: 'RivalMode', name: 'Modo Rival', description: 'Ver noticias desde la perspectiva del rival' },
+  { key: 'AdvancedStats', name: 'Estadísticas Avanzadas', description: 'Métricas detalladas de rendimiento' },
+  { key: 'EarlyAccess', name: 'Acceso Anticipado', description: 'Ver noticias antes que nadie' }
 ];
 
 const SUBSCRIPTION_PLANS = {
-  free: ['match_center', 'squad_details'],
-  standard: ['match_center', 'squad_details', 'ad_free', 'dark_mode'],
-  plus: ['match_center', 'squad_details', 'ad_free', 'dark_mode', 'multi_team', 'rival_mode'],
-  premium: ['match_center', 'squad_details', 'ad_free', 'dark_mode', 'multi_team', 'rival_mode', 'advanced_stats', 'early_access'],
-  trial: ['match_center', 'squad_details', 'ad_free', 'dark_mode', 'multi_team', 'rival_mode', 'advanced_stats', 'early_access']
+  free: ['MatchCenter', 'SquadDetails'],
+  standard: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode'],
+  plus: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode', 'MultiTeam', 'RivalMode'],
+  premium: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode', 'MultiTeam', 'RivalMode', 'AdvancedStats', 'EarlyAccess'],
+  trial: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode', 'MultiTeam', 'RivalMode', 'AdvancedStats', 'EarlyAccess']
 };
 
 async function seedFeatures() {

@@ -2,6 +2,8 @@ export type SourceStatus = 'active' | 'quarantined';
 
 export type SubscriptionStatus = 'free' | 'standard' | 'plus' | 'premium' | 'trial';
 
+export type Locale = 'es' | 'en';
+
 export interface Team {
   id: string;
   key: string;
@@ -16,6 +18,7 @@ export interface UserProfile {
   email: string | null;
   fullName: string | null;
   avatarUrl: string | null;
+  language: Locale;
   primaryTeamId: string | null;
   secondaryTeamIds: string[] | null;
   subscriptionStatus: SubscriptionStatus;
@@ -94,8 +97,11 @@ export interface NewsItem extends BaseFeedItem {
 export interface GroupedNewsItem extends BaseFeedItem {
   type: 'news_group';
   title: string;
+  titleEn?: string;
   aiSummary: string;
+  aiSummaryEn?: string;
   shortSummary?: string;
+  shortSummaryEn?: string;
   publishedAt: string;
   articles: ArticleLink[];
   imageUrl?: string;

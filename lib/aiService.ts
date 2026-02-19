@@ -12,6 +12,7 @@ export interface ArticleData {
 
 export interface ThemedArticleGroup {
   theme: string;
+  themeEn: string;
   articles: ArticleData[];
   imageUrl?: string | null;
 }
@@ -53,46 +54,63 @@ async function generateContentWithGemini(prompt: string, json: boolean = false):
     throw new Error('Gemini AI not available. Check API_KEY.');
   }
 
-  // Rate Limiting: Wait before making a request
-  console.log(`[AI] Generating content with model: gemini-2.5-flash...`);
-  await sleep(RATE_LIMIT_DELAY);
+  const MODELS = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'];
 
-  const model = genAI.getGenerativeModel({
-    model: 'gemini-2.5-flash', // Updated to 2.5 flash as per 2026 availability
-    generationConfig: {
-      ...generationConfig,
-      responseMimeType: json ? 'application/json' : 'text/plain',
-    },
-    safetySettings,
-  });
+  for (const modelName of MODELS) {
+    console.log(`[AI] Generating content with model: ${modelName}...`);
+    await sleep(RATE_LIMIT_DELAY);
 
-  let lastError: unknown = null;
+    const model = genAI.getGenerativeModel({
+      model: modelName,
+      generationConfig: {
+        ...generationConfig,
+        responseMimeType: json ? 'application/json' : 'text/plain',
+      },
+      safetySettings,
+    });
 
-  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-    try {
-      const result = await model.generateContent(prompt);
-      return result.response.text();
-    } catch (error: unknown) {
-      lastError = error;
-      console.error('Detailed error:', error);
-      let errorMessage = 'Unknown error';
-      if (error instanceof Error) {
-        errorMessage = error.message;
-      }
+    let lastError: unknown = null;
+    let shouldFallback = false;
 
-      // Retry on 503 (Unavailable) or 429 (Too Many Requests)
-      if ((hasStatus(error) && (error.status === 503 || error.status === 429 || error.status === 500)) || (error instanceof TypeError && errorMessage.includes('fetch failed'))) {
-        const delay = RETRY_DELAY * Math.pow(2, attempt - 1);
-        console.warn(`Attempt ${attempt} failed with error: ${errorMessage}. Retrying in ${delay / 1000}s...`);
-        await sleep(delay);
-      } else {
-        throw error;
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        const result = await model.generateContent(prompt);
+        return result.response.text();
+      } catch (error: unknown) {
+        lastError = error;
+        let errorMessage = 'Unknown error';
+        if (error instanceof Error) {
+          errorMessage = error.message;
+        }
+
+        // On 429 quota or 404 model not found, fall back to next model
+        if (hasStatus(error) && (error.status === 404 || (error.status === 429 && errorMessage.includes('quota')))) {
+          console.warn(`[AI] ${error.status === 404 ? 'Model not found' : 'Quota exceeded'} for ${modelName}.`);
+          shouldFallback = true;
+          break; // Don't retry, fall back to next model
+        }
+
+        // Retry on transient errors (503, 500, network failures)
+        if ((hasStatus(error) && (error.status === 503 || error.status === 429 || error.status === 500)) || (error instanceof TypeError && errorMessage.includes('fetch failed'))) {
+          const delay = RETRY_DELAY * Math.pow(2, attempt - 1);
+          console.warn(`Attempt ${attempt} failed with error: ${errorMessage}. Retrying in ${delay / 1000}s...`);
+          await sleep(delay);
+        } else {
+          throw error;
+        }
       }
     }
+
+    if (shouldFallback) {
+      console.warn(`[AI] Falling back from ${modelName} to next model...`);
+      continue;
+    }
+
+    console.error(`[AI] All retries failed for model ${modelName}.`);
+    throw lastError;
   }
 
-  console.error('All retries failed.');
-  throw lastError;
+  throw new Error('[AI] All models exhausted. Could not generate content.');
 }
 
 
@@ -114,12 +132,13 @@ export async function clusterArticlesByTheme(articles: ArticleData[]): Promise<T
     3.  **Ignore Generic Pages:** Do not group articles with generic titles like "Últimas noticias", "Home", or similar non-descriptive titles. These are likely section fronts, not actual articles.
     4.  **Minimum Group Size:** A group must contain at least TWO articles. Do not create groups for single articles.
     5.  **Ignore Unrelated:** If an article does not share a specific theme with at least one other, IGNORE IT. Do not create a theme for it.
-    6.  **Theme Title:** Create a short, descriptive theme title in Spanish for each group.
+    6.  **Theme Title:** Create a short, descriptive theme title in BOTH Spanish and English for each group.
 
     Output Format:
-    Return a valid JSON array of objects. Each object must have two keys:
+    Return a valid JSON array of objects. Each object must have three keys:
     1. "theme": The Spanish theme title.
-    2. "urls": An array of URL strings for that theme.
+    2. "themeEn": The English theme title.
+    3. "urls": An array of URL strings for that theme.
 
     Articles to Process:
     ${JSON.stringify(articlesInput)}
@@ -129,10 +148,11 @@ export async function clusterArticlesByTheme(articles: ArticleData[]): Promise<T
 
   try {
     const rawJson = await generateContentWithGemini(prompt, true);
-    const clusters: { theme: string; urls: string[] }[] = JSON.parse(rawJson);
+    const clusters: { theme: string; themeEn: string; urls: string[] }[] = JSON.parse(rawJson);
 
     const themedGroups: ThemedArticleGroup[] = clusters.map((cluster) => ({
       theme: cluster.theme,
+      themeEn: cluster.themeEn || cluster.theme,
       articles: cluster.urls.map((url) => articles.find((a) => a.url === url)).filter((a): a is ArticleData => !!a),
     }));
 
@@ -257,12 +277,14 @@ export async function filterRelevantArticles(articles: ArticleData[], teamName: 
   }
 }
 
-export async function summarizeThemedArticles(theme: string, articles: ArticleData[]): Promise<{ shortSummary: string; fullSummary: string }> {
+export async function summarizeThemedArticles(theme: string, articles: ArticleData[]): Promise<{ shortSummary: string; fullSummary: string; shortSummaryEn: string; fullSummaryEn: string }> {
   if (!genAI) {
     console.warn('AI disabled. Returning placeholder summary.');
     return {
       shortSummary: `Este es un resumen corto para el tema "${theme}".`,
       fullSummary: `Este es un resumen de marcador de posición para el tema "${theme}".`,
+      shortSummaryEn: `This is a short summary for the topic "${theme}".`,
+      fullSummaryEn: `This is a placeholder summary for the topic "${theme}".`,
     };
   }
 
@@ -271,12 +293,14 @@ export async function summarizeThemedArticles(theme: string, articles: ArticleDa
   const prompt = `
     Actúa como un periodista deportivo experto. A continuación, se te proporcionan varios artículos de diferentes fuentes, todos sobre el mismo tema: "${theme}".
 
-    Tu tarea es leer y sintetizar la información de TODOS los artículos para crear dos resúmenes en castellano y devolverlos en formato JSON.
+    Tu tarea es leer y sintetizar la información de TODOS los artículos para crear resúmenes en CASTELLANO y en INGLÉS, y devolverlos en formato JSON.
 
-    1.  **fullSummary**: Un resumen consolidado, coherente y bien redactado. Debe ser objetivo, escrito en un **único párrafo de entre 3 y 5 frases**, y combinar la información de todas las fuentes sin inventar datos.
-    2.  **shortSummary**: Un resumen de vista previa, extremadamente corto y directo. Debe ser **una única oración de no más de 15 palabras**. Por ejemplo: "El jugador estrella se lesionó y no jugará el próximo partido."
+    1.  **fullSummary**: Un resumen consolidado en castellano, coherente y bien redactado. Debe ser objetivo, escrito en un **único párrafo de entre 3 y 5 frases**, y combinar la información de todas las fuentes sin inventar datos.
+    2.  **shortSummary**: Un resumen en castellano de vista previa, extremadamente corto y directo. Debe ser **una única oración de no más de 15 palabras**. Por ejemplo: "El jugador estrella se lesionó y no jugará el próximo partido."
+    3.  **fullSummaryEn**: The same as fullSummary, but in English.
+    4.  **shortSummaryEn**: The same as shortSummary, but in English.
 
-    El formato de salida debe ser un objeto JSON con las claves "fullSummary" y "shortSummary".
+    El formato de salida debe ser un objeto JSON con las claves "fullSummary", "shortSummary", "fullSummaryEn" y "shortSummaryEn".
 
     Aquí están los artículos para sintetizar:
     ${JSON.stringify(articlesInput)}
@@ -290,25 +314,35 @@ export async function summarizeThemedArticles(theme: string, articles: ArticleDa
 
     let fullSummary = summaries.fullSummary;
     let shortSummary = summaries.shortSummary;
+    let fullSummaryEn = summaries.fullSummaryEn;
+    let shortSummaryEn = summaries.shortSummaryEn;
 
     if (typeof fullSummary !== 'string') {
-      console.error('AI returned non-string fullSummary. Using placeholder.', fullSummary);
       fullSummary = `No se pudo generar el resumen completo para el tema "${theme}".`;
     }
     if (typeof shortSummary !== 'string') {
-      console.error('AI returned non-string shortSummary. Using placeholder.', shortSummary);
       shortSummary = `No se pudo generar el resumen corto para el tema "${theme}".`;
+    }
+    if (typeof fullSummaryEn !== 'string') {
+      fullSummaryEn = `Could not generate summary for the topic "${theme}".`;
+    }
+    if (typeof shortSummaryEn !== 'string') {
+      shortSummaryEn = `Could not generate short summary for the topic "${theme}".`;
     }
 
     fullSummary = sanitizeHtml(fullSummary || '');
     shortSummary = sanitizeHtml(shortSummary || '');
+    fullSummaryEn = sanitizeHtml(fullSummaryEn || '');
+    shortSummaryEn = sanitizeHtml(shortSummaryEn || '');
 
-    return { fullSummary, shortSummary };
+    return { fullSummary, shortSummary, fullSummaryEn, shortSummaryEn };
   } catch (error) {
     console.error(`Error generating summary for theme "${theme}":`, error);
     return {
       shortSummary: `No se pudo generar el resumen corto para el tema "${theme}".`,
       fullSummary: `No se pudo generar el resumen para el tema "${theme}" debido a un error.`,
+      shortSummaryEn: `Could not generate short summary for the topic "${theme}".`,
+      fullSummaryEn: `Could not generate summary for the topic "${theme}" due to an error.`,
     };
   }
 }

@@ -24,12 +24,13 @@ export async function GET(request: Request) {
         return new NextResponse('Not Found', { status: 404 });
       }
 
-      // Transform Mongoose doc to FeedItem
       const feedItem: FeedItem = {
         id: article._id.toString(),
         type: 'news_group',
         title: article.title,
+        titleEn: article.titleEn,
         aiSummary: article.summary,
+        aiSummaryEn: article.summaryEn,
         // @ts-ignore - lean() result
         teamId: article.teamId.toString(),
         // @ts-ignore
@@ -38,13 +39,16 @@ export async function GET(request: Request) {
         publishedAt: article.publishedAt.toISOString(),
         // @ts-ignore
         articles: (article.originalLinks || []).map((link: any) => ({
-          id: link.url, // Use URL as ID for now if no specific ID
+          id: link.url,
           title: link.title,
           originalUrl: link.url,
           source: { name: link.sourceName },
         })),
         // @ts-ignore
         imageUrl: article.imageUrl,
+        // @ts-ignore
+        shortSummary: article.shortSummary,
+        shortSummaryEn: article.shortSummaryEn,
         // @ts-ignore
         rivalSentiment: article.rivalSentiment,
       };
@@ -66,7 +70,7 @@ export async function GET(request: Request) {
             // Check rival access
             const featureAccess = await SubscriptionFeature.findOne({
                subscriptionStatus: user.subscriptionStatus,
-               featureKey: 'rival_mode'
+               featureKey: 'RivalMode'
             });
 
             hasRivalAccess = !!featureAccess;
@@ -154,8 +158,11 @@ export async function GET(request: Request) {
         id: article._id.toString(),
         type: 'news_group',
         title: article.title,
+        titleEn: article.titleEn || '',
         aiSummary: article.summary,
+        aiSummaryEn: article.summaryEn || '',
         shortSummary: article.shortSummary,
+        shortSummaryEn: article.shortSummaryEn || '',
         publishedAt: article.publishedAt.toISOString(),
         teamId: article.teamId?.toString(),
         createdAt: article.createdAt.toISOString(),

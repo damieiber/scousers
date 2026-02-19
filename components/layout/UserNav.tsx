@@ -13,11 +13,13 @@ import {
 import { LogOut, Settings, User, Trophy } from 'lucide-react';
 import Link from 'next/link';
 import { useSession, signOut } from "next-auth/react";
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 export function UserNav() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   const user = session?.user;
+  const { t } = useLanguage();
 
   const handleSignOut = async () => {
     await signOut();
@@ -31,7 +33,7 @@ export function UserNav() {
     return (
       <Button asChild variant="secondary" size="sm" className="font-bold bg-white text-primary hover:bg-white/90">
         <Link href="/login">
-          Ingresar
+          {t.auth.login}
         </Link>
       </Button>
     );
@@ -52,7 +54,7 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{user.name || 'Usuario'}</p>
+            <p className="text-sm font-medium leading-none">{user.name || (t.auth.profile)}</p>
             <p className="text-xs leading-none text-muted-foreground">
               {user.email}
             </p>
@@ -63,22 +65,22 @@ export function UserNav() {
           <DropdownMenuItem asChild>
             <Link href="/profile" className="cursor-pointer">
               <User className="mr-2 h-4 w-4" />
-              <span>Perfil</span>
+              <span>{t.auth.profile}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem disabled>
             <Trophy className="mr-2 h-4 w-4" />
-            <span>Mis Equipos (Premium)</span>
+            <span>{t.auth.myTeams}</span>
           </DropdownMenuItem>
           <DropdownMenuItem disabled>
             <Settings className="mr-2 h-4 w-4" />
-            <span>Configuración</span>
+            <span>{t.auth.settings}</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => handleSignOut()} className="text-red-500 focus:text-red-500">
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Cerrar Sesión</span>
+          <span>{t.auth.logout}</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,89 +1,102 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Loader2, Trophy, Crown, User, LucideIcon } from 'lucide-react';
-// import { getUserProfile, updateUserProfile, getAllTeams, getUserFeatures } from '@/lib/supabaseService'; // Removed
-import { UserProfile, Team, SubscriptionStatus, Feature } from '@/lib/types';
-import TeamSelector from './TeamSelector';
+import { Loader2, Trophy, Crown, User, Globe, LucideIcon } from 'lucide-react';
+import { UserProfile, SubscriptionStatus, Feature } from '@/lib/types';
 import { useSession } from "next-auth/react"
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
-const profileFormSchema = z.object({
-  full_name: z.string().min(2, 'El nombre deb tener al menos 2 caracteres').nullable(),
-  email: z.string().email(), 
-  primary_team_id: z.string().nullable(),
-  secondary_team_ids: z.array(z.string()).nullable(),
-});
+interface TeamOption {
+  id: string;
+  key: string;
+  name: string;
+  primaryColor: string | null;
+  secondaryColor: string | null;
+  logoUrl: string | null;
+}
 
-type ProfileFormData = z.infer<typeof profileFormSchema>;
+// Map team keys to badge images in /public
+const TEAM_BADGES: Record<string, string> = {
+  liverpool: '/liverpool.png',
+  everton: '/everton.png',
+};
 
 interface ProfileFormProps {
   userId: string;
 }
 
-const SUBSCRIPTION_LABELS: Record<SubscriptionStatus, { label: string; icon: LucideIcon | null; color: string }> = {
-  free: { label: 'Gratuito', icon: null, color: 'text-muted-foreground' },
-  standard: { label: 'Standard', icon: Trophy, color: 'text-blue-600' },
-  plus: { label: 'Plus', icon: Trophy, color: 'text-purple-600' },
-  premium: { label: 'Premium', icon: Crown, color: 'text-yellow-600' },
-  trial: { label: 'Prueba', icon: Trophy, color: 'text-green-600' },
-};
-
 export default function ProfileForm({ userId }: ProfileFormProps) {
-  const router = useRouter();
+  const { data: session, update: updateSession } = useSession();
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [teams, setTeams] = useState<TeamOption[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
+  const { locale, setLocale, t } = useLanguage();
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<ProfileFormData>({
-    resolver: zodResolver(profileFormSchema),
-    defaultValues: {
-      full_name: '',
-      email: '',
-      primary_team_id: null,
-      secondary_team_ids: [],
-    },
-  });
-
-  const primaryTeamId = watch('primary_team_id');
-
-  /*
+  // Fetch teams on mount
   useEffect(() => {
-    async function loadData() {
-      // TODO: Refactor to use API routes or Server Actions
+    async function fetchData() {
+      try {
+        const teamsRes = await fetch('/api/team/list');
+        if (teamsRes.ok) {
+          const teamsData = await teamsRes.json();
+          setTeams(teamsData);
+        }
+
+        // Set selected team from session
+        // @ts-ignore
+        const teamId = session?.user?.primaryTeamId;
+        if (teamId) {
+          setSelectedTeamId(teamId);
+        }
+
+        // Set name from session
+        if (session?.user?.name) {
+          setFullName(session.user.name);
+        }
+      } catch {
+        // silently fail
+      } finally {
+        setLoading(false);
+      }
     }
-    loadData();
-  }, [userId, setValue]);
 
-  async function onSubmit(data: ProfileFormData) {
-     // TODO: Refactor to use API routes or Server Actions
-     toast.info("Profile update not recommended yet.");
-  }
-  */
+    fetchData();
+  }, [session]);
 
-  // Temporary mock for build
-  useEffect(() => {
-     setLoading(false);
-  }, []);
+  async function handleSave() {
+    setSaving(true);
+    try {
+      const res = await fetch('/api/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName,
+          primaryTeamId: selectedTeamId,
+          language: locale,
+        }),
+      });
 
-  async function onSubmit(data: ProfileFormData) {
-      toast.info("Updating profile via API is coming soon.");
+      if (res.ok) {
+        // Trigger session refresh so TeamThemeProvider picks up the change
+        await updateSession();
+        toast.success(locale === 'es' ? 'Perfil actualizado' : 'Profile updated');
+      } else {
+        toast.error(locale === 'es' ? 'Error al guardar' : 'Error saving');
+      }
+    } catch {
+      toast.error(locale === 'es' ? 'Error al guardar' : 'Error saving');
+    } finally {
+      setSaving(false);
+    }
   }
 
   if (loading) {
@@ -94,73 +107,125 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
     );
   }
 
-  const subscriptionInfo = profile ? SUBSCRIPTION_LABELS[profile.subscription_status] : null;
+  const SUBSCRIPTION_LABELS: Record<SubscriptionStatus, { label: string; icon: LucideIcon | null; color: string }> = {
+    free: { label: t.subscriptions.free, icon: null, color: 'text-muted-foreground' },
+    standard: { label: t.subscriptions.standard, icon: Trophy, color: 'text-blue-600' },
+    plus: { label: t.subscriptions.plus, icon: Trophy, color: 'text-purple-600' },
+    premium: { label: t.subscriptions.premium, icon: Crown, color: 'text-yellow-600' },
+    trial: { label: t.subscriptions.trial, icon: Trophy, color: 'text-green-600' },
+  };
+
+  const subscriptionInfo = profile ? SUBSCRIPTION_LABELS[profile.subscriptionStatus] : null;
   const SubscriptionIcon = subscriptionInfo?.icon;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <div className="space-y-6">
+      {/* Personal Data */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <User className="h-5 w-5" />
-            Datos Personales
+            {t.profile.personalData}
           </CardTitle>
           <CardDescription>
-            Información básica de tu cuenta
+            {t.profile.basicInfo}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t.profile.email}</Label>
             <Input 
               id="email" 
-              {...register('email')} 
+              value={session?.user?.email || ''} 
               disabled 
               className="bg-muted"
             />
             <p className="text-xs text-muted-foreground">
-              El email no se puede cambiar directamente
+              {t.profile.emailCantChange}
             </p>
           </div>
           
           <div className="grid gap-2">
-            <Label htmlFor="full_name">Nombre Completo</Label>
+            <Label htmlFor="full_name">{t.profile.fullName}</Label>
             <Input 
               id="full_name" 
-              {...register('full_name')} 
-              placeholder="Tu nombre"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder={t.profile.fullNamePlaceholder}
             />
-            {errors.full_name && (
-              <p className="text-sm text-red-500">{errors.full_name.message}</p>
-            )}
           </div>
         </CardContent>
       </Card>
 
+      {/* Language Preference */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            {SubscriptionIcon && <SubscriptionIcon className={`h-5 w-5 ${subscriptionInfo.color}`} />}
-            Plan de Suscripción
+            <Globe className="h-5 w-5" />
+            {t.profile.language}
           </CardTitle>
           <CardDescription>
-            Tu plan actual y características disponibles
+            {t.profile.languageDesc}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-2">
+            <Label>{t.profile.languageLabel}</Label>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setLocale('es')}
+                className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 font-bold text-sm transition-all duration-200 ${
+                  locale === 'es' 
+                    ? 'border-primary bg-primary/10 text-primary' 
+                    : 'border-border text-muted-foreground hover:border-primary/50'
+                }`}
+              >
+                <img src="/spain.png" alt="España" className="h-5 w-5 rounded-sm object-cover" />
+                Español
+              </button>
+              <button
+                type="button"
+                onClick={() => setLocale('en')}
+                className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 font-bold text-sm transition-all duration-200 ${
+                  locale === 'en' 
+                    ? 'border-primary bg-primary/10 text-primary' 
+                    : 'border-border text-muted-foreground hover:border-primary/50'
+                }`}
+              >
+                <img src="/uk.png" alt="English" className="h-5 w-5 rounded-sm object-cover" />
+                English
+              </button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Subscription Plan */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            {SubscriptionIcon && <SubscriptionIcon className={`h-5 w-5 ${subscriptionInfo?.color}`} />}
+            {t.profile.subscriptionPlan}
+          </CardTitle>
+          <CardDescription>
+            {t.profile.subscriptionDesc}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div>
-              <Label className="text-sm text-muted-foreground">Plan Actual</Label>
+              <Label className="text-sm text-muted-foreground">{t.profile.currentPlan}</Label>
               <p className={`text-2xl font-bold ${subscriptionInfo?.color}`}>
-                {subscriptionInfo?.label}
+                {subscriptionInfo?.label || t.subscriptions.free}
               </p>
             </div>
 
-            {profile?.subscription_expires_at && (
+            {profile?.subscriptionExpiresAt && (
               <div>
-                <Label className="text-sm text-muted-foreground">Expira el</Label>
+                <Label className="text-sm text-muted-foreground">{t.profile.expiresOn}</Label>
                 <p className="text-lg">
-                  {new Date(profile.subscription_expires_at).toLocaleDateString('es-AR', {
+                  {new Date(profile.subscriptionExpiresAt).toLocaleDateString(locale === 'en' ? 'en-US' : 'es-AR', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
@@ -169,17 +234,17 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
               </div>
             )}
 
-            {profile?.subscription_status === 'free' && (
+            {(!profile || profile?.subscriptionStatus === 'free') && (
               <div className="rounded-lg bg-muted p-4">
                 <p className="text-sm">
-                  💡 <strong>Mejorá tu experiencia:</strong> Actualizá a un plan Premium para desbloquear características exclusivas como modo rival, personalización visual y más.
+                  {t.profile.upgradeMessage}
                 </p>
               </div>
             )}
 
             {features.length > 0 && (
               <div>
-                <Label className="text-sm text-muted-foreground mb-2 block">Características Activas</Label>
+                <Label className="text-sm text-muted-foreground mb-2 block">{t.profile.activeFeatures}</Label>
                 <div className="space-y-1">
                   {features.map((feature) => (
                     <div key={feature.id} className="flex items-center gap-2 text-sm">
@@ -197,41 +262,68 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
         </CardContent>
       </Card>
 
+      {/* Favorite Team - Button style selector */}
       <Card>
         <CardHeader>
-          <CardTitle>Equipos Favoritos</CardTitle>
+          <CardTitle>{t.profile.favoriteTeams}</CardTitle>
           <CardDescription>
-            Seleccioná tu equipo principal para personalizar tu feed de noticias
+            {t.profile.favoriteTeamsDesc}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="primary_team">Equipo Principal</Label>
-            <TeamSelector
-              teams={teams}
-              value={primaryTeamId}
-              onChange={(value) => setValue('primary_team_id', value)}
-              placeholder="Seleccioná tu equipo (opcional)"
-            />
+            <Label>{t.profile.primaryTeam}</Label>
+            <div className="flex gap-3">
+              {teams.map((team) => {
+                const isSelected = selectedTeamId === team.id;
+                const badgeSrc = TEAM_BADGES[team.key] || null;
+                return (
+                  <button
+                    key={team.id}
+                    type="button"
+                    onClick={() => setSelectedTeamId(isSelected ? null : team.id)}
+                    className={`flex-1 flex flex-col items-center gap-3 py-4 px-4 rounded-lg border-2 font-bold text-sm transition-all duration-200 ${
+                      isSelected
+                        ? 'border-primary bg-primary/10 text-primary shadow-md'
+                        : 'border-border text-muted-foreground hover:border-primary/50'
+                    }`}
+                    style={isSelected && team.primaryColor ? {
+                      borderColor: team.primaryColor,
+                      backgroundColor: `${team.primaryColor}15`,
+                      color: team.primaryColor,
+                    } : undefined}
+                  >
+                    {badgeSrc ? (
+                      <img 
+                        src={badgeSrc} 
+                        alt={team.name} 
+                        className="h-12 w-12 object-contain"
+                      />
+                    ) : (
+                      <div 
+                        className="h-12 w-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                        style={{ backgroundColor: team.primaryColor || '#666' }}
+                      >
+                        {team.name.charAt(0)}
+                      </div>
+                    )}
+                    {team.name}
+                  </button>
+                );
+              })}
+            </div>
             <p className="text-sm text-muted-foreground">
-              Si no seleccionás un equipo, verás noticias de todos los equipos disponibles
+              {t.profile.noTeamSelected}
             </p>
           </div>
 
           <div className="space-y-2 opacity-50">
-            <Label htmlFor="secondary_teams" className="flex items-center gap-2">
-              Equipos Secundarios
+            <Label className="flex items-center gap-2">
+              {t.profile.secondaryTeams}
               <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded">Premium</span>
             </Label>
-            <TeamSelector
-              teams={teams.filter(t => t.id !== primaryTeamId)}
-              value={null}
-              onChange={(_value: string | null) => {}}
-              placeholder="Disponible en planes Premium"
-              disabled
-            />
             <p className="text-sm text-muted-foreground">
-              En los planes Premium podrás seguir múltiples equipos
+              {t.profile.secondaryTeamsDesc}
             </p>
           </div>
         </CardContent>
@@ -239,14 +331,15 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
 
       <div className="flex justify-end">
         <Button 
-          type="submit" 
+          type="button"
+          onClick={handleSave}
           disabled={saving}
           className="bg-primary hover:bg-primary/90 text-white font-bold"
         >
           {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          Guardar Cambios
+          {t.profile.saveChanges}
         </Button>
       </div>
-    </form>
+    </div>
   );
 }

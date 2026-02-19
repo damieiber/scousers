@@ -8,8 +8,11 @@ export interface IOriginalLink {
 
 export interface IArticle extends Document {
   title: string;
+  titleEn: string;
   summary: string;
+  summaryEn: string;
   shortSummary: string;
+  shortSummaryEn: string;
   imageUrl?: string;
   teamId: mongoose.Types.ObjectId;
   publishedAt: Date;
@@ -28,8 +31,11 @@ const OriginalLinkSchema = new Schema({
 
 const ArticleSchema: Schema = new Schema({
   title: { type: String, required: true },
+  titleEn: { type: String, default: '' },
   summary: { type: String, required: true },
+  summaryEn: { type: String, default: '' },
   shortSummary: { type: String, required: true },
+  shortSummaryEn: { type: String, default: '' },
   imageUrl: { type: String },
   teamId: { type: Schema.Types.ObjectId, ref: 'Team', required: true },
   publishedAt: { type: Date, default: Date.now },

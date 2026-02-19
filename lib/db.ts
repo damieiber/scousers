@@ -89,8 +89,11 @@ export interface OriginalArticleLink {
 
 export async function saveThemedArticle(
   title: string,
+  titleEn: string,
   summary: string,
+  summaryEn: string,
   shortSummary: string,
+  shortSummaryEn: string,
   teamId: string,
   originalArticles: OriginalArticleLink[],
   embedding: number[],
@@ -142,8 +145,11 @@ export async function saveThemedArticle(
         // 2. Create new article
         await Article.create({
             title,
+            titleEn,
             summary,
+            summaryEn,
             shortSummary: shortSummary,
+            shortSummaryEn: shortSummaryEn,
             teamId: teamId,
             imageUrl: imageUrl,
             embedding,

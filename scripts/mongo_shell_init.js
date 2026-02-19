@@ -77,8 +77,11 @@ try {
                 required: ['title', 'summary', 'publishedAt', 'embedding', 'teamId'],
                 properties: {
                     title: { bsonType: 'string' },
+                    titleEn: { bsonType: ['string', 'null'] },
                     summary: { bsonType: 'string' },
+                    summaryEn: { bsonType: ['string', 'null'] },
                     shortSummary: { bsonType: 'string' },
+                    shortSummaryEn: { bsonType: ['string', 'null'] },
                     imageUrl: { bsonType: ['string', 'null'] },
                     teamId: { bsonType: 'objectId', description: 'The team this article belongs to' },
                     publishedAt: { bsonType: 'date' },
@@ -111,6 +114,7 @@ try {
                     email: { bsonType: 'string' },
                     emailVerified: { bsonType: ['date', 'null'] },
                     image: { bsonType: ['string', 'null'] },
+                    language: { enum: ['es', 'en'], description: 'User preferred language, defaults to es' },
                     primaryTeamId: { bsonType: ['objectId', 'null'] },
                     secondaryTeamIds: { bsonType: 'array', items: { bsonType: 'objectId' } },
                     subscriptionStatus: { enum: ['free', 'standard', 'plus', 'premium', 'trial'] },
@@ -309,14 +313,14 @@ if (liverpool && everton) {
 // 4. Seed Features
 print('Seeding Features...');
 const features   = [
-  { key: 'match_center', name: 'Match Center', is_active: true },
-  { key: 'squad_details', name: 'Detalle de Plantel', is_active: true },
-  { key: 'multi_team', name: 'Multi-Equipo', is_active: true },
-  { key: 'rival_mode', name: 'Modo Rival', is_active: true },
-  { key: 'ad_free', name: 'Sin Publicidad', is_active: true },
-  { key: 'dark_mode', name: 'Modo Oscuro', is_active: true },
-  { key: 'advanced_stats', name: 'Estadísticas Avanzadas', is_active: true },
-  { key: 'early_access', name: 'Acceso Anticipado', is_active: true }
+  { key: 'MatchCenter', name: 'Match Center', is_active: true },
+  { key: 'SquadDetails', name: 'Detalle de Plantel', is_active: true },
+  { key: 'MultiTeam', name: 'Multi-Equipo', is_active: true },
+  { key: 'RivalMode', name: 'Modo Rival', is_active: true },
+  { key: 'AdFree', name: 'Sin Publicidad', is_active: true },
+  { key: 'DarkMode', name: 'Modo Oscuro', is_active: true },
+  { key: 'AdvancedStats', name: 'Estadísticas Avanzadas', is_active: true },
+  { key: 'EarlyAccess', name: 'Acceso Anticipado', is_active: true }
 ];
 
 features.forEach(f => {
@@ -326,11 +330,11 @@ features.forEach(f => {
 // 5. Seed SubscriptionFeatures
 print('Seeding SubscriptionFeatures...');
 const subPlans = [
-    { status: 'free', keys: ['match_center', 'squad_details'] },
-    { status: 'standard', keys: ['match_center', 'squad_details', 'ad_free', 'dark_mode'] },
-    { status: 'plus', keys: ['match_center', 'squad_details', 'ad_free', 'dark_mode', 'multi_team', 'rival_mode'] },
-    { status: 'premium', keys: ['match_center', 'squad_details', 'ad_free', 'dark_mode', 'multi_team', 'rival_mode', 'advanced_stats', 'early_access'] },
-    { status: 'trial', keys: ['match_center', 'squad_details', 'ad_free', 'dark_mode', 'multi_team', 'rival_mode', 'advanced_stats', 'early_access'] }
+    { status: 'free', keys: ['MatchCenter', 'SquadDetails'] },
+    { status: 'standard', keys: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode'] },
+    { status: 'plus', keys: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode', 'MultiTeam', 'RivalMode'] },
+    { status: 'premium', keys: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode', 'MultiTeam', 'RivalMode', 'AdvancedStats', 'EarlyAccess'] },
+    { status: 'trial', keys: ['MatchCenter', 'SquadDetails', 'AdFree', 'DarkMode', 'MultiTeam', 'RivalMode', 'AdvancedStats', 'EarlyAccess'] }
 ];
 
 // Clear logic for simplicity on seed

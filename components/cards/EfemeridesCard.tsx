@@ -1,4 +1,7 @@
+'use client';
+
 import { Efemeride } from '@/lib/types';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 
 interface EfemeridesCardProps {
@@ -23,6 +26,7 @@ const typeIcons = {
 export function EfemeridesCard({ efemeride, isToday = false }: EfemeridesCardProps) {
   const [month, day] = efemeride.date.split('-');
   const formattedDate = `${day}/${month}`;
+  const { t } = useLanguage();
 
   return (
     <div
@@ -47,7 +51,7 @@ export function EfemeridesCard({ efemeride, isToday = false }: EfemeridesCardPro
         {isToday && (
           <div className="absolute top-3 right-3">
             <span className="bg-white text-primary text-[10px] font-black px-2 py-1 rounded-full shadow-lg animate-pulse uppercase tracking-widest">
-              HOY
+              {t.ephemeridesCard.today}
             </span>
           </div>
         )}

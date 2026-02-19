@@ -142,7 +142,7 @@ async function runIngestionProcess() {
              for (const group of themedGroups) {
                 try {
                     console.log(`    Summarizing cluster: "${group.theme}"`);
-                    const { fullSummary, shortSummary } = await summarizeThemedArticles(group.theme, group.articles);
+                    const { fullSummary, shortSummary, fullSummaryEn, shortSummaryEn } = await summarizeThemedArticles(group.theme, group.articles);
                      // Generate embedding using AI Service
                     const embedding = await generateEmbedding(`${group.theme} - ${shortSummary}`);
 
@@ -154,10 +154,13 @@ async function runIngestionProcess() {
 
                     await saveThemedArticle(
                         group.theme,
+                        group.themeEn || group.theme,
                         fullSummary,
+                        fullSummaryEn,
                         shortSummary,
+                        shortSummaryEn,
                         teamId,
-                        articlesToSave, // Mongoose expects this structure
+                        articlesToSave,
                         embedding,
                         group.imageUrl
                     );
