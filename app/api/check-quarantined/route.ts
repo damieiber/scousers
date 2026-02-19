@@ -25,7 +25,7 @@ async function runQuarantineCheck() {
     return;
   }
 
-  const results = await Promise.allSettled(
+  const _results = await Promise.allSettled(
     quarantinedSources.map(async (source) => {
       const isHealthy = await isSourceHealthy(source.url);
       if (isHealthy) {

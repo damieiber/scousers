@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { siteConfig } from '@/lib/config';
 import {
@@ -39,7 +40,7 @@ function HeaderContent() {
     async function checkRivalAccess() {
       setIsLoadingAccess(true);
       if (session?.user) {
-         // @ts-expect-error
+         // @ts-expect-error - subscription_status added in auth callbacks
          const status = session.user.subscription_status;
          if (['premium', 'plus', 'trial'].includes(status)) {
              setHasRivalAccess(true);
@@ -156,10 +157,12 @@ function HeaderContent() {
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-white/90 hover:text-white hover:bg-white/20 transition-all duration-200"
               title={locale === 'es' ? 'Switch to English' : 'Cambiar a Español'}
             >
-              <img 
+              <Image 
                 src={locale === 'es' ? '/spain.png' : '/uk.png'} 
                 alt={locale === 'es' ? 'Español' : 'English'} 
-                className="h-4 w-4 rounded-sm object-cover" 
+                width={16}
+                height={16}
+                className="rounded-sm object-cover" 
               />
               {locale === 'es' ? 'ES' : 'EN'}
             </button>

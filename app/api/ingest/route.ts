@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { saveThemedArticle, getActiveSources, handleSourceSuccess, handleSourceFailure, getAllTeams } from '@/lib/db';
 import { getLinksFromSource, getContentFromUrl } from '@/lib/scrapingService';
-import { clusterArticlesByTheme, summarizeThemedArticles, filterRelevantArticles, ArticleData, generateEmbedding } from '@/lib/aiService';
-import { Source } from '@/lib/types'; // We align types in db.ts to types.ts or vice versa
+import { clusterArticlesByTheme, summarizeThemedArticles, filterRelevantArticles, generateEmbedding } from '@/lib/aiService';
+
 
 const MAX_LINKS_PER_SOURCE = 100;
 const VALID_ARTICLES_PER_SOURCE = 30;
@@ -85,7 +85,7 @@ async function runIngestionProcess() {
                                 imageUrl 
                             });
                             validArticlesCount++;
-                        } catch (articleError: unknown) {
+                        } catch (_articleError: unknown) {
                             // const errorMessage = articleError instanceof Error ? articleError.message : String(articleError);
                             // console.warn(`    ⚠️ Error fetching content for ${link.url}, skipping.`, errorMessage);
                         }

@@ -2,11 +2,11 @@ import { NextResponse } from 'next/server';
 import { auth } from "@/auth"
 import type { FeedItem, GroupedNewsItem } from '@/lib/types';
 import dbConnect from '@/lib/mongodb';
-import Article, { IArticle } from '@/lib/models/Article';
+import Article from '@/lib/models/Article';
 import User from '@/lib/models/User';
 import SubscriptionFeature from '@/lib/models/SubscriptionFeature';
 import Rivalry from '@/lib/models/Rivalry';
-import { OriginalArticleLink } from '@/lib/db'; 
+
 
 export async function GET(request: Request) {
   try {

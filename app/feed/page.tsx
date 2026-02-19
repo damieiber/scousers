@@ -22,7 +22,7 @@ function FeedContent() {
   const [error, setError] = useState<string | null>(null);
   const [feedMode, setFeedMode] = useState<string>('normal');
   const searchParams = useSearchParams();
-  const { locale, t } = useLanguage();
+  const { t } = useLanguage();
 
   const mode = searchParams.get('mode');
 
@@ -42,7 +42,7 @@ function FeedContent() {
     return () => {
       mounted = false;
     };
-  }, [mode]);
+  }, [mode, t.home.couldNotLoadFeed]);
 
   const renderNewsCard = (item: GroupedNewsItem) => {
     const group = item as GroupedNewsItem;

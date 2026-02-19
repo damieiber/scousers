@@ -49,7 +49,7 @@ export default function Home() {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [t.home.couldNotLoadFeed]);
 
   const featuredArticle = items && items.length > 0 ? (items[0] as GroupedNewsItem) : null;
   const previewArticles = items && items.length > 1 ? items.slice(1, 3) : [];

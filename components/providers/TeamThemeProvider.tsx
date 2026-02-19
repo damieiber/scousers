@@ -29,24 +29,7 @@ export function useTeamTheme() {
 
 const CACHE_KEY = 'team-theme-colors';
 
-// Default neutral values to restore when no team is selected
-const NEUTRAL_COLORS_LIGHT = {
-  '--primary': 'oklch(0.55 0.15 175)',
-  '--primary-foreground': 'oklch(1 0 0)',
-  '--ring': 'oklch(0.55 0.15 175)',
-  '--sidebar-primary': 'oklch(0.55 0.15 175)',
-  '--sidebar-ring': 'oklch(0.55 0.15 175)',
-  '--chart-1': 'oklch(0.55 0.15 175)',
-};
 
-const NEUTRAL_COLORS_DARK = {
-  '--primary': 'oklch(0.55 0.15 175)',
-  '--primary-foreground': 'oklch(1 0 0)',
-  '--ring': 'oklch(0.55 0.15 175)',
-  '--sidebar-primary': 'oklch(0.55 0.15 175)',
-  '--sidebar-ring': 'oklch(0.55 0.15 175)',
-  '--chart-1': 'oklch(0.55 0.15 175)',
-};
 
 function applyColorVars(vars: Record<string, string>) {
   const root = document.documentElement;

@@ -1,13 +1,11 @@
 import dbConnect from './mongodb';
 import Team, { ITeam } from './models/Team';
 import Source, { ISource } from './models/Source';
-import Article, { IArticle } from './models/Article';
+import Article from './models/Article';
 import User, { IUser } from './models/User';
 import Feature, { IFeature } from './models/Feature';
-import SubscriptionFeature, { ISubscriptionFeature } from './models/SubscriptionFeature';
-import Rivalry, { IRivalry } from './models/Rivalry';
-import Efemeris, { IEfemeris } from './models/Efemeris';
-import mongoose from 'mongoose';
+import SubscriptionFeature from './models/SubscriptionFeature';
+import Rivalry from './models/Rivalry';
 
 // Ensure connection is established
 const ensureDb = async () => {

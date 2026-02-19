@@ -30,10 +30,12 @@ interface ProfileFormProps {
   userId: string;
 }
 
-export default function ProfileForm({ userId }: ProfileFormProps) {
+export default function ProfileForm({ userId: _userId }: ProfileFormProps) {
   const { data: session, update: updateSession } = useSession();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [teams, setTeams] = useState<TeamOption[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -181,6 +183,7 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
                     : 'border-border text-muted-foreground hover:border-primary/50'
                 }`}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/spain.png" alt="España" className="h-5 w-5 rounded-sm object-cover" />
                 Español
               </button>
@@ -193,6 +196,7 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
                     : 'border-border text-muted-foreground hover:border-primary/50'
                 }`}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/uk.png" alt="English" className="h-5 w-5 rounded-sm object-cover" />
                 English
               </button>
@@ -294,6 +298,7 @@ export default function ProfileForm({ userId }: ProfileFormProps) {
                     } : undefined}
                   >
                     {badgeSrc ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
                       <img 
                         src={badgeSrc} 
                         alt={team.name} 
