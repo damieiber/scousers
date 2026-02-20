@@ -1,12 +1,17 @@
+'use client';
+
 import { TacticalData } from '@/lib/services/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Activity, Target, BarChart3 } from 'lucide-react';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface TacticalBoardProps {
   data: TacticalData;
 }
 
 export function TacticalBoard({ data }: TacticalBoardProps) {
+  const { t } = useLanguage();
+
   const getZoneColor = (percentage: number) => {
     if (percentage >= 40) return 'bg-primary';
     if (percentage >= 30) return 'bg-primary/70';
@@ -18,13 +23,13 @@ export function TacticalBoard({ data }: TacticalBoardProps) {
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-lg font-black uppercase tracking-tight">
           <Activity className="w-5 h-5 text-primary" />
-          Tablero Táctico
+          {t.matchCenter.tacticalBoard}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex items-center justify-between p-4 bg-muted/30 rounded-xl border border-border/50">
           <div className="flex flex-col">
-            <span className="text-sm text-muted-foreground font-medium uppercase tracking-wider">Posesión Media</span>
+            <span className="text-sm text-muted-foreground font-medium uppercase tracking-wider">{t.matchCenter.avgPossession}</span>
             <span className="text-3xl font-black text-foreground">{data.possession}%</span>
           </div>
           <div className="h-16 w-16 rounded-full border-4 border-muted relative flex items-center justify-center">
@@ -38,7 +43,7 @@ export function TacticalBoard({ data }: TacticalBoardProps) {
 
         <div>
           <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1">
-            <BarChart3 className="w-3 h-3" /> Zonas de Ataque
+            <BarChart3 className="w-3 h-3" /> {t.matchCenter.attackZones}
           </h4>
           <div className="grid grid-cols-3 gap-2 h-32">
             {data.attackZones.map((zone) => (
@@ -61,16 +66,16 @@ export function TacticalBoard({ data }: TacticalBoardProps) {
 
         <div>
            <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-1">
-            <Target className="w-3 h-3" /> Tiros por partido
+            <Target className="w-3 h-3" /> {t.matchCenter.shotsPerMatch}
           </h4>
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-muted/30 p-2 rounded-lg border border-border/50 text-center">
                <span className="block text-xl font-black text-foreground">{data.shotStats.total}</span>
-               <span className="text-[10px] text-muted-foreground uppercase font-bold">Total</span>
+               <span className="text-[10px] text-muted-foreground uppercase font-bold">{t.matchCenter.total}</span>
             </div>
             <div className="bg-primary/10 p-2 rounded-lg border border-primary/20 text-center">
                <span className="block text-xl font-black text-primary">{data.shotStats.onTarget}</span>
-               <span className="text-[10px] text-primary uppercase font-bold">Al Arco</span>
+               <span className="text-[10px] text-primary uppercase font-bold">{t.matchCenter.onTarget}</span>
             </div>
           </div>
         </div>

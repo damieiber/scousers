@@ -1,49 +1,84 @@
-import { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import { AuthForm } from '@/components/auth/AuthForm';
-
-export const metadata: Metadata = {
-  title: 'Login - FanNews',
-  description: 'Inicia sesión en tu cuenta de FanNews',
-};
+import { useLanguage } from '@/components/providers/LanguageProvider';
+import { siteConfig } from '@/lib/config';
 
 export default function LoginPage() {
+  const { t } = useLanguage();
+
   return (
-    <div className="container relative h-[800px] flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <Link
-        href="/"
-        className={"absolute left-4 top-4 md:left-8 md:top-8 text-sm font-bold hover:text-primary transition-colors"}
-      >
-        Wait, I need to check if button variants are available in ui/button or I should just use standard classes.
-        I will use standard classes for now to be safe.
-        ← Volver
-      </Link>
-      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className="absolute inset-0 bg-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent opacity-80" />
-        
-        <div className="relative z-20 flex items-center text-lg font-medium">
-            <span className="font-black tracking-tighter text-2xl">FAN<span className="text-primary">NEWS</span></span>
-        </div>
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">
-              &quot;La mejor forma de seguir a tu equipo. Noticias personalizadas, efemérides y estadísticas en un solo lugar.&quot;
-            </p>
-          </blockquote>
-        </div>
-      </div>
-      <div className="p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Bienvenido
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Ingresa tu email para entrar a tu cuenta
+    <div className="flex items-center justify-center px-4 py-10" style={{ minHeight: 'calc(100vh - 4rem)' }}>
+      <div className="w-full max-w-[820px] rounded-2xl overflow-hidden shadow-2xl border border-border flex">
+        {/* Left panel — Hero */}
+        <div className="hidden md:flex md:w-[40%] relative bg-gradient-to-br from-primary via-primary/90 to-primary/70 p-8 flex-col justify-between">
+          <Link href="/" className="inline-block">
+            <h2 className="font-black text-2xl tracking-tighter text-white italic uppercase transform -skew-x-6">
+              {siteConfig.name}
+            </h2>
+          </Link>
+
+          <div className="space-y-3">
+            <div className="flex gap-2">
+              {['⚽', '📊', '📰'].map((emoji, i) => (
+                <div key={i} className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-sm border border-white/10">
+                  {emoji}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-white/85 font-medium leading-relaxed">
+              &quot;{t.footer.description}&quot;
             </p>
           </div>
-          <AuthForm />
+
+          <div className="flex gap-5 text-white/60 text-[10px] font-medium">
+            <div className="text-center">
+              <div className="text-lg font-black text-white">2</div>
+              <div className="uppercase tracking-wider">Teams</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-black text-white">12+</div>
+              <div className="uppercase tracking-wider">Sources</div>
+            </div>
+            <div className="text-center">
+              <div className="text-lg font-black text-white">AI</div>
+              <div className="uppercase tracking-wider">Powered</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right panel — Form */}
+        <div className="flex-1 bg-background p-8 flex flex-col justify-center">
+          <div className="w-full max-w-[340px] mx-auto space-y-5">
+            <div className="md:hidden text-center">
+              <Link href="/">
+                <h2 className="font-black text-2xl tracking-tighter text-foreground italic uppercase transform -skew-x-6 inline-block">
+                  {siteConfig.name}
+                </h2>
+              </Link>
+            </div>
+
+            <div className="space-y-1 text-center">
+              <h1 className="text-2xl font-black text-foreground tracking-tight">
+                {t.auth.login}
+              </h1>
+              <p className="text-muted-foreground text-xs">
+                {t.footer.description}
+              </p>
+            </div>
+
+            <AuthForm />
+
+            <div className="text-center">
+              <Link
+                href="/"
+                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                ← {t.newsDetail.backToHome}
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

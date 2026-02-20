@@ -19,6 +19,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { Team } from '@/lib/types';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface TeamSelectorProps {
   teams: Team[];
@@ -32,15 +33,18 @@ export default function TeamSelector({
   teams,
   value,
   onChange,
-  placeholder = 'Seleccioná un equipo...',
+  placeholder,
   disabled = false,
 }: TeamSelectorProps) {
+  const { t } = useLanguage();
   const [open, setOpen] = React.useState(false);
 
   const selectedTeam = teams.find((team) => team.id === value);
 
   const availableTeams = teams.filter(t => t.isAvailable);
   const unavailableTeams = teams.filter(t => !t.isAvailable);
+
+  const displayPlaceholder = placeholder || t.teamSelector.selectTeam;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -52,16 +56,16 @@ export default function TeamSelector({
           className="w-full justify-between"
           disabled={disabled}
         >
-          {selectedTeam ? selectedTeam.key : placeholder}
+          {selectedTeam ? selectedTeam.key : displayPlaceholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Buscar equipo..." />
+          <CommandInput placeholder={t.teamSelector.searchTeam} />
           <CommandList>
-            <CommandEmpty>No se encontró el equipo.</CommandEmpty>
-            <CommandGroup heading="Disponibles">
+            <CommandEmpty>{t.teamSelector.noTeamFound}</CommandEmpty>
+            <CommandGroup heading={t.teamSelector.available}>
               {value && (
                 <CommandItem
                   value="__clear__"
@@ -76,7 +80,7 @@ export default function TeamSelector({
                       !value ? 'opacity-100' : 'opacity-0'
                     )}
                   />
-                  <span className="italic text-muted-foreground">Sin equipo</span>
+                  <span className="italic text-muted-foreground">{t.teamSelector.noTeam}</span>
                 </CommandItem>
               )}
               {availableTeams.map((team) => (
@@ -100,7 +104,7 @@ export default function TeamSelector({
             </CommandGroup>
             
             {unavailableTeams.length > 0 && (
-              <CommandGroup heading="Próximamente">
+              <CommandGroup heading={t.teamSelector.comingSoon}>
                 {unavailableTeams.map((team) => (
                   <CommandItem
                     key={team.id}
@@ -121,4 +125,3 @@ export default function TeamSelector({
     </Popover>
   );
 }
-

@@ -1,11 +1,16 @@
+'use client';
+
 import { MatchPreviewData } from '@/lib/services/types';
 import { Calendar, MapPin, User, CloudSun, Sun, CloudRain, Cloud } from 'lucide-react';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface MatchHeaderProps {
   data: MatchPreviewData;
 }
 
 export function MatchHeader({ data }: MatchHeaderProps) {
+  const { t, locale } = useLanguage();
+
   const getWeatherIcon = (icon: string) => {
     if (icon === 'sun') return <Sun className="w-5 h-5 text-yellow-500" />;
     if (icon === 'rain') return <CloudRain className="w-5 h-5 text-blue-400" />;
@@ -14,7 +19,7 @@ export function MatchHeader({ data }: MatchHeaderProps) {
   };
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('es-AR', {
+    return new Date(dateStr).toLocaleDateString(locale === 'es' ? 'es-AR' : 'en-GB', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -26,8 +31,8 @@ export function MatchHeader({ data }: MatchHeaderProps) {
   return (
     <div className="w-full bg-card border border-border rounded-xl overflow-hidden shadow-sm mb-8">
       <div className="bg-black/5 dark:bg-white/5 px-6 py-2 flex justify-between items-center text-xs font-bold uppercase tracking-wider text-muted-foreground">
-        <span>Liga Profesional</span>
-        <span>Próximo Partido</span>
+        <span>{t.matchCenter.league}</span>
+        <span>{t.matchCenter.nextMatch}</span>
       </div>
 
       <div className="p-6 md:p-8">
@@ -36,7 +41,7 @@ export function MatchHeader({ data }: MatchHeaderProps) {
             <h2 className="text-3xl md:text-5xl font-black text-foreground uppercase tracking-tighter leading-none">
               {data.homeTeam}
             </h2>
-            <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mt-1 block">Local</span>
+            <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mt-1 block">{t.matchCenter.home}</span>
           </div>
           <div className="flex flex-col items-center justify-center shrink-0">
             <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-xl font-black shadow-lg shadow-primary/30">
@@ -47,7 +52,7 @@ export function MatchHeader({ data }: MatchHeaderProps) {
             <h2 className="text-3xl md:text-5xl font-black text-foreground uppercase tracking-tighter leading-none">
               {data.awayTeam}
             </h2>
-             <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mt-1 block">Visitante</span>
+             <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest mt-1 block">{t.matchCenter.away}</span>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-border grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
@@ -56,7 +61,7 @@ export function MatchHeader({ data }: MatchHeaderProps) {
               <Calendar className="w-4 h-4" />
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase">Fecha y Hora</span>
+              <span className="text-[10px] font-bold text-muted-foreground uppercase">{t.matchCenter.dateTime}</span>
               <span className="text-xs font-bold text-foreground capitalize">{formatDate(data.date)}</span>
             </div>
           </div>
@@ -65,7 +70,7 @@ export function MatchHeader({ data }: MatchHeaderProps) {
               <MapPin className="w-4 h-4" />
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase">Estadio</span>
+              <span className="text-[10px] font-bold text-muted-foreground uppercase">{t.matchCenter.venue}</span>
               <span className="text-xs font-bold text-foreground">{data.venue}</span>
             </div>
           </div>
@@ -74,7 +79,7 @@ export function MatchHeader({ data }: MatchHeaderProps) {
               <User className="w-4 h-4" />
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase">Árbitro</span>
+              <span className="text-[10px] font-bold text-muted-foreground uppercase">{t.matchCenter.referee}</span>
               <span className="text-xs font-bold text-foreground">{data.referee}</span>
             </div>
           </div>
@@ -83,7 +88,7 @@ export function MatchHeader({ data }: MatchHeaderProps) {
               {getWeatherIcon(data.weather.icon)}
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-muted-foreground uppercase">Clima</span>
+              <span className="text-[10px] font-bold text-muted-foreground uppercase">{t.matchCenter.weather}</span>
               <span className="text-xs font-bold text-foreground">{data.weather.temp}°C - {data.weather.condition}</span>
             </div>
           </div>

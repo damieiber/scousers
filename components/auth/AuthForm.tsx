@@ -11,20 +11,21 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-// import { supabase } from '@/lib/supabaseService'; // Removed
 import { signIn } from 'next-auth/react';
-
-const userAuthSchema = z.object({
-  email: z.string().email('Email inválido'),
-  password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
-});
-
-type FormData = z.infer<typeof userAuthSchema>;
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 export function AuthForm() {
+  const { t } = useLanguage();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false);
   const [mode, setMode] = React.useState<'login' | 'register'>('login');
+
+  const userAuthSchema = z.object({
+    email: z.string().email(t.authForm.invalidEmail),
+    password: z.string().min(6, t.authForm.passwordMinLength),
+  });
+
+  type FormData = z.infer<typeof userAuthSchema>;
 
   const {
     register,
@@ -42,48 +43,36 @@ export function AuthForm() {
         const result = await signIn('credentials', {
            email: data.email,
            password: data.password,
-           redirect: false // Handle redirect manually or let NextAuth do it
+           redirect: false
         });
 
         if (result?.error) {
           throw new Error(result.error);
         }
 
-        toast.success('Sesión iniciada correctamente');
+        toast.success(t.authForm.loginSuccess);
         window.location.href = '/';
       } else {
-         // With NextAuth credentials, registration is usually a separate API call or 
-         // we just sign in and if user doesn't exist we fail?
-         // In our auth.ts we only have "authorize" which reads user. 
-         // We need a register API route if we want email/pass registration.
-         // For now, let's assume registration is not fully supported via credentials in this quick refactor 
-         // OR we just call an API to create user then login.
-         
-         // Let's implement a simple registration via API for now since "authorize" is only for login.
-         // Or just tell user to use Google for now as primary.
-         // But I'll try to support it by checking mode.
-         
          const res = await fetch('/api/auth/register', {
              method: 'POST',
              body: JSON.stringify(data),
              headers: { 'Content-Type': 'application/json' }
          });
          
-         if (!res.ok) throw new Error('Error al registrarse');
+         if (!res.ok) throw new Error(t.authForm.registerError);
          
-         // Auto login after register
          await signIn('credentials', {
            email: data.email,
            password: data.password,
            redirect: false
         });
         
-        toast.success('Cuenta creada y sesión iniciada');
+        toast.success(t.authForm.registerSuccess);
         window.location.href = '/';
       }
     } catch (error) {
       console.error(error);
-      toast.error('Ocurrió un error. Por favor intenta de nuevo.');
+      toast.error(t.authForm.genericError);
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +84,7 @@ export function AuthForm() {
       await signIn('google', { callbackUrl: '/' });
     } catch (error) {
       console.error(error);
-      toast.error('Error al conectar con Google');
+      toast.error(t.authForm.googleError);
       setIsGoogleLoading(false);
     }
   };
@@ -105,10 +94,10 @@ export function AuthForm() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t.authForm.email}</Label>
             <Input
               id="email"
-              placeholder="nombre@ejemplo.com"
+              placeholder={t.authForm.emailPlaceholder}
               type="email"
               autoCapitalize="none"
               autoComplete="email"
@@ -121,7 +110,7 @@ export function AuthForm() {
             )}
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">Contraseña</Label>
+            <Label htmlFor="password">{t.authForm.password}</Label>
             <Input
               id="password"
               placeholder="******"
@@ -138,7 +127,7 @@ export function AuthForm() {
             {isLoading && (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
             )}
-            {mode === 'login' ? 'Iniciar Sesión' : 'Registrarse'}
+            {mode === 'login' ? t.authForm.loginButton : t.authForm.registerButton}
           </Button>
         </div>
       </form>
@@ -149,7 +138,7 @@ export function AuthForm() {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            O continuar con
+            {t.authForm.orContinueWith}
           </span>
         </div>
       </div>
@@ -176,8 +165,8 @@ export function AuthForm() {
           onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
         >
           {mode === 'login' 
-            ? '¿No tienes cuenta? Regístrate' 
-            : '¿Ya tienes cuenta? Inicia sesión'}
+            ? t.authForm.noAccount
+            : t.authForm.hasAccount}
         </button>
       </div>
     </div>

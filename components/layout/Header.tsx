@@ -16,6 +16,7 @@ import { ChevronDown, Swords, BarChart3, Users, Trophy } from 'lucide-react';
 import { useEffect, useState, Suspense } from 'react';
 import { useSession } from "next-auth/react"
 import { useLanguage } from '@/components/providers/LanguageProvider';
+import { useUserTeamKey } from '@/lib/hooks/useUserTeamKey';
 
 export function Header() {
   return (
@@ -33,6 +34,7 @@ function HeaderContent() {
   const [hasRivalAccess, setHasRivalAccess] = useState(false);
   const [isLoadingAccess, setIsLoadingAccess] = useState(true);
   const { locale, setLocale, t } = useLanguage();
+  const { teamInfo } = useUserTeamKey();
 
   const isRivalMode = searchParams.get('mode') === 'rivals';
 
@@ -78,12 +80,24 @@ function HeaderContent() {
       className="fixed top-0 left-0 right-0 z-50 bg-primary shadow-md py-3 transition-all duration-300 ease-in-out"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <div className="flex flex-col">
+        <div className="flex items-center">
           <Link href="/" className="group flex items-center gap-2 no-underline">
             <h1 className="font-black text-3xl tracking-tighter text-white italic uppercase transform -skew-x-6 group-hover:scale-105 transition-transform">
               {siteConfig.name}
             </h1>
           </Link>
+          {teamInfo && (
+            <div className="flex items-center gap-2 ml-3 pl-3 border-l border-white/30">
+              <span className="text-white/80 font-bold text-sm uppercase tracking-wider">{teamInfo.name}</span>
+              <Image
+                src={`/${teamInfo.key}${teamInfo.key === 'liverpool' ? '_white' : ''}.png`}
+                alt={teamInfo.name}
+                width={28}
+                height={28}
+                className="object-contain"
+              />
+            </div>
+          )}
         </div>
         
         <div className="flex items-center gap-6">
@@ -91,10 +105,9 @@ function HeaderContent() {
             {[
               { name: t.nav.home, href: '/' },
               { name: t.nav.feed, href: '/feed' },
-              { name: t.nav.matchCenter, href: '/match-center' },
-              { name: t.nav.squad, href: '/squad' },
-              { name: t.nav.standings, href: '/standings' },
-              { name: t.nav.efemerides, href: '/efemerides' },
+              ...(session ? [
+                { name: t.nav.efemerides, href: '/efemerides' },
+              ] : []),
             ].map((link) => {
               const isActive = pathname === link.href && !isRivalMode;
               return (
@@ -112,28 +125,30 @@ function HeaderContent() {
               );
             })}
 
-            <DropdownMenu>
-              <DropdownMenuTrigger className="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide transition-all duration-200 text-white/90 hover:text-white hover:bg-white/20 flex items-center gap-1 outline-none">
-                {t.nav.club} <ChevronDown className="h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link href="/match-center" className="flex items-center cursor-pointer">
-                    <BarChart3 className="mr-2 h-4 w-4" /> {t.nav.matchCenter}
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/squad" className="flex items-center cursor-pointer">
-                    <Users className="mr-2 h-4 w-4" /> {t.nav.squad}
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/standings" className="flex items-center cursor-pointer">
-                    <Trophy className="mr-2 h-4 w-4" /> {t.nav.standings}
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {session && (
+              <DropdownMenu>
+                <DropdownMenuTrigger className="px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide transition-all duration-200 text-white/90 hover:text-white hover:bg-white/20 flex items-center gap-1 outline-none">
+                  {t.nav.club} <ChevronDown className="h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem asChild>
+                    <Link href="/match-center" className="flex items-center cursor-pointer">
+                      <BarChart3 className="mr-2 h-4 w-4" /> {t.nav.matchCenter}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/squad" className="flex items-center cursor-pointer">
+                      <Users className="mr-2 h-4 w-4" /> {t.nav.squad}
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/standings" className="flex items-center cursor-pointer">
+                      <Trophy className="mr-2 h-4 w-4" /> {t.nav.standings}
+                    </Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
             
             {!isLoadingAccess && hasRivalAccess && (
               <button

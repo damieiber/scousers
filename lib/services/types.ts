@@ -76,7 +76,7 @@ export interface MatchPreviewData {
 }
 
 export interface IMatchAnalysisService {
-  getMatchPreview(matchId: string): Promise<MatchPreviewData>;
+  getMatchPreview(matchId: string, teamKey?: string): Promise<MatchPreviewData>;
   getTacticalData(teamId: string): Promise<TacticalData>;
 }
 
@@ -134,11 +134,11 @@ export interface YouthProspect {
 }
 
 export interface ISquadService {
-  getTopFormPlayers(): Promise<PlayerForm[]>;
-  getSquadLoad(): Promise<PlayerLoad[]>;
-  getTransferImpacts(): Promise<TransferImpact[]>;
-  getLoanWatch(): Promise<LoanPlayer[]>;
-  getYouthProspect(): Promise<YouthProspect>;
+  getTopFormPlayers(teamKey?: string): Promise<PlayerForm[]>;
+  getSquadLoad(teamKey?: string): Promise<PlayerLoad[]>;
+  getTransferImpacts(teamKey?: string): Promise<TransferImpact[]>;
+  getLoanWatch(teamKey?: string): Promise<LoanPlayer[]>;
+  getYouthProspect(teamKey?: string): Promise<YouthProspect>;
 }
 
 export interface OddsOption {
@@ -172,6 +172,6 @@ export interface CompetitionStandings {
 }
 
 export interface IClubService {
-  getMatchOdds(matchId: string): Promise<MatchOdds>;
+  getMatchOdds(matchId: string, teamKey?: string): Promise<MatchOdds>;
   getStandings(): Promise<CompetitionStandings[]>;
 }

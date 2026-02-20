@@ -1,12 +1,17 @@
+'use client';
+
 import { PlayerLoad } from '@/lib/services/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BatteryWarning, BatteryCharging, BatteryFull } from 'lucide-react';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface SquadLoadMapProps {
   players: PlayerLoad[];
 }
 
 export function SquadLoadMap({ players }: SquadLoadMapProps) {
+  const { t } = useLanguage();
+
   const getStatusColor = (status: 'optimal' | 'warning' | 'overload') => {
     if (status === 'optimal') return 'bg-green-500';
     if (status === 'warning') return 'bg-yellow-500';
@@ -17,6 +22,12 @@ export function SquadLoadMap({ players }: SquadLoadMapProps) {
     if (status === 'optimal') return <BatteryFull className="w-4 h-4 text-green-500" />;
     if (status === 'warning') return <BatteryCharging className="w-4 h-4 text-yellow-500" />;
     return <BatteryWarning className="w-4 h-4 text-red-500" />;
+  };
+
+  const getPositionLabel = (pos: string) => {
+    if (pos === 'DEF') return t.squad.defenders;
+    if (pos === 'MID') return t.squad.midfielders;
+    return t.squad.forwards;
   };
 
   const grouped = {
@@ -30,7 +41,7 @@ export function SquadLoadMap({ players }: SquadLoadMapProps) {
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-lg font-black uppercase tracking-tight">
           <BatteryWarning className="w-5 h-5 text-primary" />
-          Mapa de Carga
+          {t.squad.squadLoad}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -38,7 +49,7 @@ export function SquadLoadMap({ players }: SquadLoadMapProps) {
           group.length > 0 && (
             <div key={pos}>
               <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 border-b border-border pb-1">
-                {pos === 'DEF' ? 'Defensores' : pos === 'MID' ? 'Mediocampistas' : 'Delanteros'}
+                {getPositionLabel(pos)}
               </h4>
               <div className="space-y-2">
                 {group.map(player => (
@@ -60,9 +71,9 @@ export function SquadLoadMap({ players }: SquadLoadMapProps) {
           )
         ))}
         <div className="flex justify-between text-[10px] text-muted-foreground pt-2">
-          <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-green-500"></div> Óptimo</span>
-          <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-yellow-500"></div> Precaución</span>
-          <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-red-500"></div> Sobrecarga</span>
+          <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-green-500"></div> {t.squad.optimal}</span>
+          <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-yellow-500"></div> {t.squad.caution}</span>
+          <span className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-red-500"></div> {t.squad.overload}</span>
         </div>
       </CardContent>
     </Card>

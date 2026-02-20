@@ -1,12 +1,17 @@
+'use client';
+
 import { MatchRisk } from '@/lib/services/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AlertTriangle, CheckCircle2, Info } from 'lucide-react';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface RiskMeterProps {
   data: MatchRisk;
 }
 
 export function RiskMeter({ data }: RiskMeterProps) {
+  const { t } = useLanguage();
+
   const getRiskColor = (level: 'low' | 'medium' | 'high') => {
     if (level === 'low') return 'bg-green-500 text-green-500';
     if (level === 'medium') return 'bg-yellow-500 text-yellow-500';
@@ -14,9 +19,9 @@ export function RiskMeter({ data }: RiskMeterProps) {
   };
 
   const getRiskLabel = (level: 'low' | 'medium' | 'high') => {
-    if (level === 'low') return 'Bajo';
-    if (level === 'medium') return 'Medio';
-    return 'Alto';
+    if (level === 'low') return t.matchCenter.low;
+    if (level === 'medium') return t.matchCenter.medium;
+    return t.matchCenter.high;
   };
 
   const colorClass = getRiskColor(data.level);
@@ -30,7 +35,7 @@ export function RiskMeter({ data }: RiskMeterProps) {
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-lg font-black uppercase tracking-tight">
           <AlertTriangle className={`w-5 h-5 ${textClass}`} />
-          Índice de Riesgo
+          {t.matchCenter.riskIndex}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -42,19 +47,19 @@ export function RiskMeter({ data }: RiskMeterProps) {
             ></div>
           </div>
           <div className="flex justify-between w-full text-[10px] font-bold text-muted-foreground uppercase tracking-wider">
-             <span>Bajo</span>
-             <span>Medio</span>
-             <span>Alto</span>
+             <span>{t.matchCenter.low}</span>
+             <span>{t.matchCenter.medium}</span>
+             <span>{t.matchCenter.high}</span>
           </div>
           <div className="mt-4 text-center">
              <span className={`text-4xl font-black ${textClass} leading-none`}>{data.score}</span>
-             <span className="block text-xs font-bold text-muted-foreground uppercase mt-1">Nivel de Riesgo: {getRiskLabel(data.level)}</span>
+             <span className="block text-xs font-bold text-muted-foreground uppercase mt-1">{t.matchCenter.riskLevel}: {getRiskLabel(data.level)}</span>
           </div>
         </div>
 
         <div className="space-y-3">
            <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1">
-            <Info className="w-3 h-3" /> Factores Clave
+            <Info className="w-3 h-3" /> {t.matchCenter.keyFactors}
           </h4>
           <ul className="space-y-2">
             {data.factors.map((factor, index) => (
@@ -68,7 +73,7 @@ export function RiskMeter({ data }: RiskMeterProps) {
         
         <div className="pt-4 border-t border-border">
            <p className="text-[10px] text-muted-foreground text-center">
-             * Cálculo basado en forma reciente, bajas y mercado.
+             {t.matchCenter.riskDisclaimer}
            </p>
         </div>
       </CardContent>

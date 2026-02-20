@@ -2,23 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { NewsCard } from '@/components/cards/NewsCard';
-import { EfemeridesCard } from '@/components/cards/EfemeridesCard';
 import type { FeedItem, GroupedNewsItem } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/components/providers/LanguageProvider';
 
-interface Efemeride {
-  date: string;
-  year: number;
-  title: string;
-  description: string;
-  type: 'match' | 'birth' | 'title' | 'generic';
-}
+import { FeaturesTeaser } from '@/components/home/FeaturesTeaser';
 
 export default function Home() {
   const [items, setItems] = useState<FeedItem[] | null>(null);
-  const [todayEfemeride, setTodayEfemeride] = useState<Efemeride | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { locale, t } = useLanguage();
 
@@ -31,20 +23,6 @@ export default function Home() {
         if (mounted) setItems(data.items ?? []);
       })
       .catch(() => setError(t.home.couldNotLoadFeed));
-
-    const today = new Date();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const dateStr = `${month}-${day}`;
-
-    fetch(`/api/efemerides?date=${dateStr}`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (mounted && data.efemerides && data.efemerides.length > 0) {
-          setTodayEfemeride(data.efemerides[0]);
-        }
-      })
-      .catch((err) => console.error('Error loading efemeride:', err));
 
     return () => {
       mounted = false;
@@ -66,8 +44,7 @@ export default function Home() {
     <div className="w-full px-4 sm:px-6 lg:px-8 py-2">
       {error && <p className="text-center text-red-600 bg-red-100 dark:bg-red-900/30 p-4 rounded-lg mb-8">{error}</p>}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-10">
+      <div className="max-w-5xl mx-auto space-y-10">
           {featuredArticle && (
             <section>
               <h2 className="text-2xl font-black text-foreground mb-6 uppercase tracking-tighter border-l-4 border-primary pl-3">
@@ -159,22 +136,8 @@ export default function Home() {
               </div>
             </div>
           )}
-        </div>
-
-        <div className="lg:col-span-1">
-          <Link href="/efemerides">
-            <h2 className="text-2xl font-black text-foreground mb-6 uppercase tracking-tighter border-l-4 border-primary pl-3 hover:text-primary transition-colors cursor-pointer">
-              {t.home.ephemerides}
-            </h2>
-          </Link>
-          {todayEfemeride ? (
-            <EfemeridesCard efemeride={todayEfemeride} isToday={true} />
-          ) : (
-            <div className="rounded-xl border border-border p-6 animate-pulse bg-card h-64">
-              <div className="h-full w-full bg-muted rounded-lg"></div>
-            </div>
-          )}
-        </div>
+          
+          <FeaturesTeaser />
       </div>
     </div>
   );

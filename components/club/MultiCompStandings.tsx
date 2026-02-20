@@ -1,12 +1,18 @@
+'use client';
+
 import { CompetitionStandings } from '@/lib/services/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Trophy } from 'lucide-react';
+import { useLanguage } from '@/components/providers/LanguageProvider';
 
 interface MultiCompStandingsProps {
   competitions: CompetitionStandings[];
+  userTeam?: string | null;
 }
 
-export function MultiCompStandings({ competitions }: MultiCompStandingsProps) {
+export function MultiCompStandings({ competitions, userTeam }: MultiCompStandingsProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="space-y-8">
       {competitions.map((comp) => (
@@ -23,18 +29,18 @@ export function MultiCompStandings({ competitions }: MultiCompStandingsProps) {
                 <thead className="text-xs text-muted-foreground uppercase bg-muted/50">
                   <tr>
                     <th className="px-4 py-3 font-bold text-center w-12">#</th>
-                    <th className="px-4 py-3 font-bold">Equipo</th>
-                    <th className="px-4 py-3 font-bold text-center">PJ</th>
-                    <th className="px-4 py-3 font-bold text-center">G</th>
-                    <th className="px-4 py-3 font-bold text-center">E</th>
-                    <th className="px-4 py-3 font-bold text-center">P</th>
-                    <th className="px-4 py-3 font-black text-center text-foreground">Pts</th>
-                    <th className="px-4 py-3 font-bold text-center hidden sm:table-cell">Forma</th>
+                    <th className="px-4 py-3 font-bold">{t.standings.team}</th>
+                    <th className="px-4 py-3 font-bold text-center">{t.standings.played}</th>
+                    <th className="px-4 py-3 font-bold text-center">{t.standings.won}</th>
+                    <th className="px-4 py-3 font-bold text-center">{t.standings.drawn}</th>
+                    <th className="px-4 py-3 font-bold text-center">{t.standings.lost}</th>
+                    <th className="px-4 py-3 font-black text-center text-foreground">{t.standings.points}</th>
+                    <th className="px-4 py-3 font-bold text-center hidden sm:table-cell">{t.standings.form}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
                   {comp.table.map((row) => {
-                    const isUserTeam = row.team === 'Liverpool' || row.team === 'Everton';
+                    const isUserTeam = userTeam ? row.team.toLowerCase() === userTeam.toLowerCase() : false;
                     return (
                     <tr key={row.team} className={`hover:bg-muted/30 transition-colors ${isUserTeam ? 'bg-primary/5' : ''}`}>
                       <td className="px-4 py-3 text-center font-bold text-muted-foreground">{row.position}</td>
