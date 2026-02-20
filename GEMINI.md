@@ -1,342 +1,292 @@
-# FanNews - Project Documentation
+# Scousers — AI-Powered Fan Hub
 
-> AI-Powered Fan Hub: Una plataforma que resuelve la sobrecarga de información para los fanáticos del deporte.
+AI-curated football news platform for Liverpool and Everton fans. Bilingual (English default, Spanish), oriented towards English-speaking supporters worldwide.
 
-## Tabla de Contenidos
-
-1. [Resumen del Proyecto](#resumen-del-proyecto)
-2. [Estado Actual del MVP](#estado-actual-del-mvp)
-3. [Estructura del Proyecto](#estructura-del-proyecto)
-4. [Arquitectura y Stack Tecnológico](#arquitectura-y-stack-tecnológico)
-5. [Database Schema](#database-schema)
-6. [Flujo de Ingesta de Noticias (AI-Driven)](#flujo-de-ingesta-de-noticias-ai-driven)
-7. [Sistema de Autenticación y Perfiles](#sistema-de-autenticación-y-perfiles)
-8. [Sistema de Suscripciones y Features](#sistema-de-suscripciones-y-features)
-9. [Vercel Cron Jobs](#vercel-cron-jobs)
-10. [Roadmap: Fase 2 (Premium)](#roadmap-fase-2-premium)
-11. [Roadmap: Contenido Nuevo](#roadmap-contenido-nuevo)
-12. [Notas Técnicas](#notas-técnicas)
+Package name: `fannews`.
 
 ---
 
-## Resumen del Proyecto
+## Tech Stack
 
-**FanNews** es una aplicación Next.js que agrega y muestra noticias deportivas personalizadas. Utiliza IA para:
-- Agregar noticias de múltiples fuentes
-- Eliminar duplicados y agrupar por tema
-- Generar resúmenes concisos en español
-- Deduplicación semántica con embeddings
-
-### Modelo de Negocio (Freemium)
-- **Gratuito**: Feed básico con noticias resumidas, efemérides, experiencia para un equipo
-- **Premium**: Modo Rival, personalización visual, multi-equipo, motor de preferencias explícitas
-
----
-
-## Estado Actual del MVP
-
-### ✅ Completado (Epic 1 & 2)
-
-| Historia | Estado | Descripción |
-|----------|--------|-------------|
-| 1.1 Configuración Multi-equipo | ✅ | Tablas `teams`, `sports`, relaciones con `team_id` |
-| 1.2 Ingesta + Health Management | ✅ | Scraping, cuarentena de fuentes, 24 migraciones, scripts optimizados |
-| 1.3 Feed Básico | ✅ | Página principal, cards, Suspense boundaries para build |
-| 1.4 Resúmenes y Clustering IA | ✅ | Gemini API, deduplicación vectoria con pgvector |
-| 1.5 Engagement Diario | ✅ | Efemérides (JSON + tabla DB), integration en UI |
-| F2-1 Autenticación | ✅ | Email/Password + Google OAuth (corregido UserNav) |
-| F2-1 Perfil de Usuario | ✅ | Edición de perfil, Avatar, manejo de estado de sesión |
-| F2-1 Sistema de Suscripciones | ✅ | 5 tiers, lógica de features en backend y frontend |
-| F2-2 Modo Rival (Base) | ✅ | Toggle en Header, filtro por query param, indicación visual |
-
-### 🚧 En Progreso / Pendiente (Fase 2)
-
-| Historia | Estado | Descripción |
-|----------|--------|-------------|
-| F2-3 Personalización Visual | ❌ | Teams Assets pendientes (theme switcher funciona global) |
-| F2-4 Motor Explícito | ❌ | Feed ponderado por preferencias (likes/dislikes) |
-| F2-5 Multi-equipo UI | 🔄 | Backend listo, UI de selección secundaria disabled |
-| F2-6 Engagement IA | ❌ | Generación automática de contenido diario |
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 15 (Turbopack) |
+| Language | TypeScript |
+| Database | MongoDB Atlas + Mongoose |
+| AI | Google Gemini AI (`@google/generative-ai`, `@google/genai`) |
+| Styling | Tailwind CSS v4 + shadcn/ui (Radix UI) |
+| Auth | next-auth v5 beta 30 (Google OAuth + Credentials) |
+| Validation | Zod v4 |
+| Forms | React Hook Form + `@hookform/resolvers` |
+| Scraping | Cheerio (devDep) |
+| Sanitisation | isomorphic-dompurify |
+| Icons | Lucide React + Radix Icons |
+| Theming | next-themes (light/dark) |
+| Deploy | Vercel |
 
 ---
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
-app/
-├── api/
-│   ├── feed/route.ts          # GET feed (filtra por team_id del usuario)
-│   ├── ingest/route.ts        # POST trigger ingesta (CRON)
-│   ├── cleanup/route.ts       # POST purge artículos >30 días
-│   ├── check-quarantined/     # POST reactivar fuentes
-│   └── efemerides/route.ts    # GET efemérides por fecha
-├── auth/
-│   ├── auth-code-error/       # Página error OAuth
-│   └── callback/              # OAuth callback handler
-├── efemerides/                # Navegación de efemérides
-├── feed/                      # Feed completo de noticias
-├── login/                     # Página de login
-├── news/[id]/                 # Detalle de noticia
-├── profile/                   # Página de perfil usuario
-├── match-center/              # [WIP] Centro de partidos
-├── squad/                     # [WIP] Plantel
-└── standings/                 # [WIP] Tabla de posiciones
-
-components/
-├── auth/AuthForm.tsx          # Login/Register form
-├── cards/
-│   ├── NewsCard.tsx           # Card de noticia
-│   └── EfemeridesCard.tsx     # Card de efeméride
-├── layout/
-│   ├── Header.tsx             # Header con nav
-│   ├── ThemeProvider.tsx      # next-themes provider
-│   └── UserNav.tsx            # Avatar/Login button
-├── profile/
-│   ├── ProfileForm.tsx        # Form de perfil completo
-│   └── TeamSelector.tsx       # Selector de equipo
-├── club/                      # Componentes de club
-├── squad/                     # Componentes de plantel
-├── tactics/                   # Componentes tácticos
-└── ui/                        # shadcn/ui primitives
-
-lib/
-├── aiService.ts               # Gemini API (summarize, cluster, filter)
-├── scrapingService.ts         # Cheerio + fetch para scraping
-├── supabaseService.ts         # Todas las queries a Supabase
-├── types.ts                   # TypeScript types
-├── config.ts                  # Site config
-└── services/                  # Servicios adicionales
-
-scripts/
-└── cluster-and-ingest.ts      # Script principal de ingesta
-
-supabase/migrations/           # 24 archivos de migración
-utils/supabase/middleware.ts   # Session refresh middleware
+app/            → App Router: pages & API routes
+components/     → React components organised by feature
+lib/            → Core logic: models, services, AI, scraping, DB, i18n, types
+scripts/        → Seed, ingest, reset, test scripts
+public/         → Static assets & guides
+docs/           → Technical documentation
 ```
 
 ---
 
-## Arquitectura y Stack Tecnológico
+## Pages & Routes
 
-| Categoría | Tecnología | Justificación |
-|-----------|------------|---------------|
-| Framework | Next.js 15 | Full-stack, App Router, SSR/SSG |
-| Lenguaje | TypeScript | Tipado estático, calidad de código |
-| Base de Datos | PostgreSQL + Supabase | pgvector para embeddings |
-| Auth | Supabase Auth | Email + OAuth integrado |
-| UI | Tailwind + shadcn/ui | Componentes accesibles |
-| Hosting | Vercel | Preview deployments, cron jobs |
-| IA | Google Gemini | Resúmenes, clustering, filtrado |
-
----
-
-## Database Schema
-
-### Tablas Principales
-
-```sql
--- Equipos y deportes
-teams (id, key, sport_id, is_available, created_at, updated_at)
-sports (id, key)
-
--- Artículos temáticos (agrupados por IA)
-themed_articles (
-  id, title, summary, short_summary,
-  team_id, published_at, embedding, image_url,
-  created_at, updated_at
-)
-
--- Links a artículos originales
-original_article_links (
-  id, themed_article_id, url, source_name, title
-)
-
--- Fuentes de noticias
-sources (
-  id, name, url, team_id, logo_url,
-  content_selector, article_link_selector,
-  status ('active'|'quarantined'),
-  consecutive_failures, quarantine_threshold
-)
-
--- Usuarios
-user_profiles (
-  id, email, full_name, avatar_url,
-  primary_team_id, secondary_team_ids[],
-  subscription_status, subscription_expires_at,
-  preferences JSONB, created_at, updated_at
-)
-
--- Features dinámicas
-features (id, key, name, description, is_active)
-subscription_features (subscription_status, feature_id)
-
--- Efemérides
-efemerides (id, date, year, title, description, type, team_id, importance)
-```
-
-### Función RPC para Búsqueda Semántica
-
-```sql
-find_similar_theme(query_embedding, p_team_id, similarity_threshold)
-  RETURNS (id, title, published_at, similarity)
-```
+| Route | Description |
+|-------|-------------|
+| `/` | Landing / Home |
+| `/feed` | AI-curated news feed |
+| `/news/[id]` | Individual news detail |
+| `/match-center` | Next match dashboard (mock data) |
+| `/squad` | Squad metrics & management (mock data) |
+| `/standings` | Multi-competition standings (mock data) |
+| `/efemerides` | Team ephemerides |
+| `/profile` | User profile |
+| `/login` | Login page |
+| `/auth/[...nextauth]` | NextAuth handler |
 
 ---
 
-## Flujo de Ingesta de Noticias (AI-Driven)
+## API Routes
 
-```
-1. Fetch Active Sources (supabaseService)
-      ↓
-2. Para cada equipo:
-   a. Scrape links de cada fuente
-   b. AI filtra links relevantes (Gemini)
-   c. Scrape contenido de links filtrados
-      ↓
-3. AI Clustering por tema
-   - Genera título, resumen, shortSummary
-   - Selecciona imagen (evita logos)
-      ↓
-4. Deduplicación Semántica
-   - Genera embedding del tema
-   - Busca tema similar (threshold 0.8, <3 días)
-   - Si existe: merge artículos + actualiza
-   - Si no: crea nuevo themed_article
-      ↓
-5. Health Management
-   - Éxito: reset consecutive_failures
-   - Fallo: increment + quarantine si >= threshold
-```
+| Endpoint | Description |
+|----------|-------------|
+| `/api/feed` | Returns curated article feed |
+| `/api/ingest` | News ingestion (Vercel Cron: daily 13:00 UTC) |
+| `/api/check-quarantined` | Checks quarantined sources (Vercel Cron: daily 02:00 UTC) |
+| `/api/efemerides` | Ephemerides data |
+| `/api/cleanup` | Purges old articles |
+| `/api/auth/[...nextauth]` | NextAuth endpoints |
+| `/api/profile` | User profile updates |
+| `/api/team/[...params]` | Team data |
 
 ---
 
-## Sistema de Autenticación y Perfiles
+## MongoDB Models (Mongoose)
 
-### Flujo de Auth
-1. Usuario accede a `/login`
-2. `AuthForm.tsx` permite email/password o Google OAuth
-3. `middleware.ts` → `utils/supabase/middleware.ts` refresh token
-4. Callback OAuth → `/auth/callback` → redirect home
-5. Errores → `/auth/auth-code-error`
+All collection names are **PascalCase plural**.
 
-### Perfil de Usuario
-- `ProfileForm.tsx` muestra:
-  - Datos personales (nombre, email readonly)
-  - Plan de suscripción (badge con color)
-  - Features activas del plan
-  - Selector de equipo principal
-  - Equipos secundarios (disabled, premium only)
+| Model | Collection | Key Fields |
+|-------|-----------|------------|
+| `Article` | `Articles` | `title`, `titleEn`, `summary`, `summaryEn`, `shortSummary`, `shortSummaryEn`, `imageUrl`, `teamId` (ObjectId → Team), `publishedAt`, `embedding` (number[]), `rivalSentiment` (POSITIVE/NEUTRAL/NEGATIVE), `originalLinks[]` |
+| `Team` | `Teams` | `key` (unique), `name`, `sportId`, `isAvailable`, `rivalTeamId` (ObjectId → Team), `primaryColor`, `secondaryColor`, `logoUrl` |
+| `User` | `Users` | `email` (unique), `name`, `language` ('es'\|'en', default 'en'), `primaryTeamId`, `secondaryTeamIds[]`, `subscriptionStatus`, `roles[]` |
+| `Source` | `Sources` | `name`, `url`, `teamId`, `keywords[]`, `contentSelector`, `articleLinkSelector`, `status` (active/quarantined), `consecutiveFailures`, `quarantineThreshold` |
+| `Efemeris` | `Efemerides` | `date`, `year`, `title`, `description`, `type` (match/birth/debut/other), `teamId` |
+| `Feature` | `Features` | `key` (unique), `name`, `description`, `isActive` |
+| `SubscriptionFeature` | `SubscriptionFeatures` | `subscriptionStatus`, `featureKey` |
+| `Rivalry` | `Rivalries` | `teamId`, `rivalTeamId`, `rank` |
 
 ---
 
-## Sistema de Suscripciones y Features
+## Service Layers
 
-### Tiers de Suscripción
-| Tier | Descripción |
-|------|-------------|
-| `free` | Básico, sin expiración |
-| `standard` | Funciones básicas premium |
-| `plus` | Funciones intermedias |
-| `premium` | Todas las features |
-| `trial` | Prueba con expiración |
+### AI Service — `lib/aiService.ts`
 
-### Verificación de Features
-```typescript
-// En código
-const isPremium = await isUserPremium(userId);
-const hasSecondaryTeams = await hasFeature(userId, 'secondary_teams');
-const userFeatures = await getUserFeatures(userId);
-```
+- `generateContentWithGemini(prompt, json?)` — Gemini wrapper with retry (max 5) and rate limiting (10s between requests)
+- `clusterArticlesByTheme(articles)` — Groups articles by theme using AI
+- `extractRelevantLinksFromHtml(html, teamName)` — Extracts relevant links from source page HTML
+- `filterRelevantArticles(articles, teamName, keywords)` — Filters articles by team relevance
+- `summarizeThemedArticles(theme, articles)` — Generates short/full bilingual summaries (ES/EN)
+- `generateEmbedding(text)` — Generates embeddings with Google's embedding model
+- `classifyRivalSentiment(title, summary, rivalTeamName)` — Classifies rival sentiment (POSITIVE/NEUTRAL/NEGATIVE)
 
----
+### Scraping Service — `lib/scrapingService.ts`
 
-## Vercel Cron Jobs
+- `getLinksFromSource(source, teamKey, limit?)` — Gets links from a source using AI to filter HTML
+- `getContentFromUrl(articleUrl)` — Scrapes article content (title, text, og:image)
 
-Configuración en `vercel.json`:
+### Data Access Layer — `lib/db.ts`
 
-| Endpoint | Horario | Propósito |
-|----------|---------|-----------|
-| `/api/ingest` | 13:00 diario | Ingesta completa de noticias |
-| `/api/check-quarantined` | 02:00 diario | Reactivar fuentes recuperadas |
+Key functions: `getActiveSources()`, `saveThemedArticle()`, `findSimilarTheme()` (cosine similarity, threshold 0.85), `handleSourceSuccess()`, `handleSourceFailure()`, `getQuarantinedSources()`, `reactivateSource()`, `purgeOldArticles(daysOld)`, `getAllTeams()`, `getAvailableTeams()`, `updateUserProfile()`, `isUserPremium()`, `getAllFeatures()`, `getSubscriptionFeatures()`, `getUserFeatures()`, `hasFeature()`, `getTeamRivalries()`, `getRivalTeamIds()`, `updateArticleSentiment()`, `getThemedArticleWithOriginals()`.
 
-**Nota**: Plan Hobby limita a 1 ejecución/día por job.
+### Mock Services — `lib/services/`
 
----
+Currently `useMock = true` in `lib/services/index.ts`. Three interfaces with mock implementations:
 
-## Roadmap: Fase 2 (Premium)
+- `IMatchAnalysisService` — Match preview, tactical data (Liverpool vs Everton mock)
+- `ISquadService` — Player form, squad load, transfers, loan watch, youth prospect
+- `IClubService` — Match odds, competition standings (Premier League, Champions League)
 
-### F2-2: Modo Rival Automático
-- Tabla `rivalries (team_id, rival_team_id, rank)`
-- IA clasifica noticias: NEGATIVA/NEUTRA/POSITIVA
-- Feed filtrado solo rivales, ordenado por sentimiento
-
-### F2-3: Personalización Visual
-- Tabla `teams_assets (primary_color, secondary_color, logo_url, banner_url)`
-- IA Asset Manager para actualizar assets
-- React Context aplica tema según equipo
-
-### F2-4: Motor de Personalización Explícita
-- Tabla `user_preferences (category_id, weight)`
-- IA categoriza noticias automáticamente
-- Feed ponderado por preferencias
-
-### F2-5: Multi-equipo Premium
-- `secondary_team_ids[]` ya en DB
-- Feed combina todos los equipos
-- Filtro rápido por equipo
-
-### F2-6: Engagement IA Diario
-- Tabla `daily_content (team_id, date, type, content)`
-- IA genera efemérides automáticamente
-- Foto del día desde redes oficiales
+To connect real APIs, set `useMock = false`.
 
 ---
 
-## Roadmap: Contenido Nuevo
+## News Ingestion Pipeline
 
-De `Nuevo contenido.docx.txt`:
+Runs via the `/api/ingest` endpoint (Vercel Cron daily at 13:00 UTC). The strategy is:
 
-| # | Feature | Endpoint | Estado |
-|---|---------|----------|--------|
-| 1 | Tablero táctico | `/api/team/tactics` | ❌ |
-| 2 | Eficacia balón parado | `/api/team/setpieces` | ❌ |
-| 3 | Índice riesgo partido | `/api/match/risk` | ❌ |
-| 4 | H2H compacto | `/api/match/h2h` | ❌ |
-| 5 | Formómetro jugadores | `/api/team/top-form` | ❌ |
-| 6 | Mapa minutos/carga | `/api/team/load-map` | ❌ |
-| 7 | Impacto mercado | `/api/team/transfer-impact` | ❌ |
-| 8 | Loan Watch | `/api/team/loans` | ❌ |
-| 9 | Cantera/Reserva | `/api/team/youth-highlight` | ❌ |
-| 10 | Previa partido | `/api/match/preview` | ❌ |
-| 11 | Odds informativo | `/api/match/odds-top` | ❌ |
-| 12 | Tabla posiciones | `/api/team/standings` | 🔄 WIP |
+1. Scrape list of links with titles from source page
+2. AI pre-filters links by title (`extractRelevantLinksFromHtml`)
+3. Scrape full content of only relevant links
+4. `filterRelevantArticles()` filters by team relevance
+5. `clusterArticlesByTheme()` groups articles by theme
+6. `summarizeThemedArticles()` generates bilingual summaries
+7. `generateEmbedding()` creates embedding for theme
+8. `findSimilarTheme()` detects duplicates via cosine similarity (threshold: 0.85)
+9. `saveThemedArticle()` persists to MongoDB
 
-**Fuentes de datos sugeridas**: API-Football, TheOddsAPI, OpenWeather
+Script implementation: `scripts/cluster-and-ingest.ts`.
 
 ---
 
-## Notas Técnicas
+## Authentication
 
-### Module Resolution
-El proyecto usa CommonJS para compatibilidad entre Next.js y scripts:
-- Sin `"type": "module"` en `package.json`
-- `tsconfig.scripts.json` usa `module: CommonJS`
-- Imports sin extensión en `lib/` y `scripts/`
+- **Providers:** Google OAuth + Credentials (email/password)
+- **Architecture:** Split into `auth.config.ts` (edge-compatible, no DB) + `auth.ts` (with DB access)
+- **Middleware:** Protects `/dashboard` → redirects to `/login` if unauthenticated; redirects logged-in users away from `/login` to `/`
+- **Session callback:** Enriches session with `primaryTeamId`, `subscriptionStatus`, `roles` from MongoDB
 
-### User Rules
-- ❌ No usar `npm`, `npx`, `git` - el usuario maneja esto
-- ❌ No formatear prompts de IA como JSON string
-- ✅ Respuestas de IA pueden ser JSON si es apropiado
+---
 
-### Pipeline de Sanitización
-Todas las respuestas de IA pasan por sanitización antes de guardarse:
-- DOMPurify para eliminar XSS
-- Validación de formato JSON
-- Retry mechanism para estabilidad API
+## Environment Variables
 
-### Deduplicación Semántica
-- Threshold: 0.8 (agresivo)
-- Límite temporal: 3 días
-- Si tema existe y es reciente: merge artículos + update summary
-- Si tema es viejo (>3 días): crear nuevo tema
+Stored in `.env.local` (git-ignored). Reference: `env.example`.
+
+| Variable | Purpose |
+|----------|---------|
+| `MONGODB_URI` | MongoDB Atlas connection string |
+| `GOOGLE_AI_API_KEY` | Gemini AI (content generation) |
+| `GOOGLE_AI_API_KEY_EMBEDDINGS` | Gemini AI (embeddings) |
+| `AUTH_GOOGLE_ID` | Google OAuth client ID |
+| `AUTH_GOOGLE_SECRET` | Google OAuth client secret |
+| `AUTH_SECRET` | NextAuth secret |
+| `NEXTAUTH_URL` | NextAuth base URL |
+
+---
+
+## Internationalisation (i18n)
+
+- **Languages:** English (default) and Spanish, both fully supported
+- **Implementation:** Dictionaries in `lib/i18n/dictionaries.ts`
+- **Provider:** `LanguageProvider` in root layout (default: `'en'`)
+- **User preference:** Stored in user profile (`language: 'es' | 'en'`, default `'en'`)
+- **Bilingual articles:** Fields `title`/`titleEn`, `summary`/`summaryEn`, `shortSummary`/`shortSummaryEn`
+
+---
+
+## Theming
+
+- **Light/Dark mode:** via `next-themes` (`ThemeProvider`)
+- **Team colours:** `TeamThemeProvider` applies primary/secondary colours from the user's team
+- **Switcher component:** `ThemeSwitcher.tsx`
+- **Provider chain:** `SessionProvider → ThemeProvider → TeamThemeProvider → LanguageProvider`
+
+---
+
+## Key Components
+
+| Group | Components |
+|-------|-----------|
+| Layout | `Header`, `Footer`, `ThemeProvider`, `UserNav` |
+| Auth | `SessionProvider`, login page |
+| Cards | News cards |
+| Club | Club-related components |
+| Squad | 5 components: form meter, load, transfers, loans, youth |
+| Tactics | 5 components: attack zones, set pieces, risk index, H2H, odds |
+| Providers | `LanguageProvider`, `TeamThemeProvider` |
+| UI | 13 shadcn/ui components (Dialog, Select, Popover, Avatar, etc.) |
+
+---
+
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `npm run dev` | Dev server with Turbopack |
+| `npm run build` | Production build with Turbopack |
+| `seed-teams-sources.ts` | Seeds Liverpool/Everton teams and their news sources |
+| `seed-efemerides.ts` | Seeds team ephemerides |
+| `seed-features.ts` | Seeds system features |
+| `reset_db.ts` | Resets the database |
+| `setup-mongo-schema.js` | Sets up MongoDB schema validation |
+| `mongo_shell_init.js` | Full mongosh init: schema + seed (Teams, Sources, Features, SubscriptionFeatures) |
+| `test-gemini.js` | Tests Gemini AI connection |
+| `test-gemini-models.ts` | Tests available Gemini models |
+| `list_models.js` | Lists available AI models |
+
+---
+
+## Vercel Configuration
+
+- **Crons:**
+  - `/api/ingest` → daily at 13:00 UTC
+  - `/api/check-quarantined` → daily at 02:00 UTC
+- **Remote images:** Enabled for all domains (`**`)
+
+---
+
+## Coding Rules & Conventions
+
+- **DO NOT** use `npm`, `npx`, or `git` commands — the user handles package management and version control
+- **AI prompts:** Must be plain strings, never JSON-formatted. The AI response format can be JSON when appropriate
+- **Code language:** Variable/function names in English
+- **MongoDB collections:** PascalCase plural (`Articles`, `Teams`, `Users`, `Sources`)
+- **Properties:** Always use `teamId` (camelCase), NEVER `team_id` (snake_case), to align with Mongoose schemas
+- **ESLint:** Configured with `eslint-config-next`
+- **TypeScript:** Strict mode via `tsconfig.json` for app, `tsconfig.scripts.json` for scripts
+
+---
+
+## News Sources
+
+**Liverpool:**
+- Liverpool FC Official — `liverpoolfc.com/news`
+- Liverpool Echo — `liverpoolecho.co.uk/all-about/liverpool-fc`
+- This Is Anfield — `thisisanfield.com`
+- Empire of the Kop — `empireofthekop.com`
+- Anfield Watch — `anfieldwatch.co.uk`
+- Rousing The Kop — `rousingthekop.com`
+
+**Everton:**
+- Everton FC Official — `evertonfc.com/news`
+- Liverpool Echo (Everton) — `liverpoolecho.co.uk/all-about/everton-fc`
+- ToffeeWeb — `toffeeweb.com`
+- GrandOldTeam — `grandoldteam.com/news`
+- Royal Blue Mersey — `royalbluemersey.sbnation.com`
+- Goodison News — `goodisonnews.com`
+
+---
+
+## Feature State
+
+| Feature | Status |
+|---------|--------|
+| AI news feed & ingestion | ✅ Production |
+| Authentication (Google + Credentials) | ✅ Production |
+| Ephemerides | ✅ Production |
+| User profile & preferences | ✅ Production |
+| Match Center | 🟡 Mock data |
+| Squad management | 🟡 Mock data |
+| Standings | 🟡 Mock data |
+| Odds | 🟡 Mock data |
+
+Mock → real: change `useMock = false` in `lib/services/index.ts`.
+
+---
+
+## Subscriptions & Roles
+
+- **Subscription tiers:** `free`, `standard`, `plus`, `premium`, `trial`
+- **User roles:** Array of strings, default `['user']`
+- **Feature gating:** `SubscriptionFeature` model maps features to subscription levels
+- **Rival Mode:** AI classifies rival sentiment on articles (POSITIVE/NEUTRAL/NEGATIVE)
+
+---
+
+## Technical Details
+
+- **MongoDB connection:** Globally cached singleton for HMR in development (`lib/mongodb.ts`)
+- **AI rate limiting:** 10s between Gemini requests, max 5 retries with 10s delay
+- **Duplicate detection:** Cosine similarity threshold of 0.85 on article embeddings
+- **Source quarantine:** Sources are quarantined after consecutive failures (per-source `quarantineThreshold`)
+- **Article purge:** `purgeOldArticles(daysOld)` available for cleanup

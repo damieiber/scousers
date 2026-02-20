@@ -18,7 +18,7 @@ interface LanguageProviderProps {
 }
 
 export function LanguageProvider({ children }: LanguageProviderProps) {
-  const [locale, setLocaleState] = useState<Locale>('es');
+  const [locale, setLocaleState] = useState<Locale>('en');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   // but always render with default locale on server
   if (!mounted) {
     return (
-      <LanguageContext.Provider value={{ locale: 'es', setLocale, t: getDictionary('es') }}>
+      <LanguageContext.Provider value={{ locale: 'en', setLocale, t: getDictionary('en') }}>
         {children}
       </LanguageContext.Provider>
     );

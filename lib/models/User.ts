@@ -21,7 +21,7 @@ const UserSchema: Schema = new Schema({
   email: { type: String, unique: true, required: true },
   emailVerified: { type: Date },
   image: { type: String },
-  language: { type: String, enum: ['es', 'en'], default: 'es' },
+  language: { type: String, enum: ['es', 'en'], default: 'en' },
   primaryTeamId: { type: Schema.Types.ObjectId, ref: 'Team' },
   secondaryTeamIds: [{ type: Schema.Types.ObjectId, ref: 'Team' }],
   preferences: { type: Schema.Types.Mixed, default: {} },

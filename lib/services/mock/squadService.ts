@@ -3,22 +3,22 @@ import { ISquadService, PlayerForm, PlayerLoad, TransferImpact, LoanPlayer, Yout
 export class MockSquadService implements ISquadService {
   async getTopFormPlayers(): Promise<PlayerForm[]> {
     return [
-      { id: '1', name: 'Facundo Colidio', position: 'FWD', rating: 8.2, trend: 'up' },
-      { id: '2', name: 'Franco Mastantuono', position: 'MID', rating: 7.9, trend: 'up' },
-      { id: '3', name: 'Paulo Díaz', position: 'DEF', rating: 7.5, trend: 'stable' },
-      { id: '4', name: 'Santiago Simón', position: 'MID', rating: 7.4, trend: 'up' },
-      { id: '5', name: 'Miguel Borja', position: 'FWD', rating: 7.2, trend: 'down' },
+      { id: '1', name: 'Mohamed Salah', position: 'FWD', rating: 8.5, trend: 'up' },
+      { id: '2', name: 'Alexis Mac Allister', position: 'MID', rating: 8.1, trend: 'up' },
+      { id: '3', name: 'Virgil van Dijk', position: 'DEF', rating: 7.9, trend: 'stable' },
+      { id: '4', name: 'Ryan Gravenberch', position: 'MID', rating: 7.7, trend: 'up' },
+      { id: '5', name: 'Luis Díaz', position: 'FWD', rating: 7.4, trend: 'down' },
     ];
   }
 
   async getSquadLoad(): Promise<PlayerLoad[]> {
     return [
-      { id: '1', name: 'Germán Pezzella', position: 'DEF', minutesPlayed: 450, status: 'overload' },
-      { id: '2', name: 'Marcos Acuña', position: 'DEF', minutesPlayed: 410, status: 'warning' },
-      { id: '3', name: 'Matías Kranevitter', position: 'MID', minutesPlayed: 380, status: 'optimal' },
-      { id: '4', name: 'Claudio Echeverri', position: 'MID', minutesPlayed: 250, status: 'optimal' },
-      { id: '5', name: 'Pablo Solari', position: 'FWD', minutesPlayed: 300, status: 'optimal' },
-      { id: '6', name: 'Fabricio Bustos', position: 'DEF', minutesPlayed: 440, status: 'overload' },
+      { id: '1', name: 'Virgil van Dijk', position: 'DEF', minutesPlayed: 450, status: 'overload' },
+      { id: '2', name: 'Trent Alexander-Arnold', position: 'DEF', minutesPlayed: 420, status: 'warning' },
+      { id: '3', name: 'Dominik Szoboszlai', position: 'MID', minutesPlayed: 380, status: 'optimal' },
+      { id: '4', name: 'Curtis Jones', position: 'MID', minutesPlayed: 250, status: 'optimal' },
+      { id: '5', name: 'Cody Gakpo', position: 'FWD', minutesPlayed: 300, status: 'optimal' },
+      { id: '6', name: 'Andrew Robertson', position: 'DEF', minutesPlayed: 440, status: 'overload' },
     ];
   }
 
@@ -26,22 +26,22 @@ export class MockSquadService implements ISquadService {
     return [
       {
         id: '1',
-        name: 'Valentín Gómez',
-        fromTeam: 'Vélez Sarsfield',
+        name: 'Federico Chiesa',
+        fromTeam: 'Juventus',
         toTeam: 'Liverpool',
         type: 'arrival',
         impactScore: 'high',
-        analysis: 'Refuerzo clave para la zaga central zurda. Joven y con proyección.',
+        analysis: 'Key reinforcement for the attack. Versatile forward who can play across the front three.',
         date: '2025-01-15',
       },
       {
         id: '2',
-        name: 'Enzo Díaz',
+        name: 'Joel Matip',
         fromTeam: 'Liverpool',
-        toTeam: 'São Paulo',
+        toTeam: 'Free Agent',
         type: 'departure',
         impactScore: 'medium',
-        analysis: 'Salida necesaria para liberar cupo y masa salarial. Rendimiento irregular.',
+        analysis: 'Released after contract expiry. Solid servant but injury-prone in recent seasons.',
         date: '2025-01-10',
       },
     ];
@@ -51,19 +51,19 @@ export class MockSquadService implements ISquadService {
     return [
       {
         id: '1',
-        name: 'Felipe Peña Biafore',
-        currentTeam: 'Lanús',
-        stats: { matches: 12, goals: 1, assists: 2, rating: 7.1 },
+        name: 'Fabio Carvalho',
+        currentTeam: 'Brentford',
+        stats: { matches: 14, goals: 3, assists: 4, rating: 7.3 },
         highlight: true,
-        summary: 'Figura en la victoria vs Boca. Dominó el mediocampo.',
+        summary: 'Man of the match in a 2-1 win. Dominated the midfield with creative passing.',
       },
       {
         id: '2',
-        name: 'Flabián Londoño',
-        currentTeam: 'Arsenal',
-        stats: { matches: 8, goals: 3, assists: 0, rating: 6.8 },
+        name: 'Tyler Morton',
+        currentTeam: 'Blackburn Rovers',
+        stats: { matches: 12, goals: 2, assists: 1, rating: 6.9 },
         highlight: false,
-        summary: 'Anotó un gol en la última fecha pero salió lesionado.',
+        summary: 'Scored a late equaliser but picked up a yellow card for a rash challenge.',
       },
     ];
   }
@@ -71,11 +71,11 @@ export class MockSquadService implements ISquadService {
   async getYouthProspect(): Promise<YouthProspect> {
     return {
       id: '1',
-      name: 'Ian Subiabre',
-      category: 'Reserva',
-      position: 'Extremo',
-      stats: '2 Asistencias',
-      description: 'Desequilibrante en el 1 vs 1. Clave en la victoria del Superclásico de Reserva.',
+      name: 'Jayden Danns',
+      category: 'U21',
+      position: 'Striker',
+      stats: '4 Goals in 6 matches',
+      description: 'Clinical finisher with pace to burn. Scored twice in the Youth Cup quarter-final.',
     };
   }
 }

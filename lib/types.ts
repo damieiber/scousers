@@ -58,8 +58,8 @@ export interface Source {
   quarantineThreshold: number;
 }
 
-export type TeamKey = 'river-plate';
-export type SportKey = 'soccer';
+export type TeamKey = 'liverpool' | 'everton';
+export type SportKey = 'football';
 
 export interface SourceMeta {
   id: string;

@@ -2,134 +2,134 @@
   {
     "id": "group-news-1",
     "type": "news_group",
-    "teamKey": "river-plate",
+    "teamKey": "liverpool",
     "createdAt": "2025-09-29T14:00:00.000Z",
-    "title": "River Plate sufre dura derrota ante Deportivo Riestra y profundiza su crisis",
-    "aiSummary": "El equipo de Marcelo Gallardo cayó 2-1, sumando su cuarta derrota consecutiva, la peor racha en 15 años. El entrenador se disculpó con los hinchas.",
-    "featuredArticleId": "news-1-source-lpm",
+    "title": "Liverpool cruise to dominant 3-0 victory over Manchester United at Anfield",
+    "aiSummary": "Arne Slot's side delivered a commanding performance with goals from Salah, Mac Allister, and Gakpo as United had no answer at Anfield.",
+    "featuredArticleId": "news-1-source-tia",
     "totalSources": 3,
     "articles": [
       {
-        "id": "news-1-source-lpm",
+        "id": "news-1-source-tia",
         "type": "news",
-        "teamKey": "river-plate",
+        "teamKey": "liverpool",
         "createdAt": "2025-09-29T14:00:00.000Z",
-        "title": "La Página Millonaria: River, en caída libre: Riestra lo superó y la preocupación crece",
-        "aiSummary": "Análisis de la derrota de River y el mal momento que atraviesa el equipo, con declaraciones del DT.",
+        "title": "This Is Anfield: Liverpool dismantle United as Salah stars once again",
+        "aiSummary": "Match report covering Liverpool's dominant display and Salah's record-breaking goal tally against United.",
         "source": {
-          "id": "lpm",
-          "name": "La Página Millonaria"
+          "id": "thisisanfield",
+          "name": "This Is Anfield"
         },
         "publishedAt": "2025-09-29T13:55:00.000Z",
-        "originalUrl": "https://lapaginamillonaria.com/river-derrota-riestra"
+        "originalUrl": "https://www.thisisanfield.com/liverpool-united-report"
       },
       {
-        "id": "news-1-source-tyc",
+        "id": "news-1-source-echo",
         "type": "news",
-        "teamKey": "river-plate",
+        "teamKey": "liverpool",
         "createdAt": "2025-09-29T13:58:00.000Z",
-        "title": "TyCSports: Cuarta derrota al hilo para River: ¿Qué le pasa al equipo de Gallardo?",
-        "aiSummary": "Reporte del partido y las posibles causas del bajo rendimiento de River en las últimas fechas.",
+        "title": "Liverpool Echo: Slot's tactical masterclass ends United's hopes at Anfield",
+        "aiSummary": "Analysis of Arne Slot's game plan and how Liverpool exploited United's defensive weaknesses.",
         "source": {
-          "id": "tyc",
-          "name": "TyCSports"
+          "id": "liverpoolecho",
+          "name": "Liverpool Echo"
         },
         "publishedAt": "2025-09-29T13:50:00.000Z",
-        "originalUrl": "https://tycsports.com/river-cuarta-derrota"
+        "originalUrl": "https://www.liverpoolecho.co.uk/liverpool-tactical-masterclass"
       },
       {
-        "id": "news-1-source-ole",
+        "id": "news-1-source-eotk",
         "type": "news",
-        "teamKey": "river-plate",
+        "teamKey": "liverpool",
         "createdAt": "2025-09-29T13:50:00.000Z",
-        "title": "Olé: La crisis de River no tiene fin: Riestra lo goleó y Gallardo pidió disculpas",
-        "aiSummary": "Crónica del partido, puntajes de los jugadores y la reacción del entrenador tras el encuentro.",
+        "title": "Empire of the Kop: Player ratings as Liverpool thrash Man United 3-0",
+        "aiSummary": "Individual player ratings and standout performances from Liverpool's emphatic North West derby win.",
         "source": {
-          "id": "ole",
-          "name": "Olé"
+          "id": "empireofthekop",
+          "name": "Empire of the Kop"
         },
         "publishedAt": "2025-09-29T13:45:00.000Z",
-        "originalUrl": "https://ole.com.ar/river-crisis-riestra"
+        "originalUrl": "https://www.empireofthekop.com/player-ratings-man-united"
       }
     ]
   },
   {
     "id": "group-news-2",
     "type": "news_group",
-    "teamKey": "river-plate",
+    "teamKey": "liverpool",
     "createdAt": "2025-09-29T13:30:00.000Z",
-    "title": "River acelera por un zaguero europeo de jerarquía para el próximo mercado",
-    "aiSummary": "La dirigencia de River Plate está negociando contra reloj para cerrar la incorporación de un defensor central de Europa en las próximas 48 horas.",
-    "featuredArticleId": "news-2-source-espn",
+    "title": "Liverpool closing in on Bundesliga centre-back for January transfer window",
+    "aiSummary": "Liverpool are in advanced talks to sign a highly-rated centre-back from the Bundesliga as they look to bolster their defensive options ahead of the second half of the season.",
+    "featuredArticleId": "news-2-source-echo",
     "totalSources": 2,
     "articles": [
       {
-        "id": "news-2-source-espn",
+        "id": "news-2-source-echo",
         "type": "news",
-        "teamKey": "river-plate",
+        "teamKey": "liverpool",
         "createdAt": "2025-09-29T13:30:00.000Z",
-        "title": "ESPN: River, a un paso de cerrar un central de la Serie A",
-        "aiSummary": "Detalles de la negociación de River por el defensor, su trayectoria y el impacto que tendría en el equipo.",
+        "title": "Liverpool Echo: Reds on verge of completing deal for Bundesliga defender",
+        "aiSummary": "Details on Liverpool's negotiations for the centre-back, his profile and what he would bring to the squad.",
         "source": {
-          "id": "espn",
-          "name": "ESPN"
+          "id": "liverpoolecho",
+          "name": "Liverpool Echo"
         },
         "publishedAt": "2025-09-29T13:25:00.000Z",
-        "originalUrl": "https://espn.com.ar/river-central-seriea"
+        "originalUrl": "https://www.liverpoolecho.co.uk/liverpool-bundesliga-defender"
       },
       {
-        "id": "news-2-source-bolavip",
+        "id": "news-2-source-aw",
         "type": "news",
-        "teamKey": "river-plate",
+        "teamKey": "liverpool",
         "createdAt": "2025-09-29T13:28:00.000Z",
-        "title": "Bolavip: Bombazo en River: el defensor que está a punto de firmar",
-        "aiSummary": "Información de último momento sobre el posible fichaje de River y las expectativas de los hinchas.",
+        "title": "Anfield Watch: Liverpool set to land top defensive target in £40m deal",
+        "aiSummary": "Breaking transfer news on Liverpool's pursuit, with expected fee and personal terms reportedly agreed.",
         "source": {
-          "id": "bolavip",
-          "name": "Bolavip"
+          "id": "anfieldwatch",
+          "name": "Anfield Watch"
         },
         "publishedAt": "2025-09-29T13:20:00.000Z",
-        "originalUrl": "https://bolavip.com/river-fichaje-defensor"
+        "originalUrl": "https://anfieldwatch.co.uk/liverpool-defensive-signing"
       }
     ]
   },
   {
     "id": "group-news-3",
     "type": "news_group",
-    "teamKey": "river-plate",
+    "teamKey": "liverpool",
     "createdAt": "2025-09-29T13:00:00.000Z",
-    "title": "La joya de la Reserva de River que se suma a los entrenamientos del primer equipo",
-    "aiSummary": "Un joven mediocampista ofensivo que deslumbró en las inferiores de River Plate ha sido convocado para entrenar con el plantel profesional.",
-    "featuredArticleId": "news-3-source-riverplateoficial",
+    "title": "Academy starlet promoted to first-team training after impressive U21 run",
+    "aiSummary": "A young forward who has been dazzling in Liverpool's academy setup has been called up to train with the senior squad by Arne Slot.",
+    "featuredArticleId": "news-3-source-lfc",
     "totalSources": 2,
     "articles": [
       {
-        "id": "news-3-source-riverplateoficial",
+        "id": "news-3-source-lfc",
         "type": "news",
-        "teamKey": "river-plate",
+        "teamKey": "liverpool",
         "createdAt": "2025-09-29T13:00:00.000Z",
-        "title": "River Plate Oficial: Promesa de la Reserva se suma al primer equipo",
-        "aiSummary": "Comunicado oficial del club sobre la incorporación de un juvenil al plantel de primera división.",
+        "title": "Liverpool FC Official: Academy prospect joins first-team training",
+        "aiSummary": "Official club announcement on the young player's promotion to senior training sessions.",
         "source": {
-          "id": "riverplateoficial",
-          "name": "River Plate Oficial"
+          "id": "liverpoolfc",
+          "name": "Liverpool FC Official"
         },
         "publishedAt": "2025-09-29T12:55:00.000Z",
-        "originalUrl": "https://www.cariverplate.com.ar/noticia-reserva-primer-equipo"
+        "originalUrl": "https://www.liverpoolfc.com/news/academy-prospect-first-team"
       },
       {
-        "id": "news-3-source-lpm",
+        "id": "news-3-source-rtk",
         "type": "news",
-        "teamKey": "river-plate",
+        "teamKey": "liverpool",
         "createdAt": "2025-09-29T12:58:00.000Z",
-        "title": "La Página Millonaria: Quién es la joya de la Reserva que Gallardo sube al primer equipo",
-        "aiSummary": "Perfil del joven jugador, sus características y las expectativas sobre su futuro en River.",
+        "title": "Rousing The Kop: Who is the academy gem Slot has called up to the first team?",
+        "aiSummary": "In-depth profile of the young player, his strengths and expectations for his future at the club.",
         "source": {
-          "id": "lpm",
-          "name": "La Página Millonaria"
+          "id": "rousingthekop",
+          "name": "Rousing The Kop"
         },
         "publishedAt": "2025-09-29T12:50:00.000Z",
-        "originalUrl": "https://lapaginamillonaria.com/joya-reserva-river"
+        "originalUrl": "https://www.rousingthekop.com/academy-gem-profile"
       }
     ]
   }
