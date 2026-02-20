@@ -5,8 +5,6 @@ import Credentials from "next-auth/providers/credentials"
 import { z } from "zod"
 import dbConnect from "./lib/mongodb"
 import User from "./lib/models/User"
-import bcrypt from "bcryptjs"
-
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
